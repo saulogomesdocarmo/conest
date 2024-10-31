@@ -17,10 +17,11 @@ function createWindow() {
 
     // botões 
     ipcMain.on('open-client',() =>{
-        
+        clientWindow()
     })
 }
 
+// Janela Sobre
 function aboutWindow() {
     nativeTheme.themeSource = 'light'
     const main = BrowserWindow.getFocusedWindow()
@@ -47,6 +48,26 @@ function aboutWindow() {
     })
 }
 
+// Janela Clientes
+function clientWindow() {
+    nativeTheme.themeSource = 'light'
+    const main = BrowserWindow.getFocusedWindow()
+    let client
+    if (main) {
+        client = new BrowserWindow({
+            width: 800,
+            height: 600,
+            autoHideMenuBar: true,
+            parent: main,
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+        })
+    }
+    client.loadFile('./src/views/clientes.html')
+   
+}
 
 app.whenReady().then(() => {
     createWindow()
