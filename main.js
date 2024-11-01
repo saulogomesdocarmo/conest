@@ -4,22 +4,34 @@ const path = require('node:path')
 let win
 function createWindow() {
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1010,
+        height: 700,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
     })
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
-
     win.loadFile('./src/views/index.html')
 
     // botões 
+<<<<<<< HEAD
     ipcMain.on('open-client',() =>{
         console.log('teste de recebimento de mensagem')
+=======
+    ipcMain.on('open-client', () => {
+>>>>>>> 3b76e1b67cac200f7431b6bad12cff6620b255c6
         clientWindow()
     })
+
+    ipcMain.on('view-product', () => {
+        productWindow()
+    })
+
+    ipcMain.on('view-suplier', () => {
+        suplierWindow()
+    })
+
 }
 
 // Janela Sobre
@@ -30,7 +42,7 @@ function aboutWindow() {
     if (main) {
         about = new BrowserWindow({
             width: 360,
-            height: 220,
+            height: 160,
             autoHideMenuBar: true,
             resizable: false,
             minimizable: false,
@@ -42,7 +54,9 @@ function aboutWindow() {
         })
     }
     about.loadFile('./src/views/sobre.html')
-    ipcMain.addListener('close-about', () => {
+
+    ipcMain.on('close-about', () => {
+        console.log('Recebi a mensagem close-about')
         if (about && !about.isDestroyed()) {
             about.close()
         }
@@ -67,8 +81,51 @@ function clientWindow() {
         })
     }
     client.loadFile('./src/views/clientes.html')
-   
+
 }
+
+// Janela Produtos
+function productWindow() {
+    nativeTheme.themeSource = 'light'
+    const main = BrowserWindow.getFocusedWindow()
+    let product
+    if (main) {
+        product = new BrowserWindow({
+            width: 800,
+            height: 600,
+            autoHideMenuBar: true,
+            parent: main,
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+
+        })
+    }
+    product.loadFile('./src/views/produto.html')
+}
+
+// Janela Funcionários
+function suplierWindow() {
+    nativeTheme.themeSource = 'light'
+    const main = BrowserWindow.getFocusedWindow()
+    let suplier
+    if (main) {
+        suplier = new BrowserWindow({
+            width: 800,
+            height: 600,
+            autoHideMenuBar: true,
+            parent: main,
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+
+        })
+    }
+    suplier.loadFile('./src/views/funcionarios.html')
+}
+
 
 app.whenReady().then(() => {
     createWindow()

@@ -7,3 +7,12 @@ function fechar(){
 function clientes() {
     api.janelaClientes()
 }
+
+function produtos(){
+    api.productWindow()
+}
+
+function funcionarios(){
+    api.suplierWindow()
+}
+
