@@ -17,6 +17,7 @@ function createWindow() {
 
     // botões 
     ipcMain.on('open-client',() =>{
+        console.log('teste de recebimento de mensagem')
         clientWindow()
     })
 }
