@@ -12,7 +12,10 @@ function produtos(){
     api.productWindow()
 }
 
-function funcionarios(){
+function fornecedor(){
     api.suplierWindow()
 }
 
+function relatorios(){
+    api.relatorioWindow()
+}

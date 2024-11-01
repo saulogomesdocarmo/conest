@@ -27,6 +27,10 @@ function createWindow() {
     ipcMain.on('view-suplier', () => {
         suplierWindow()
     })
+    
+    ipcMain.on('view-relatorio', () =>{
+        relatorioWindow()
+    })
 }
 
 // Janela Sobre
@@ -114,7 +118,27 @@ function suplierWindow() {
                 preload: path.join(__dirname, 'preload.js')
             }
         })
-        suplier.loadFile('./src/views/funcionarios.html')
+        suplier.loadFile('./src/views/fornecedor.html')
+    }
+}
+
+// Janela Relatórios
+function relatorioWindow() {
+    nativeTheme.themeSource = 'light'
+    const main = BrowserWindow.getAllWindows()
+    let relatorio
+    if (main) {
+        relatorio = new BrowserWindow({
+            width: 800,
+            height: 600,
+            autoHideMenuBar: true,
+            parent: main,
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+        })
+        relatorio.loadFile('./src/views/relatorios.html')
     }
 }
 
