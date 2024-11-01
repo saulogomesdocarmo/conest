@@ -19,8 +19,12 @@ function createWindow() {
         clientWindow()
     })
 
-    ipcMain.on('view-product',() =>{
+    ipcMain.on('view-product', () => {
         productWindow()
+    })
+
+    ipcMain.on('view-suplier', () => {
+        suplierWindow()
     })
 
 }
@@ -78,7 +82,7 @@ function clientWindow() {
 // Janela Produtos
 function productWindow() {
     nativeTheme.themeSource = 'light'
-    const main =  BrowserWindow.getFocusedWindow()
+    const main = BrowserWindow.getFocusedWindow()
     let product
     if (main) {
         product = new BrowserWindow({
@@ -94,6 +98,27 @@ function productWindow() {
         })
     }
     product.loadFile('./src/views/produto.html')
+}
+
+// Janela Funcionários
+function suplierWindow() {
+    nativeTheme.themeSource = 'light'
+    const main = BrowserWindow.getFocusedWindow()
+    let suplier
+    if (main) {
+        suplier = new BrowserWindow({
+            width: 800,
+            height: 600,
+            autoHideMenuBar: true,
+            parent: main,
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+
+        })
+    }
+    suplier.loadFile('./src/views/funcionarios.html')
 }
 
 

@@ -12,4 +12,7 @@ function produtos(){
     api.productWindow()
 }
 
+function funcionarios(){
+    api.suplierWindow()
+}
 
