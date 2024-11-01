@@ -7,3 +7,9 @@ function fechar(){
 function clientes() {
     api.janelaClientes()
 }
+
+function produtos(){
+    api.productWindow()
+}
+
+

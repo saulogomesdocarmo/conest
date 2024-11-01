@@ -4,21 +4,25 @@ const path = require('node:path')
 let win
 function createWindow() {
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1010,
+        height: 700,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
     })
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
-
     win.loadFile('./src/views/index.html')
 
     // botões 
-    ipcMain.on('open-client',() =>{
+    ipcMain.on('open-client', () => {
         clientWindow()
     })
+
+    ipcMain.on('view-product',() =>{
+        productWindow()
+    })
+
 }
 
 // Janela Sobre
@@ -29,7 +33,7 @@ function aboutWindow() {
     if (main) {
         about = new BrowserWindow({
             width: 360,
-            height: 220,
+            height: 240,
             autoHideMenuBar: true,
             resizable: false,
             minimizable: false,
@@ -41,7 +45,9 @@ function aboutWindow() {
         })
     }
     about.loadFile('./src/views/sobre.html')
-    ipcMain.addListener('close-about', () => {
+
+    ipcMain.on('close-about', () => {
+        console.log('Recebi a mensagem close-about')
         if (about && !about.isDestroyed()) {
             about.close()
         }
@@ -66,8 +72,30 @@ function clientWindow() {
         })
     }
     client.loadFile('./src/views/clientes.html')
-   
+
 }
+
+// Janela Produtos
+function productWindow() {
+    nativeTheme.themeSource = 'light'
+    const main =  BrowserWindow.getFocusedWindow()
+    let product
+    if (main) {
+        product = new BrowserWindow({
+            width: 800,
+            height: 600,
+            autoHideMenuBar: true,
+            parent: main,
+            modal: true,
+            webPreferences: {
+                preload: path.join(__dirname, 'preload.js')
+            }
+
+        })
+    }
+    product.loadFile('./src/views/produto.html')
+}
+
 
 app.whenReady().then(() => {
     createWindow()

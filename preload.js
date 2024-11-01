@@ -8,5 +8,6 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('api', {
     // A linha abaixo cria uma função que envia uma mensagem ao processo principal
     closeAbout: ()=> ipcRenderer.send('close-about'),
-    janelaClientes:() => ipcRenderer.send('open-client')
+    janelaClientes:() => ipcRenderer.send('open-client'),
+    productWindow:() => ipcRenderer.send('view-product')
 })
