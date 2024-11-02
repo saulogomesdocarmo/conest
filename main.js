@@ -28,7 +28,7 @@ function createWindow() {
         suplierWindow()
     })
     
-    ipcMain.on('view-relatorio', () =>{
+    ipcMain.on('view-report', () =>{
         relatorioWindow()
     })
 }
@@ -125,7 +125,7 @@ function suplierWindow() {
 // Janela Relatórios
 function relatorioWindow() {
     nativeTheme.themeSource = 'light'
-    const main = BrowserWindow.getAllWindows()
+    const main = BrowserWindow.getFocusedWindow()
     let relatorio
     if (main) {
         relatorio = new BrowserWindow({
