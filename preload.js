@@ -4,6 +4,9 @@
 
 const { contextBridge, ipcRenderer } = require('electron')
 
+// estabelecer a conexão com o banco (pedido para o main)
+ipcRenderer.send('db-connect')
+
 // processos de comunicação entre renderer e main
 contextBridge.exposeInMainWorld('api', {
     // A linha abaixo cria uma função que envia uma mensagem ao processo principal
