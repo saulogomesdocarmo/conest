@@ -32,7 +32,7 @@ const conectar = async () => {
 
 // desconectar 
 const desconectar = async () => {
-    if (isConnected === false) {
+    if (isConnected === true) {
         try {
             // linha abaixo encerra a conexão com o MongoDB
             await mongoose.disconnect(url)
