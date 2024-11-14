@@ -20,12 +20,11 @@ function createWindow() {
         }
     })
 
-    Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+    // Menu.setApplicationMenu(Menu.buildFromTemplate(template))
     win.loadFile('./src/views/index.html')
 
     // botões  
     ipcMain.on('open-client', () => {
-        console.log('teste de recebimento de mensagem')
         clientWindow()
     })
 
@@ -156,11 +155,21 @@ app.whenReady().then(() => {
 
     // Melhor local para estabelecer a conexão com o banco de dados
     // Importar o módulo de conexão no ínicio do código
+
+    // Conexão com o banco
     ipcMain.on('db-connect', async (event, message) => {
         // A linha abaixo estabelece a conexão com o banco
         dbcon = await dbConnect()
+        // enviar ao renderizador uma mensagem para trocar o íncone do status do banco de dados
+        event.reply('db-message', "conectando")
+    })
+
+    // desconectar do banco ao encerrar a aplicação
+    app.on('before-quit', async () => {
+        await desconectar(dbcon)
 
     })
+
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {

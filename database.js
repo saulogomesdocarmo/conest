@@ -44,5 +44,5 @@ const desconectar = async () => {
     }
 }
 
-
-// (rede local - IP do servidor)
+// Exportar para o MAIN as funções desejadas
+module.exports = { dbConnect, desconectar }
