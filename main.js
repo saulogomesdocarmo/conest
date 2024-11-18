@@ -161,7 +161,7 @@ app.whenReady().then(() => {
         // A linha abaixo estabelece a conexão com o banco
         dbcon = await dbConnect()
         // enviar ao renderizador uma mensagem para trocar o íncone do status do banco de dados
-        event.reply('db-message', "conectando")
+        event.reply('db-message', "conectado")
     })
 
     // desconectar do banco ao encerrar a aplicação
