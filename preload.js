@@ -15,6 +15,8 @@ contextBridge.exposeInMainWorld('api', {
     janelaClientes: () => ipcRenderer.send('open-client'),
     productWindow: () => ipcRenderer.send('view-product'),
     suplierWindow: () => ipcRenderer.send('view-suplier'),
-    relatorioWindow: () => ipcRenderer.send('view-report')
+    relatorioWindow: () => ipcRenderer.send('view-report'),
+    novoCliente: (cliente) => ipcRenderer.send('new-client', cliente),
+    resetarFormulario: (args) => ipcRenderer.on('reset-form', args)
 
 })

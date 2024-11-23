@@ -1,4 +1,4 @@
-const { app, BrowserWindow, nativeTheme, Menu, shell, ipcMain } = require('electron/main')
+const { app, BrowserWindow, nativeTheme, Menu, shell, ipcMain, dialog } = require('electron/main')
 const path = require('node:path')
 
 // Importação do módulo de conexão
@@ -22,7 +22,7 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js')
         }
     })
-
+    // Menu personalizado (Comentar para debugar)
     // Menu.setApplicationMenu(Menu.buildFromTemplate(template))
     win.loadFile('./src/views/index.html')
 
@@ -82,7 +82,7 @@ function clientWindow() {
         client = new BrowserWindow({
             width: 800,
             height: 600,
-            autoHideMenuBar: true,
+            // autoHideMenuBar: true,
             parent: main,
             modal: true,
             webPreferences: {
@@ -227,3 +227,35 @@ const template = [
         ]
     }
 ]
+
+// CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Recebimento dos dados do fomulário
+ipcMain.on('new-client', async (event, cliente) => {
+    // Teste de recebimento dos dados (Passo 2 - slide) Importante !
+    console.log(cliente)
+
+    // Passo 3 - slide (cadastrar os daods no banco de dados)
+    try {
+        // criar um novo objeto usando a classe modelo
+        const novoCliente = new clienteModel({
+            nomeCliente: cliente.nomeCli,
+            foneCliente: cliente.foneCli,
+            emailCliente: cliente.emailCli
+        })
+        // A linha abaixo usa a biblioteca moogoose para salvar
+        await novoCliente.save()
+
+        // Cofirmação de cliente adicionado no banco
+        dialog.showMessageBox({
+            type: 'info',
+            title: "Aviso",
+            message: "Cliente adicionado com sucesso",
+            buttons: ['OK']
+        })
+        // enviar uma resposta para o renderizador resetar o form
+        event.reply('reset-form')
+
+    } catch (error) {
+        console.log(error)
+    }
+})

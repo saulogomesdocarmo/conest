@@ -3,8 +3,8 @@
 // Importar biblioteca
 const mongoose = require('mongoose')
 
-// Definir URL e a autenticação do banco de dados 
-const url = 'mongodb+srv://admin:123SENAC@clusterconest.xqzwa.mongodb.net/' // se for uma rede local com swit - não sera URL, será um IP
+// Definir URL e a autenticação do banco de dados  (acrescentar ao final da url um nome para o banco de dados)
+const url = 'mongodb+srv://admin:123SENAC@clusterconest.xqzwa.mongodb.net/dbconest' // se for uma rede local com swit - não sera URL, será um IP
 
 // Status de conexão (ícone de conexão)
 let isConnected = false
