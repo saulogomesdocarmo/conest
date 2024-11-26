@@ -1,23 +1,24 @@
 /**
- * Modelo de dados (Clientes)
+ * Modelo de dados - Fornecedores
  */
+
 
 // Importação de recursos
 const { model, Schema } = require('mongoose')
 
 // Criação da estrutura de dados ("tabela") que será usada no banco (Mongo DB - chama de coleção )
-const clienteSchema = new Schema({
-    nomeCliente: {
+const fornecedorSchema = new Schema({
+    razaoFornecedor: {
         type: String
     },
-    foneCliente: {
+    foneFornecedor: {
         type: String
     },
-    emailCliente: {
+    siteFornecedor: {
         type: String
     },
 })
 // exportar para o main
 // Para modificar o nome da coleção ("tabela"),basta, 
 // modificar na linha abaixo  o rótulo 'Clientes', sempre iniciando com letra maíscula
-module.exports = model('Clientes', clienteSchema)
+module.exports = model('Fornecedores', fornecedorSchema)

@@ -4,16 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conest - Produtos</title>
+    <title>Conest - Fornecedores</title>
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/style.css">
 </head>
 
 <body>
-    <h1>Fornecedor</h1>
+    <div class="container">
+        <h1>Fornecedores</h1>
+    </div>
+
+    <div class="container">
+        <form id="frmFornecedor" class="mt-2 row gl-3">
+            <!-- Buscar Fornecedor -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="searchForner" maxlength="30" spellcheck="false">
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-primary" id="btnreadfornecer">Buscar</button>
+            </div>
+            <hr class="mt-4 border-primary border -1">
+
+            <!-- Id do Fornecedor (oculto) -->
+
+            <div class="col-md-6" id="idForne">
+                <input class="form-control" type="text" id="inputFornecedor" placeholder="Id">
+            </div>
+
+            <!-- Nome do Fornecedor (Razão Social) -->
+            <div class="col-md-8">
+                <label for="inputNameFornecedor" class="form-label">Razão Social</label>
+                <input class="form-control" type="tel" id="inputNameFornecedor" spellcheck="false" required
+                    maxlength="50">
+            </div>
+
+            <!-- Fone -->
+            <div class="col-md-4">
+                <label for="inputPhoneFornecedor" class="form-label">Telefone</label>
+                <input class="form-control" type="tel" id="inputPhoneFornecedor" spellcheck="false" required
+                    maxlength="15">
+            </div>
+
+            <!-- Site (Fornecedor) -->
+            <div class="col-md-8">
+                <label for="inputSiteFornecedor" class="form-label">Site</label>
+                <input class="form-control" type="text" id="inputSiteFornecedor" required maxlength="50">
+            </div>
+
+            <!-- Botões -->
+            <div class="mt-5">
+                <button type="submit" class="btn btn-success" id="btnAdfornecer">Adicionar</button>
+                <button type="submit" class="btn btn-warning" id="btnEdfornecer">Editar</button>
+                <button type="submit" class="btn btn-danger" id="btnDelfornecer">Excluir</button>
+                <button type="reset" class="btn" id="btnRefornecer"><img src="" alt=""></button>
+            </div>
+        </form>
+    </div>
 
     <script src="../public/js/bootstrap.min.js"></script>
-    <script src="funcionarios.js"></script>
+    <script src="fornecedores.js"></script>
 </body>
 
 </html>

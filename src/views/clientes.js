@@ -13,7 +13,7 @@ let emailCliente = document.getElementById('inputEmailClient')
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 formCliente.addEventListener('submit', async (event) => {
-    // evitar o comportamento padrão de envio em um form
+    // evitar o comportamento padrão de envio em um formulário
     event.preventDefault()
     // teste importante ! (Fluxo de dados )
     console.log(nomeCliente.value, foneCliente.value, emailCliente.value)
@@ -23,7 +23,7 @@ formCliente.addEventListener('submit', async (event) => {
     const cliente = {
         nomeCli: nomeCliente.value,
         foneCli: foneCliente.value,
-        emilCli: emailCliente.value
+        emailCli: emailCliente.value
     }
     api.novoCliente(cliente)
 

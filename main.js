@@ -12,6 +12,9 @@ let dbcon = null // valor null  -> inicia sem nenhuma conexão
 // Importação do Schema Clientes da camada Model
 const clienteModel = require('./src/models/Clientes.js')
 
+// Importação do Schema Fornecedores da camada Model
+const fornecedorModel = require('./src/models/Fornecedores.js')
+
 // Janela principal
 let win
 function createWindow() {
@@ -227,14 +230,17 @@ const template = [
         ]
     }
 ]
+/**************************************************/
+/*****Clientes**************************************/
+/**************************************************/
 
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-// Recebimento dos dados do fomulário
+// Recebimento dos dados do fomulário do cliente
 ipcMain.on('new-client', async (event, cliente) => {
     // Teste de recebimento dos dados (Passo 2 - slide) Importante !
     console.log(cliente)
 
-    // Passo 3 - slide (cadastrar os daods no banco de dados)
+    // Passo 3 - slide (cadastrar os dados no banco de dados)
     try {
         // criar um novo objeto usando a classe modelo
         const novoCliente = new clienteModel({
@@ -252,6 +258,44 @@ ipcMain.on('new-client', async (event, cliente) => {
             message: "Cliente adicionado com sucesso",
             buttons: ['OK']
         })
+        // enviar uma resposta para o renderizador resetar o form
+        event.reply('reset-form')
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+/**************************************************/
+/*****Fornecedores**************************************/
+/**************************************************/
+
+// CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Recebimento dos dados do fomulário do fornecedor
+ipcMain.on('new-supplier', async (event, fornecedor) => {
+    // Teste de recebimento dos dados (passo 2 - slide)
+    console.log(fornecedor)
+
+    // Passo 3 -  slide (cadastrar os dados no banco de dados)
+    try {
+        // criar um objeto usando a classe modelo
+        const novoFornecedor = new fornecedorModel({
+            razaoFornecedor: fornecedor.razaoForne,
+            foneFornecedor: fornecedor.foneForne,
+            siteFornecedor: fornecedor.siteForne
+        })
+        // A linha abaixo usa a biblioteca moogoose para salvar
+        await novoFornecedor.save()
+
+        // Cofirmação de cliente adicionado no banco
+
+        dialog.showMessageBox({
+            type: 'info',
+            title: "Aviso",
+            message: "Fornecedor cadastrado com sucesso",
+            buttons: ['OK']
+        })
+
         // enviar uma resposta para o renderizador resetar o form
         event.reply('reset-form')
 
