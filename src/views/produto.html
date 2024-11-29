@@ -10,7 +10,53 @@
 </head>
 
 <body>
-    <h1>Produtos</h1>
+    <h1> Produtos</h1>
+    <div class="container">
+
+        <form id="frmProduto" class="mt-2 row gl-3">
+            <!-- Buscar Cliente -->
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="searchProdutp" maxlength="30" spellcheck="false">
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-primary" id="btnReadProdut">Buscar</button>
+            </div>
+            <hr class="mt-4 border-primary border -1">
+
+            <!-- Id do Cliente (oculto) -->
+
+            <div class="col-md-6" id="idClient">
+                <input class="form-control" type="text" id="inputProdut" placeholder="Id">
+            </div>
+
+            <!-- Nome do Cliente -->
+            <div class="col-md-8">
+                <label for="inputNameProduto" class="form-label">Nome do Produto</label>
+                <input class="form-control" type="tel" id="inputNameProduto" spellcheck="false" required maxlength="50">
+            </div>
+
+            <!-- Fone -->
+            <div class="col-md-4">
+                <label for="inputUnidadeProduto" class="form-label">Unidades</label>
+                <input class="form-control" type="tel" id="inputUnidadeProduto" spellcheck="false" required maxlength="15">
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-8">
+                <label for="inputCodBarra" class="form-label">Código de Barras</label>
+                <input class="form-control" type="email" id="inputCodBarra" required maxlength="50">
+            </div>
+
+            <!-- Botões -->
+            <div class="mt-5">
+                <button type="submit" class="btn btn-success" id="btnCreatProdut">Adicionar</button>
+                <button type="submit" class="btn btn-warning" id="btnUpdateProdut">Editar</button>
+                <button type="submit" class="btn btn-danger" id="btnDeleteProdut">Excluir</button>
+                <button type="reset" class="btn" id="btnReset"><img src="" alt=""></button>
+            </div>
+        </form>
+    </div>
 
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="produto.js"></script>

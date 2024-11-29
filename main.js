@@ -303,3 +303,14 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
         console.log(error)
     }
 })
+
+/**************************************************/
+/*****Produtos**************************************/
+/**************************************************/
+
+// CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Recebimento dos dados do fomulário de produtos
+
+ipcMain.on('new-product', async (event, produto) => {
+    console.log(produto)
+})
