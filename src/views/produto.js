@@ -14,8 +14,10 @@ let codbarraProduto = document.getElementById('inputCodBarra')
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 
 formProduto.addEventListener('submit', async (event) => {
+    
     event.preventDefault()
-    console.log(nomeProduto.value, unidadeProduto.value, codbarraProduto.value)
+    
+    // console.log(nomeProduto.value, unidadeProduto.value, codbarraProduto.value)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto

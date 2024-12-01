@@ -313,4 +313,26 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
 
 ipcMain.on('new-product', async (event, produto) => {
     console.log(produto)
+
+    try {
+        const novoProduto = new produtoModel({
+            nomeProduto: produto.nomeProd,
+            unidadeProduto: produto.unidadeProd,
+            codigoProduto: produto.codProd
+        })
+
+        await novoProduto.save()
+
+        dialog.showMessageBox({
+            type: 'info',
+            title: 'Aviso',
+            message: 'Produto cadastrado com sucesso.',
+            buttons: ['OK']
+        })
+
+        event.reply('reset-form')
+
+    } catch (error) {
+        console.log(error)
+    }
 })

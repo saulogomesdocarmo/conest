@@ -16,7 +16,7 @@ formCliente.addEventListener('submit', async (event) => {
     // evitar o comportamento padrão de envio em um formulário
     event.preventDefault()
     // teste importante ! (Fluxo de dados )
-    console.log(nomeCliente.value, foneCliente.value, emailCliente.value)
+    // console.log(nomeCliente.value, foneCliente.value, emailCliente.value)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto

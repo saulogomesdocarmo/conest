@@ -8,7 +8,7 @@ const { model, Schema } = require('mongoose')
 // criação da estrutura de dados ("tabela") que será utilizada no banco de dados (MONGO DB - Chama de coleção)
 
 const produtoSchema = new Schema({
-    nomeproduto: {
+    nomeProduto: {
         type: String
     },
     unidadeProduto: {
@@ -22,4 +22,4 @@ const produtoSchema = new Schema({
 // exportar para o main
 // Para modificar o nome da coleção ("tabela"),basta, 
 // modificar na linha abaixo  o rótulo 'Clientes', sempre iniciando com letra maíscula
-module.exports = ('Produtos', produtoSchema)
+module.exports = model ('Produtos', produtoSchema)
