@@ -33,15 +33,21 @@
             </div>
 
             <!-- Nome do Cliente -->
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <label for="inputNameClient" class="form-label">Nome</label>
                 <input class="form-control" type="tel" id="inputNameClient" spellcheck="false" required maxlength="50">
             </div>
 
             <!-- Fone -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="inputPhoneClient" class="form-label">Telefone</label>
                 <input class="form-control" type="tel" id="inputPhoneClient" spellcheck="false" required maxlength="15">
+            </div>
+
+            <!-- DDD -->
+            <div class="col-md-2">
+                <label for="ddd" class="form-label">DDD</label>
+                <input class="form-control" type="text" id="ddd">
             </div>
 
             <!-- Email -->
@@ -50,12 +56,74 @@
                 <input class="form-control" type="email" id="inputEmailClient" required maxlength="50">
             </div>
 
+            <!-- CEP -->
+            <div class="col-md-4">
+                <label for="inputCEP" class="form-label">CEP</label>
+                <input class="form-control" type="text" id="inputCEP" required maxlength="50" onblur="checarEndereco()">
+            </div>
+
+            <!-- Endereço -->
+            <div class="col-md-12">
+                <label for="inputEndereco" class="form-label">Endereço</label>
+                <input class="form-control" type="text" id="inputEndereco" required maxlength="50">
+            </div>
+
+            <!-- Bairro -->
+            <div class="col-md-12">
+                <label for="inputBairro" class="form-label">Bairro</label>
+                <input class="form-control" type="text" id="inputBairro" required maxlength="50">
+            </div>
+
+            <!-- Cidade -->
+            <div class="col-md-4">
+                <label for="inputCidade" class="form-label">Cidade</label>
+                <input class="form-control" type="text" id="inputCidade" required maxlength="50">
+            </div>
+
+            <!-- Estado -->
+            <div class="col-md-4">
+                <label for="inputEstado" class="form-label">Estado</label>
+                <input class="form-control" type="text" id="inputEstado" required maxlength="50">
+            </div>
+
+            <!-- UF -->
+            <div class="form-group col-md-4">
+                <label for="uf">UF</label>
+                <select id="uf" class="form-control" name="ufbairro">
+                    <option selected>UF</option>
+                    <option>AC</option>
+                    <option>AL</option>
+                    <option>AM</option>
+                    <option>AP</option>
+                    <option>BA</option>
+                    <option>CE</option>
+                    <option>DF</option>
+                    <option>ES</option>
+                    <option>GO</option>
+                    <option>MA</option>
+                    <option>MG</option>
+                    <option>MS</option>
+                    <option>MT</option>
+                    <option>PA</option>
+                    <option>PB</option>
+                    <option>PE</option>
+                    <option>PR</option>
+                    <option>RJ</option>
+                    <option>RN</option>
+                    <option>RS</option>
+                    <option>SC</option>
+                    <option>SE</option>
+                    <option>SP</option>
+                    <option>TO</option>
+                </select>
+            </div>
+
             <!-- Botões -->
             <div class="mt-5">
                 <button type="submit" class="btn btn-success" id="btnCreat">Adicionar</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar</button>
                 <button type="submit" class="btn btn-danger" id="btnDelete">Excluir</button>
-                <button type="reset" class="btn" id="btnReset"><img src="" alt=""></button>
+                <button type="reset" class="btn" id="btnReset" oncanplay=""><img src="" alt=""></button>
             </div>
         </form>
     </div>
@@ -64,6 +132,7 @@
 
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="clientes.js"></script>
+    <script src="../public/js/script.js"></script>
 </body>
 
 </html>
