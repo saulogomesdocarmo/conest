@@ -15,6 +15,7 @@ const clienteModel = require('./src/models/Clientes.js')
 // Importação do Schema Fornecedores da camada Model
 const fornecedorModel = require('./src/models/Fornecedores.js')
 
+const produtoModel = require('./src/models/Produtos.js')
 // Janela principal
 let win
 function createWindow() {
