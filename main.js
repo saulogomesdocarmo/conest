@@ -85,10 +85,11 @@ function clientWindow() {
     if (main) {
         client = new BrowserWindow({
             width: 800,
-            height: 710,
+            height: 705,
             // autoHideMenuBar: true,
             parent: main,
             modal: true,
+            resizable: false,
             webPreferences: {
                 preload: path.join(__dirname, 'preload.js')
             }
@@ -105,8 +106,9 @@ function productWindow() {
     if (main) {
         product = new BrowserWindow({
             width: 800,
-            height: 710,
+            height: 705,
             autoHideMenuBar: true,
+            resizable: false,
             parent: main,
             modal: true,
             webPreferences: {
@@ -117,7 +119,7 @@ function productWindow() {
     }
 }
 
-// Janela Funcionários
+// Janela Fornecedores
 function suplierWindow() {
     nativeTheme.themeSource = 'light'
     const main = BrowserWindow.getFocusedWindow()
@@ -125,8 +127,9 @@ function suplierWindow() {
     if (main) {
         suplier = new BrowserWindow({
             width: 800,
-            height: 710,
+            height: 705,
             autoHideMenuBar: true,
+            resizable: false,
             parent: main,
             modal: true,
             webPreferences: {
@@ -145,8 +148,9 @@ function relatorioWindow() {
     if (main) {
         relatorio = new BrowserWindow({
             width: 800,
-            height: 710,
+            height: 705,
             autoHideMenuBar: true,
+            resizable: false,
             parent: main,
             modal: true,
             webPreferences: {
