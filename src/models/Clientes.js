@@ -10,12 +10,30 @@ const clienteSchema = new Schema({
     nomeCliente: {
         type: String
     },
+    dddCliente: {
+        type: String
+    },
     foneCliente: {
         type: String
     },
     emailCliente: {
         type: String
     },
+    cepCliente: {
+        type: String
+    },
+    enderecoCliente: {
+        type: String
+    },
+    bairroCliente: {
+        type: String
+    },
+    cidadeCliente: {
+        type: String
+    },
+    ufCliente: {
+        type: String
+    }
 })
 // exportar para o main
 // Para modificar o nome da coleção ("tabela"),basta, 

@@ -21,7 +21,7 @@ let win
 function createWindow() {
     win = new BrowserWindow({
         width: 1010,
-        height: 700,
+        height: 720,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }
@@ -85,7 +85,7 @@ function clientWindow() {
     if (main) {
         client = new BrowserWindow({
             width: 800,
-            height: 600,
+            height: 710,
             // autoHideMenuBar: true,
             parent: main,
             modal: true,
@@ -105,7 +105,7 @@ function productWindow() {
     if (main) {
         product = new BrowserWindow({
             width: 800,
-            height: 600,
+            height: 710,
             autoHideMenuBar: true,
             parent: main,
             modal: true,
@@ -125,7 +125,7 @@ function suplierWindow() {
     if (main) {
         suplier = new BrowserWindow({
             width: 800,
-            height: 600,
+            height: 710,
             autoHideMenuBar: true,
             parent: main,
             modal: true,
@@ -145,7 +145,7 @@ function relatorioWindow() {
     if (main) {
         relatorio = new BrowserWindow({
             width: 800,
-            height: 600,
+            height: 710,
             autoHideMenuBar: true,
             parent: main,
             modal: true,
@@ -246,8 +246,15 @@ ipcMain.on('new-client', async (event, cliente) => {
         // criar um novo objeto usando a classe modelo
         const novoCliente = new clienteModel({
             nomeCliente: cliente.nomeCli,
+            dddCliente: cliente.dddCli,
             foneCliente: cliente.foneCli,
-            emailCliente: cliente.emailCli
+            emailCliente: cliente.emailCli,
+            cepCliente: cliente.cepCli,
+            enderecoCliente: cliente.enderecoCli,
+            bairroCliente: cliente.bairroCli,
+            cidadeCliente: cliente.cidadeCli,
+            ufCliente: cliente. ufCli
+
         })
         // A linha abaixo usa a biblioteca moogoose para salvar
         await novoCliente.save()

@@ -33,14 +33,20 @@
             </div>
 
             <!-- Nome do Fornecedor (Razão Social) -->
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <label for="inputNameFornecedor" class="form-label">Razão Social</label>
                 <input class="form-control" type="tel" id="inputNameFornecedor" spellcheck="false" required
                     maxlength="50">
             </div>
 
+            <!-- DDD -->
+            <div class="col-md-2">
+                <label for="dddFornecedor" class="form-label">DDD</label>
+                <input class="form-control" type="text" id="ddd">
+            </div>
+
             <!-- Fone -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="inputPhoneFornecedor" class="form-label">Telefone</label>
                 <input class="form-control" type="tel" id="inputPhoneFornecedor" spellcheck="false" required
                     maxlength="15">
@@ -50,6 +56,68 @@
             <div class="col-md-8">
                 <label for="inputSiteFornecedor" class="form-label">Site</label>
                 <input class="form-control" type="text" id="inputSiteFornecedor" required maxlength="50">
+            </div>
+
+            <!-- CEP -->
+            <div class="col-md-4">
+                <label for="cepFornecedor" class="form-label">CEP</label>
+                <input class="form-control" type="text" id="cepFornecedor" required maxlength="50" onblur="fornecedorendereco()">
+            </div>
+
+            <!-- Endereço -->
+            <div class="col-md-12">
+                <label for="enderecoFornecedor" class="form-label">Endereço do Fornecedor</label>
+                <input class="form-control" type="text" id="enderecoFornecedor" required maxlength="50">
+            </div>
+
+            <!-- Bairro -->
+            <div class="col-md-12">
+                <label for="bairroFornecedor" class="form-label">Bairro</label>
+                <input class="form-control" type="text" id="bairroFornecedor" required maxlength="50">
+            </div>
+
+            <!-- Cidade -->
+            <div class="col-md-4">
+                <label for="cidadeFornecedor" class="form-label">Cidade</label>
+                <input class="form-control" type="text" id="cidadeFornecedor" required maxlength="50">
+            </div>
+
+            <!-- Estado -->
+            <div class="col-md-4">
+                <label for="estadoFornecedor" class="form-label">Estado</label>
+                <input class="form-control" type="text" id="estadoFornecedor" required maxlength="50">
+            </div>
+
+            <!-- UF -->
+            <div class="form-group col-md-4">
+                <label for="ufFornecedor">UF</label>
+                <select id="ufFornecedor" class="form-control">
+                    <option selected>UF</option>
+                    <option>AC</option>
+                    <option>AL</option>
+                    <option>AM</option>
+                    <option>AP</option>
+                    <option>BA</option>
+                    <option>CE</option>
+                    <option>DF</option>
+                    <option>ES</option>
+                    <option>GO</option>
+                    <option>MA</option>
+                    <option>MG</option>
+                    <option>MS</option>
+                    <option>MT</option>
+                    <option>PA</option>
+                    <option>PB</option>
+                    <option>PE</option>
+                    <option>PR</option>
+                    <option>RJ</option>
+                    <option>RN</option>
+                    <option>RS</option>
+                    <option>SC</option>
+                    <option>SE</option>
+                    <option>SP</option>
+                    <option>TO</option>
+                </select>
             </div>
 
             <!-- Botões -->
@@ -64,6 +132,7 @@
 
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="fornecedores.js"></script>
+    <script src="../public/js/script.js"></script>
 </body>
 
 </html>

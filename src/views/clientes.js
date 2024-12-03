@@ -9,7 +9,17 @@
 let formCliente = document.getElementById('frmClient')
 let nomeCliente = document.getElementById('inputNameClient')
 let foneCliente = document.getElementById('inputPhoneClient')
+let dddCliente = document.getElementById('ddd')
 let emailCliente = document.getElementById('inputEmailClient')
+let cepCliente = document.getElementById('inputCEP')
+let enderecoCliente = document.getElementById('inputEndereco')
+let bairroCliente = document.getElementById('inputBairro')
+let cidadeCliente = document.getElementById('inputCidade')
+let estadoCliente = document.getElementById('inputEstado')
+let ufCliente = document.getElementById('uf')
+
+
+
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 formCliente.addEventListener('submit', async (event) => {
@@ -22,8 +32,15 @@ formCliente.addEventListener('submit', async (event) => {
     // cirar um objeto
     const cliente = {
         nomeCli: nomeCliente.value,
+        dddCli: dddCliente.value,
         foneCli: foneCliente.value,
-        emailCli: emailCliente.value
+        emailCli: emailCliente.value,
+        cepCli: cepCliente.value,
+        enderecoCli: enderecoCliente.value,
+        bairroCli: bairroCliente.value,
+        cidadeCli: cidadeCliente.value,
+        ufClie: ufCliente.value,
+        
     }
     api.novoCliente(cliente)
 
@@ -37,6 +54,14 @@ api.resetarFormulario((args) => {
     document.getElementById('inputNameClient').value = ''
     document.getElementById('inputPhoneClient').value = ''
     document.getElementById('inputEmailClient').value = ''
+    document.getElementById('ddd').value = ''
+    document.getElementById('inputCEP').value = ''
+    document.getElementById('inputEndereco').value = ''
+    document.getElementById('inputBairro').value = ''
+    document.getElementById('inputCidade').value = ''
+    document.getElementById('inputEstado').value = ''
+    document.getElementById('uf').value = ''
+
 })
 
 
