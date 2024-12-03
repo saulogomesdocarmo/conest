@@ -7,9 +7,16 @@
 // Passo 1 - slide (capturar os dados dos inputs do form)
 
 let formFornecedor = document.getElementById('frmFornecedor')
-let razaoFornecedor = document.getElementById('inputNameFornecedor') 
+let razaoFornecedor = document.getElementById('inputNameFornecedor')
 let foneFornecedor = document.getElementById('inputPhoneFornecedor')
 let siteFornecedor = document.getElementById('inputSiteFornecedor')
+let dddFornecedor = document.getElementById('dddFornecedor')
+let ceptFornecedor = document.getElementById('cepFornecedor')
+let enderecoFornecedor = document.getElementById('enderecoFornecedor')
+let bairroFornecedor = document.getElementById('bairroFornecedor')
+let cidadeFornecedor = document.getElementById('cidadeFornecedor')
+let estadoFornecedor = document.getElementById('estadoFornecedor')
+let ufFornecedor = document.getElementById('ufFornecedor')
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 
@@ -34,6 +41,12 @@ api.resetarFormulario((args) => {
     document.getElementById('inputNameFornecedor').value = ''
     document.getElementById('inputPhoneFornecedor').value = ''
     document.getElementById('inputSiteFornecedor').value = ''
+    document.getElementById('dddFornecedor').value = ''
+    document.getElementById('cepFornecedor').value = ''
+    document.getElementById('enderecoFornecedor').value = ''
+    document.getElementById('bairroFornecedor').value = ''
+    document.getElementById('cidadeFornecedor').value = ''
+    document.getElementById('ufFornecedor').value = ''
 })
 
 // Reset Form >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
