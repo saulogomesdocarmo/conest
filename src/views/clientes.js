@@ -39,8 +39,9 @@ formCliente.addEventListener('submit', async (event) => {
         enderecoCli: enderecoCliente.value,
         bairroCli: bairroCliente.value,
         cidadeCli: cidadeCliente.value,
-        ufClie: ufCliente.value,
-        
+        estadoCli: estadoCliente.value,
+        ufCli: ufCliente.value
+
     }
     api.novoCliente(cliente)
 

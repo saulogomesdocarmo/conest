@@ -11,12 +11,30 @@ const fornecedorSchema = new Schema({
     razaoFornecedor: {
         type: String
     },
+    dddFornecedor: {
+        type: String
+    },
     foneFornecedor: {
         type: String
     },
     siteFornecedor: {
         type: String
     },
+    cepFornecedor: {
+        type: String
+    },
+    enderecoFornecedor: {
+        type: String
+    },
+    bairroFornecedor: {
+        type: String
+    },
+    estadoFornecedor: {
+        type: String
+    },
+    ufFornecedor: {
+        type: String
+    }
 })
 // exportar para o main
 // Para modificar o nome da coleção ("tabela"),basta, 

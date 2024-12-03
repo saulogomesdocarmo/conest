@@ -253,7 +253,8 @@ ipcMain.on('new-client', async (event, cliente) => {
             enderecoCliente: cliente.enderecoCli,
             bairroCliente: cliente.bairroCli,
             cidadeCliente: cliente.cidadeCli,
-            ufCliente: cliente. ufCli
+            estadoCliente: cliente.estadoCli,
+            ufCliente: cliente.ufCli
 
         })
         // A linha abaixo usa a biblioteca moogoose para salvar
@@ -289,8 +290,15 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
         // criar um objeto usando a classe modelo
         const novoFornecedor = new fornecedorModel({
             razaoFornecedor: fornecedor.razaoForne,
+            dddFornecedor:  fornecedor. dddForne,
             foneFornecedor: fornecedor.foneForne,
-            siteFornecedor: fornecedor.siteForne
+            siteFornecedor: fornecedor.siteForne,
+            cepFornecedor : fornecedor.cepForne,
+            enderecoFornecedor: fornecedor.endForne,
+            bairroFornecedor: fornecedor.bairroForne,
+            estadoFornecedor: fornecedor. estadoForne,
+            ufFornecedor: fornecedor. ufForne
+
         })
         // A linha abaixo usa a biblioteca moogoose para salvar
         await novoFornecedor.save()

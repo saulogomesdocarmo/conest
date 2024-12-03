@@ -11,7 +11,7 @@ let razaoFornecedor = document.getElementById('inputNameFornecedor')
 let foneFornecedor = document.getElementById('inputPhoneFornecedor')
 let siteFornecedor = document.getElementById('inputSiteFornecedor')
 let dddFornecedor = document.getElementById('dddFornecedor')
-let ceptFornecedor = document.getElementById('cepFornecedor')
+let cepFornecedor = document.getElementById('cepFornecedor')
 let enderecoFornecedor = document.getElementById('enderecoFornecedor')
 let bairroFornecedor = document.getElementById('bairroFornecedor')
 let cidadeFornecedor = document.getElementById('cidadeFornecedor')
@@ -30,8 +30,14 @@ formFornecedor.addEventListener('submit', async (event) => {
     // criar um objeto
     const fornecedor = {
         razaoForne: razaoFornecedor.value,
+        dddForne:  dddFornecedor.value,
         foneForne: foneFornecedor.value,
-        siteForne: siteFornecedor.value
+        siteForne: siteFornecedor.value,
+        cepForne: cepFornecedor.value,
+        endForne: enderecoFornecedor.value,
+        bairroForne: bairroFornecedor.value,
+        estadoForne: estadoFornecedor.value,
+        ufForne: ufFornecedor.value
     }
     api.novoFornecedor(fornecedor)
 })
