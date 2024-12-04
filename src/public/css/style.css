@@ -16,6 +16,11 @@
     margin-left: 10px;
 }
 
+/* Titulo - Inputs*/
+label {
+    font-weight: 500;
+}
+
 /* Rodapé */
 footer {
     background-color: #007acc;

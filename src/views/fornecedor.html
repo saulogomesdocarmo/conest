@@ -33,10 +33,24 @@
             </div>
 
             <!-- Nome do Fornecedor (Razão Social) -->
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <label for="inputNameFornecedor" class="form-label">Razão Social</label>
                 <input class="form-control" type="tel" id="inputNameFornecedor" spellcheck="false" required
                     maxlength="50">
+            </div>
+
+            <!-- CEP -->
+            <div class="col-md-4">
+                <label for="cepFornecedor" class="form-label">CEP</label>
+                <input class="form-control" type="text" id="cepFornecedor" required maxlength="50"
+                    onblur="fornecedorendereco()">
+            </div>
+
+
+            <!-- Site (Fornecedor) -->
+            <div class="col-md-6">
+                <label for="inputSiteFornecedor" class="form-label">Site</label>
+                <input class="form-control" type="text" id="inputSiteFornecedor" required maxlength="50">
             </div>
 
             <!-- DDD -->
@@ -46,22 +60,10 @@
             </div>
 
             <!-- Fone -->
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="inputPhoneFornecedor" class="form-label">Telefone</label>
                 <input class="form-control" type="tel" id="inputPhoneFornecedor" spellcheck="false" required
                     maxlength="15">
-            </div>
-
-            <!-- Site (Fornecedor) -->
-            <div class="col-md-8">
-                <label for="inputSiteFornecedor" class="form-label">Site</label>
-                <input class="form-control" type="text" id="inputSiteFornecedor" required maxlength="50">
-            </div>
-
-            <!-- CEP -->
-            <div class="col-md-4">
-                <label for="cepFornecedor" class="form-label">CEP</label>
-                <input class="form-control" type="text" id="cepFornecedor" required maxlength="50" onblur="fornecedorendereco()">
             </div>
 
             <!-- Endereço -->
@@ -90,7 +92,7 @@
 
             <!-- UF -->
             <div class="form-group col-md-4">
-                <label for="ufFornecedor">UF</label>
+                <label for="ufFornecedor" class="form-label">UF</label>
                 <select id="ufFornecedor" class="form-control">
                     <option selected>UF</option>
                     <option>AC</option>

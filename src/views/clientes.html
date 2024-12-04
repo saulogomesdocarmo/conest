@@ -33,9 +33,22 @@
             </div>
 
             <!-- Nome do Cliente -->
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <label for="inputNameClient" class="form-label">Nome</label>
                 <input class="form-control" type="tel" id="inputNameClient" spellcheck="false" required maxlength="50">
+            </div>
+
+            <!-- CEP -->
+            <div class="col-md-4">
+                <label for="inputCEP" class="form-label">CEP</label>
+                <input class="form-control" type="text" id="inputCEP" required maxlength="50" onblur="checarEndereco()">
+            </div>
+
+
+            <!-- Email -->
+            <div class="col-md-6">
+                <label for="inputEmailClient" class="form-label">Email</label>
+                <input class="form-control" type="email" id="inputEmailClient" required maxlength="50">
             </div>
 
             <!-- DDD -->
@@ -45,23 +58,11 @@
             </div>
 
             <!-- Fone -->
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="inputPhoneClient" class="form-label">Telefone</label>
                 <input class="form-control" type="tel" id="inputPhoneClient" spellcheck="false" required maxlength="15">
             </div>
 
-
-            <!-- Email -->
-            <div class="col-md-8">
-                <label for="inputEmailClient" class="form-label">Email</label>
-                <input class="form-control" type="email" id="inputEmailClient" required maxlength="50">
-            </div>
-
-            <!-- CEP -->
-            <div class="col-md-4">
-                <label for="inputCEP" class="form-label">CEP</label>
-                <input class="form-control" type="text" id="inputCEP" required maxlength="50" onblur="checarEndereco()">
-            </div>
 
             <!-- Endereço -->
             <div class="col-md-12">
@@ -88,8 +89,8 @@
             </div>
 
             <!-- UF -->
-            <div class="form-group col-md-4">
-                <label for="uf">UF</label>
+            <div class="col-md-4">
+                <label for="uf" class="form-label">UF</label>
                 <select id="uf" class="form-control">
                     <option selected>UF</option>
                     <option>AC</option>
@@ -118,7 +119,7 @@
                     <option>TO</option>
                 </select>
             </div>
-            
+
             <!-- Botões -->
             <div class="mt-5">
                 <button type="submit" class="btn btn-success" id="btnCreat">Adicionar</button>
