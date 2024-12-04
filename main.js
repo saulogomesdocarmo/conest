@@ -294,14 +294,15 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
         // criar um objeto usando a classe modelo
         const novoFornecedor = new fornecedorModel({
             razaoFornecedor: fornecedor.razaoForne,
-            dddFornecedor:  fornecedor. dddForne,
+            dddFornecedor: fornecedor.dddForne,
             foneFornecedor: fornecedor.foneForne,
             siteFornecedor: fornecedor.siteForne,
-            cepFornecedor : fornecedor.cepForne,
+            cepFornecedor: fornecedor.cepForne,
             enderecoFornecedor: fornecedor.endForne,
             bairroFornecedor: fornecedor.bairroForne,
-            estadoFornecedor: fornecedor. estadoForne,
-            ufFornecedor: fornecedor. ufForne
+            cidadeFornecedor: fornecedor.cidadeForne,
+            estadoFornecedor: fornecedor.estadoForne,
+            ufFornecedor: fornecedor.ufForne
 
         })
         // A linha abaixo usa a biblioteca moogoose para salvar

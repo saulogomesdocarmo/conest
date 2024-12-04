@@ -36,6 +36,7 @@ formFornecedor.addEventListener('submit', async (event) => {
         cepForne: cepFornecedor.value,
         endForne: enderecoFornecedor.value,
         bairroForne: bairroFornecedor.value,
+        cidadeForne: cidadeFornecedor.value,
         estadoForne: estadoFornecedor.value,
         ufForne: ufFornecedor.value
     }
