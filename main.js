@@ -338,7 +338,7 @@ ipcMain.on('new-product', async (event, produto) => {
     try {
         const novoProduto = new produtoModel({
             nomeProduto: produto.nomeProd,
-            unidadeProduto: produto.unidadeProd,
+            precoProduto: produto.precoProd,
             codigoProduto: produto.codProd
         })
 

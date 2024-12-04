@@ -11,7 +11,7 @@ const produtoSchema = new Schema({
     nomeProduto: {
         type: String
     },
-    unidadeProduto: {
+    precoProduto: {
         type: String
     },
     codigoProduto: {

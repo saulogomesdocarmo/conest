@@ -8,7 +8,7 @@
 
 let formProduto = document.getElementById('frmProduto')
 let nomeProduto = document.getElementById('inputNameProduto')
-let unidadeProduto = document.getElementById('inputUnidadeProduto')
+let precoProduto = document.getElementById('inputUnidadeProduto')
 let codbarraProduto = document.getElementById('inputCodBarra')
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
@@ -24,7 +24,7 @@ formProduto.addEventListener('submit', async (event) => {
 
     const produto = {
         nomeProd: nomeProduto.value,
-        unidadeProd: unidadeProduto.value,
+        precoProd: precoProduto.value,
         codProd: codbarraProduto.value
     }
     api.novoProduto(produto)
