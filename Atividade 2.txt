@@ -1,0 +1,11 @@
+CONEST
+
+CRUD Create
+- Clientes (adicionar endereço completo com busca automática de CEP)
+- Fornecedores (Razão Social, telefone e site)
+ *Desafio não obrigatório (vale um crédito) adicionar também o endereço com busca automática de CEP
+- Produtos (Bar code, Nome do produto, preço)
+
+Cadastrar 5 clientes
+Cadastrar 5 fornecedores
+Cadastrar 5 produtos 

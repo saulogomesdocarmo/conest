@@ -1,0 +1,10 @@
+CONEST
+
+CRUD Read
+
+- Criar busca do cliente pelo nome
+- Criar busca do fornecedor pelo nome
+
+Produto (criar 2 botões de busca)
+- Nome do produto
+- Código de barras  

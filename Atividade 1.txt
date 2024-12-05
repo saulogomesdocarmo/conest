@@ -1,0 +1,16 @@
+1) Criar um repositório GitHub de nome conest e clonar (OK)
+2) Iniciar um projeto node (npm init) (ok)
+3) Criar uma estrutura de pastas para o projeto seguindo o modelo MVC (OK)
+4) Instalar o framework electron
+5) Criar uma Janela principal com o título e subtítulo CONEST
+6) Criar uma janela modal "sobre" com botão
+7) Criar um menu personalizado de acordo com o template abaixo:
+   
+Arquivo           Zoom                                   Ajuda
+ Sair  Alt F4      Aplicar zoom              Ctrl++       Repositório
+                   Reduzir                   Ctrl--       Sobre
+                   Restaurar o zoom padrão   Ctrl+0
+
+8) Implementar no menu ajuda o link para o repositório e tela Sobre
+9) Implementar o bootstrap no Electron e aplicar nas janelas
+10) Na página principal criar botões linkando as janelas Clientes, Fornecedores, Produtos e Relatórios.
