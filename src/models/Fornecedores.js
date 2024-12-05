@@ -29,6 +29,9 @@ const fornecedorSchema = new Schema({
     bairroFornecedor: {
         type: String
     },
+    numRuaFornecedor: {
+        type: String
+    },
     cidadeFornecedor: {
         type: String
     },

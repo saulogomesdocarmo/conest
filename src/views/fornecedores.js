@@ -20,6 +20,7 @@ let bairroFornecedor = document.getElementById('bairroFornecedor')
 let cidadeFornecedor = document.getElementById('cidadeFornecedor')
 let estadoFornecedor = document.getElementById('estadoFornecedor')
 let ufFornecedor = document.getElementById('ufFornecedor')
+let numRuaFornecedor = document.getElementById('numRuaFornecedor')
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 
@@ -38,6 +39,7 @@ formFornecedor.addEventListener('submit', async (event) => {
         siteForne: siteFornecedor.value,
         cepForne: cepFornecedor.value,
         endForne: enderecoFornecedor.value,
+        numRuaForne: numRuaFornecedor.value,
         bairroForne: bairroFornecedor.value,
         cidadeForne: cidadeFornecedor.value,
         estadoForne: estadoFornecedor.value,
@@ -76,6 +78,7 @@ function buscarFornecedor() {
             document.getElementById('cidadeFornecedor').value = f.cidadeFornecedor
             document.getElementById('estadoFornecedor').value = f.estadoFornecedor
             document.getElementById('ufFornecedor').value = f.ufFornecedor
+            document.getElementById('numRuaFornecedor').value = f.numRuaFornecedor
             document.getElementById('inputFornecedor').value = f._id
         })
     })
@@ -95,6 +98,7 @@ api.resetarFormulario((args) => {
     document.getElementById('bairroFornecedor').value = ''
     document.getElementById('cidadeFornecedor').value = ''
     document.getElementById('ufFornecedor').value = ''
+    document.getElementById('numRuaFornecedor').value = ''
 })
 
 // Reset Form >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

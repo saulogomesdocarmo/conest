@@ -334,7 +334,8 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
             bairroFornecedor: fornecedor.bairroForne,
             cidadeFornecedor: fornecedor.cidadeForne,
             estadoFornecedor: fornecedor.estadoForne,
-            ufFornecedor: fornecedor.ufForne
+            ufFornecedor: fornecedor.ufForne,
+            numRuaFornecedor: fornecedor.numRuaForne
 
         })
         // A linha abaixo usa a biblioteca moogoose para salvar
