@@ -51,6 +51,13 @@ function buscarProdutos() {
         arrayProduto = produtoRenderizado
 
         console.log(arrayProduto)
+
+        arrayProduto.forEach((p) => {
+            document.getElementById('inputNameProduto').value = p.nomeProduto
+            document.getElementById('inputUnidadeProduto').value = p.precoProduto
+            document.getElementById('inputCodBarra').value = p.codigoProduto
+            document.getElementById('inputProdut').value = p._id
+        })
     })
 }
 
