@@ -14,9 +14,9 @@ let codbarraProduto = document.getElementById('inputCodBarra')
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 
 formProduto.addEventListener('submit', async (event) => {
-    
+
     event.preventDefault()
-    
+
     // console.log(nomeProduto.value, unidadeProduto.value, codbarraProduto.value)
 
     // Passo 2 - slide (envio das informações para o main)
@@ -31,6 +31,22 @@ formProduto.addEventListener('submit', async (event) => {
 })
 
 // Fim do CRUD Creat <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// CRUD READ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+function buscarProdutos() {
+    
+    let nomeProd = document.getElementById('searchProduto').value
+    console.log(nomeProd)
+
+    api.buscaproduto(nomeProd)
+}
+
+// Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+// RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 api.resetarFormulario((args) => {
     document.getElementById('inputNameProduto').value = ''
