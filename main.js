@@ -419,8 +419,21 @@ ipcMain.on('new-product', async (event, produto) => {
 
 // CRUD READ - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-ipcMain.on('search-product', async (event, nomeProd) => { 
+ipcMain.on('search-product', async (event, nomeProd) => {
     console.log(nomeProd)
+
+    try {
+        const dadosProduto = await produtoModel.find({
+            nomeProduto: new RegExp(nomeProd, 'i')
+        })
+
+        console.log(dadosProduto)
+
+        event.reply('product-data', JSON.stringify(dadosProduto))
+
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 // FIM DO CRUD READ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

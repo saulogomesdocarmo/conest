@@ -2,6 +2,9 @@
  * Processo de Renderização do Documento -> produto.html
  */
 
+
+// Array usado para manipulação de dados
+let arrayProduto = []
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Passo 1 - slide (capturar os dados)
@@ -35,11 +38,20 @@ formProduto.addEventListener('submit', async (event) => {
 // CRUD READ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 function buscarProdutos() {
-    
+
     let nomeProd = document.getElementById('searchProduto').value
     console.log(nomeProd)
 
     api.buscaproduto(nomeProd)
+
+    api.renderizarproduto((event, dadosProduto) => {
+        console.log(dadosProduto)
+
+        const produtoRenderizado = JSON.parse(dadosProduto)
+        arrayProduto = produtoRenderizado
+
+        console.log(arrayProduto)
+    })
 }
 
 // Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
