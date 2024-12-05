@@ -14,3 +14,10 @@ Clientes e Fornecedores Ficticios
 [Tecidos flor 69004785]
 [Max Ferragens 08431090]
 
+-Produtos
+[Camiseta polo  01020304 ]
+[Saco de Cimento Votoran 000001111 ]
+[Saco de areia 20kg  00000000]
+[Saco de Racao de galinha 888888888 ]
+[Lata de Tinta 00011189]
+
