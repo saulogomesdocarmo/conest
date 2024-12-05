@@ -30,7 +30,7 @@ formFornecedor.addEventListener('submit', async (event) => {
     // criar um objeto
     const fornecedor = {
         razaoForne: razaoFornecedor.value,
-        dddForne:  dddFornecedor.value,
+        dddForne: dddFornecedor.value,
         foneForne: foneFornecedor.value,
         siteForne: siteFornecedor.value,
         cepForne: cepFornecedor.value,
@@ -47,6 +47,14 @@ formFornecedor.addEventListener('submit', async (event) => {
 
 
 // CRUD CREAT -> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+function buscarFornecedor() {
+
+    let forneNome = document.getElementById('searchForner').value
+    console.log(forneNome)
+
+    api.buscarFornecedor()
+}
 
 // Fim 
 
