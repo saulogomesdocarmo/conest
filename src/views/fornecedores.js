@@ -2,6 +2,9 @@
  * Processo de Renderização do documento -> fornecedores.html
  */
 
+// Array usado nos métodos para manipulação de estrutura
+let arrayFornecedor = []
+
 // CRUD - Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Passo 1 - slide (capturar os dados dos inputs do form)
@@ -54,6 +57,21 @@ function buscarFornecedor() {
     console.log(forneNome)
 
     api.buscarFornecedor()
+
+    api.renderizarFornecedor((event, dadosFornecedor) => {
+
+        console.log(dadosFornecedor)
+
+        const fornecedorRenderizado = JSON.parse(dadosFornecedor)
+        arrayFornecedor = fornecedorRenderizado
+
+        arrayFornecedor.forEach((f) => {
+            document.getElementById('inputNameFornecedor').value = f.nomeCliente
+            document.getElementById('inputPhoneFornecedor').value = f.foneCliente
+            document.getElementById('enderecoFornecedor').value = f.enderecoCliente
+            document.getElementById('inputFornecedor').value = f._id
+        })
+    })
 }
 
 // Fim 

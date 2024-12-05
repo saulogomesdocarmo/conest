@@ -364,6 +364,18 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
 
 ipcMain.on('search-supplier', async (event, forneNome) => {
     console.log(forneNome)
+
+    try {
+        const dadosFornecedor = await fornecedorModel.find({
+            razaoFornecedor: new RegExp(forneNome, 'i')
+        })
+        console.log(dadosFornecedor)
+
+        event.reply('supplier-data', JSON.stringify(dadosFornecedor))
+
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 

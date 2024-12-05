@@ -79,8 +79,15 @@ function buscarCliente() {
         // Percorrer o Array de clientes, extrair os dados e setar(preencher os campos do formulário)
         arrayCliente.forEach((c) => {
             document.getElementById('inputNameClient').value = c.nomeCliente
+            document.getElementById('inputCEP').value = c.cepCliente
+            document.getElementById('inputEmailClient').value = c.emailCliente
+            document.getElementById('ddd').value = c.dddCliente
             document.getElementById('inputPhoneClient').value = c.foneCliente
             document.getElementById('inputEndereco').value = c.enderecoCliente
+            document.getElementById('inputBairro').value = c.bairroCliente
+            document.getElementById('inputCidade').value = c.cidadeCliente
+            document.getElementById('inputEstado').value = c.estadoCliente
+            document.getElementById('uf').value = c.ufCliente
             document.getElementById('inputClient').value = c._id
         })
     })
