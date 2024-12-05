@@ -21,6 +21,7 @@ let bairroCliente = document.getElementById('inputBairro')
 let cidadeCliente = document.getElementById('inputCidade')
 let estadoCliente = document.getElementById('inputEstado')
 let ufCliente = document.getElementById('uf')
+let numRuaCliente = document.getElementById('numRuaCliente')
 
 
 
@@ -41,6 +42,7 @@ formCliente.addEventListener('submit', async (event) => {
         emailCli: emailCliente.value,
         cepCli: cepCliente.value,
         enderecoCli: enderecoCliente.value,
+        numRuaCli: numRuaCliente.value,
         bairroCli: bairroCliente.value,
         cidadeCli: cidadeCliente.value,
         estadoCli: estadoCliente.value,

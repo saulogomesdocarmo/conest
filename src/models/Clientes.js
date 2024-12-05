@@ -31,6 +31,9 @@ const clienteSchema = new Schema({
     cidadeCliente: {
         type: String
     },
+    numRuaCliente: {
+        type: String
+    },
     estadoCliente: {
         type: String
     },
