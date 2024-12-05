@@ -43,7 +43,15 @@ formFornecedor.addEventListener('submit', async (event) => {
     api.novoFornecedor(fornecedor)
 })
 
-// Fim do CRUD - Creator >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Fim do CRUD - Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// CRUD CREAT -> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// Fim 
+
+
+
 api.resetarFormulario((args) => {
     document.getElementById('inputNameFornecedor').value = ''
     document.getElementById('inputPhoneFornecedor').value = ''
