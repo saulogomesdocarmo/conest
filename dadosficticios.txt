@@ -1,0 +1,16 @@
+Clientes e Fornecedores Ficticios
+
+-Clientes: 
+[Augusto 96050500]
+[Vicente 96200003]
+[Cintia 96200100]
+[Amelia 27949428]
+[Moacir 27949442]
+
+-Fornecedores
+[Central das pecas 27949342]
+[Casa das racoes 27949428]
+[Casa do cimento 61930430]
+[Tecidos flor 69004785]
+[Max Ferragens 08431090]
+

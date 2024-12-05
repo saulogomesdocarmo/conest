@@ -66,9 +66,16 @@ function buscarFornecedor() {
         arrayFornecedor = fornecedorRenderizado
 
         arrayFornecedor.forEach((f) => {
-            document.getElementById('inputNameFornecedor').value = f.nomeCliente
-            document.getElementById('inputPhoneFornecedor').value = f.foneCliente
-            document.getElementById('enderecoFornecedor').value = f.enderecoCliente
+            document.getElementById('inputNameFornecedor').value = f.razaoFornecedor
+            document.getElementById('cepFornecedor').value = f.cepFornecedor
+            document.getElementById('dddFornecedor').value = f.dddFornecedor
+            document.getElementById('inputSiteFornecedor').value = f.siteFornecedor
+            document.getElementById('inputPhoneFornecedor').value = f.foneFornecedor
+            document.getElementById('enderecoFornecedor').value = f.enderecoFornecedor
+            document.getElementById('bairroFornecedor').value = f.bairroFornecedor
+            document.getElementById('cidadeFornecedor').value = f.cidadeFornecedor
+            document.getElementById('estadoFornecedor').value = f.estadoFornecedor
+            document.getElementById('ufFornecedor').value = f.ufFornecedor
             document.getElementById('inputFornecedor').value = f._id
         })
     })
