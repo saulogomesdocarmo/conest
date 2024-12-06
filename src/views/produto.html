@@ -15,22 +15,18 @@
 
         <form id="frmProduto" class="mt-2 row gl-3">
             <!-- Buscar Cliente -->
-            <div class="col-md-3">
+            <div class="col-md-9">
                 <input type="text" class="form-control" id="searchProduto" maxlength="50" spellcheck="false"
-                    placeholder="Nome ou código de barra do produto">
-            </div>
-            <div class="col-md-3">
-                <input type="text" class="form-control" id="searchCodigo" maxlength="50" spellcheck="false"
                     placeholder="Nome ou código de barra do produto">
             </div>
 
             <div class="col-md-3">
                 <button class="btn btn-primary" id="btnReadProdut" onclick="buscarProdutos()">Nome</button>
+                <button class="btn btn-primary" id="btnCodeProdut" onclick="buscarProdutosCodigo()">Codigo</button>
 
             </div>
 
-            <div class="col-md-2"><button class="btn btn-primary" id="btnCodeProdut"
-                    onclick="buscarProdutosCodBar()">Codigo</button></div>
+
 
             <hr class="mt-4 border-primary border -1">
 

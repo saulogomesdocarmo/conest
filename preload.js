@@ -26,7 +26,5 @@ contextBridge.exposeInMainWorld('api', {
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),
     buscaproduto: (nomeProd) => ipcRenderer.send('search-product', nomeProd),
     renderizarproduto: (dadosProduto) => ipcRenderer.on('product-data', dadosProduto),
-    renderizarCodigo: (dadosProdutCode) => ipcRenderer.on('product-data',dadosProdutCode),
-    buscarProdutoCodigo: (codigoProduto) => ipcRenderer.send('product-code', codigoProduto)
-
+    buscarcodigo: (codProduto) => ipcRenderer.send('search-code', codProduto)
 })
