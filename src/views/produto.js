@@ -67,9 +67,29 @@ function buscarProdutos() {
 // CRUD READ  CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 function buscarProdutosCodBar() {
-    let codigoProduto = document.getElementById('searchProduto').value
+    let codProd = document.getElementById('searchCodigo').value
 
-    console.log(codigoProduto)
+    console.log(codProd)
+
+    api.buscarProdutosCodBar(codProd)
+
+    api.renderizarCodigo((event, dadosProdutCode ) => { 
+
+        console.log(dadosProdutCode)
+
+        const produtoRenderizado = JSON.parse(dadosProdutCode)
+        arrayProduto = produtoRenderizado
+
+        console.log(arrayProduto)
+
+        arrayProduto.forEach((p) => {
+            document.getElementById('inputNameProduto').value = p.nomeProduto
+            document.getElementById('inputUnidadeProduto').value = p.precoProduto
+            document.getElementById('inputCodBarra').value = p.codigoProduto
+            document.getElementById('inputProdut').value = p._id
+        }) 
+    })
+
 }
 
 // FIM DO CRUD READ - CÓDIGO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

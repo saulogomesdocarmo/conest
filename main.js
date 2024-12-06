@@ -439,3 +439,24 @@ ipcMain.on('search-product', async (event, nomeProd) => {
 })
 
 // FIM DO CRUD READ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// CRUD READ codigo - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+ipcMain.on('searchCodigo', async (event, codigoProduto) => {
+    console.log(codigoProduto)
+
+    try {
+        const buscaCodigo = await produtoModel.fin({
+            codigoProduto: new RegExp(codigoProduto, 'i')
+        })
+
+        console.log(buscaCodigo)
+
+        event.reply('product-code',JSON.stringify(buscaCodigo))
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+// FIM DO CRUD READ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
