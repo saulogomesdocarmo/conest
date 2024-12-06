@@ -90,7 +90,9 @@ function buscarCliente() {
             document.getElementById('inputCidade').value = c.cidadeCliente
             document.getElementById('inputEstado').value = c.estadoCliente
             document.getElementById('uf').value = c.ufCliente
+            document.getElementById('numRuaCliente').value = c.numRuaCliente
             document.getElementById('inputClient').value = c._id
+
         })
     })
 
@@ -112,6 +114,7 @@ api.resetarFormulario((args) => {
     document.getElementById('inputBairro').value = ''
     document.getElementById('inputCidade').value = ''
     document.getElementById('inputEstado').value = ''
+    document.getElementById('numRuaCliente').value = ''
     document.getElementById('uf').value = ''
 
 })
