@@ -10,14 +10,16 @@
 </head>
 
 <body>
-    <h1> Produtos</h1>
+    <div class="container">
+        <h1> Produtos</h1>
+    </div>
     <div class="container">
 
         <form id="frmProduto" class="mt-2 row gl-3">
             <!-- Buscar Cliente -->
             <div class="col-md-9">
                 <input type="text" class="form-control" id="searchProduto" maxlength="50" spellcheck="false"
-                    placeholder="Nome ou código de barra do produto">
+                    placeholder="Buscar produto por nome ou código">
             </div>
 
             <div class="col-md-3">
@@ -51,7 +53,7 @@
 
             <!-- Email -->
             <div class="col-md-8">
-                <label for="inputCodBarra" class="form-label">Código de Barras</label>
+                <label for="inputCodBarra" class="form-label">Código do Produto</label>
                 <input class="form-control" type="text" id="inputCodBarra" required maxlength="50">
             </div>
 
