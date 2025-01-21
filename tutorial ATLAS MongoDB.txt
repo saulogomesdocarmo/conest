@@ -1,0 +1,33 @@
+ATLAS MongoDB
+https://www.mongodb.com/pt-br/cloud/atlas/register
+1) Criar uma conta
+2) Preencher o cadastro, criando um perfil
+3) Personalizar a instalação e configuração
+   - Organização (editar o nome)
+   - Projeto (editar o nome, configurar UTC (fuso horário)
+4) Criar um cluster (M0) Gratuito
+   - AWS (preferencialmente)
+   - Mudar o nome do cluster Ex: clusterNomedoprojeto
+5) Security
+   - Database access: Definir usuário e senha e privilégios (Database user privileges -> Built-in role -> Atlas admin
+   - Network access: Allow access from anywere (0.0.0.0/0)
+6) Selecionar o cluster -> Connect -> Compass -> copiar a string de conexão
+7) Baixar o Compass, adicionar uma nova conexão, colar a string, definir o nome e cor, favoritar, opções avançadas -> Authentication, inserir senha.
+
+______________________________________________________________
+Conectando o MongoDB na aplicação nodeJS (back-end | desktop)
+- URL (caminho)
+- autenticação (usuário e senha)
+- Driver (tipo de banco)
+
+NodeJS - mongoose (simplifica o uso do MongoDB no nodeJS)
+
+Passo 1) Instalar o pacote mongoose
+npm i mongoose
+
+Passo 2) Criar na raiz um arquivo de nome database.js
+
+
+
+
+
