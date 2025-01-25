@@ -78,10 +78,11 @@ function aboutWindow() {
 }
 
 // Janela Clientes
+let client
 function clientWindow() {
     nativeTheme.themeSource = 'light'
     const main = BrowserWindow.getFocusedWindow()
-    let client
+
     if (main) {
         client = new BrowserWindow({
             width: 800,
@@ -99,10 +100,11 @@ function clientWindow() {
 }
 
 // Janela Produtos
+let product
 function productWindow() {
     nativeTheme.themeSource = 'light'
     const main = BrowserWindow.getFocusedWindow()
-    let product
+
     if (main) {
         product = new BrowserWindow({
             width: 800,
@@ -120,10 +122,11 @@ function productWindow() {
 }
 
 // Janela Fornecedores
+let suplier
 function suplierWindow() {
     nativeTheme.themeSource = 'light'
     const main = BrowserWindow.getFocusedWindow()
-    let suplier
+
     if (main) {
         suplier = new BrowserWindow({
             width: 800,
@@ -141,10 +144,11 @@ function suplierWindow() {
 }
 
 // Janela Relatórios
+let relatorio
 function relatorioWindow() {
     nativeTheme.themeSource = 'light'
     const main = BrowserWindow.getFocusedWindow()
-    let relatorio
+
     if (main) {
         relatorio = new BrowserWindow({
             width: 800,
@@ -306,10 +310,40 @@ ipcMain.on('search-client', async (event, cliNome) => {
     }
 })
 
-
-
-
 // Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('delete-client', async (event, idCliente) => {
+    //teste de recebimento do id do cliente (passo 2 - slide)
+    console.log(idCliente)
+    // confirmação antes de excluir o cliente (IMPORTANTE!)
+    // client é a variável ref a janela de clientes
+    const { response } = await dialog.showMessageBox(client, {
+        type: 'warning',
+        buttons: ['Cancelar', 'Excluir'], //[0,1]
+        title: 'Atenção!',
+        message: 'Tem certeza que deseja excluir este cliente?'
+    })
+    // apoio a lógica
+    console.log(response)
+    if (response === 1) {
+        //Passo 3 slide
+        try {
+            const clienteExcluido = await clienteModel.findByIdAndDelete(idCliente)
+            dialog.showMessageBox({
+                type: 'info',
+                title: 'Aviso',
+                message: 'Cliente excluído com sucesso',
+                buttons: ['OK']
+            })
+            event.reply('reset-form')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+})
+// Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 /**************************************************/

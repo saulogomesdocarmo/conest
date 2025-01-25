@@ -6,11 +6,12 @@
 let arrayCliente = []
 
 
-// CRUD - Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 // Passo 1 - slide (capturar os dados dos inputs do form)
 
 let formCliente = document.getElementById('frmClient')
+let idCliente = document.getElementById('inputIdClient')
 let nomeCliente = document.getElementById('inputNameClient')
 let foneCliente = document.getElementById('inputPhoneClient')
 let dddCliente = document.getElementById('ddd')
@@ -23,6 +24,8 @@ let estadoCliente = document.getElementById('inputEstado')
 let ufCliente = document.getElementById('uf')
 let numRuaCliente = document.getElementById('numRuaCliente')
 
+// CRUD - Creat / Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 
 
@@ -31,25 +34,49 @@ formCliente.addEventListener('submit', async (event) => {
     // evitar o comportamento padrão de envio em um formulário
     event.preventDefault()
     // teste importante ! (Fluxo de dados )
-    // console.log(nomeCliente.value, foneCliente.value, emailCliente.value)
+    console.log(idCliente.value, nomeCliente.value, foneCliente.value, emailCliente.value)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto
-    const cliente = {
-        nomeCli: nomeCliente.value,
-        dddCli: dddCliente.value,
-        foneCli: foneCliente.value,
-        emailCli: emailCliente.value,
-        cepCli: cepCliente.value,
-        enderecoCli: enderecoCliente.value,
-        numRuaCli: numRuaCliente.value,
-        bairroCli: bairroCliente.value,
-        cidadeCli: cidadeCliente.value,
-        estadoCli: estadoCliente.value,
-        ufCli: ufCliente.value
+
+    // Estratégia para determinar se é um novo cadastro de clientes ou a edição de um cliente já existente
+    if (idCliente.value === "") {
+        const cliente = {
+            nomeCli: nomeCliente.value,
+            dddCli: dddCliente.value,
+            foneCli: foneCliente.value,
+            emailCli: emailCliente.value,
+            cepCli: cepCliente.value,
+            enderecoCli: enderecoCliente.value,
+            numRuaCli: numRuaCliente.value,
+            bairroCli: bairroCliente.value,
+            cidadeCli: cidadeCliente.value,
+            estadoCli: estadoCliente.value,
+            ufCli: ufCliente.value
+
+        }
+        api.novoCliente(cliente)
+
+    } else {
+        const cliente = {
+            idCli: idCliente.value,
+            nomeCli: nomeCliente.value,
+            dddCli: dddCliente.value,
+            foneCli: foneCliente.value,
+            emailCli: emailCliente.value,
+            cepCli: cepCliente.value,
+            enderecoCli: enderecoCliente.value,
+            numRuaCli: numRuaCliente.value,
+            bairroCli: bairroCliente.value,
+            cidadeCli: cidadeCliente.value,
+            estadoCli: estadoCliente.value,
+            ufCli: ufCliente.value
+
+        }
+        api.editarCliente(cliente)
 
     }
-    api.novoCliente(cliente)
+
 
 })
 
@@ -101,10 +128,17 @@ function buscarCliente() {
 
 // Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+function excluirCliente() {
+    api.deletarCliente(idCliente.value) // Passo 1 do Slide
+}
+
+// Fim do CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Reset Form >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 api.resetarFormulario((args) => {
+    console.log('teste de recebimento')
     document.getElementById('inputNameClient').value = ''
     document.getElementById('inputPhoneClient').value = ''
     document.getElementById('inputEmailClient').value = ''

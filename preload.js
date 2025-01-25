@@ -20,6 +20,8 @@ contextBridge.exposeInMainWorld('api', {
     novoCliente: (cliente) => ipcRenderer.send('new-client', cliente),
     buscarCliente: (cliNome) => ipcRenderer.send('search-client', cliNome),
     renderizarCliente: (dadosCliente) => ipcRenderer.on('client-data', dadosCliente),
+    deletarCliente: (idCliente) => ipcRenderer.send('delete-client', idCliente),
+    editarCliente: (cliente) => ipcRenderer.send('update-client', cliente),
     novoFornecedor: (fornecedor) => ipcRenderer.send('new-supplier', fornecedor),
     buscarFornecedor: (forneNome) => ipcRenderer.send('search-supplier', forneNome),
     renderizarFornecedor: (dadosFornecedor) => ipcRenderer.on('supplier-data', dadosFornecedor),
