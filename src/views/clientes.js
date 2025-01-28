@@ -118,7 +118,7 @@ function buscarCliente() {
             document.getElementById('inputEstado').value = c.estadoCliente
             document.getElementById('uf').value = c.ufCliente
             document.getElementById('numRuaCliente').value = c.numRuaCliente
-            document.getElementById('inputClient').value = c._id
+            document.getElementById('inputIdClient').value = c._id
 
         })
     })
