@@ -373,9 +373,16 @@ ipcMain.on('update-client', async (event, cliente) => {
         )
     } catch (error) {
         console.log(error)
-        
-
     }
+    dialog.showMessageBox(client, {
+        type: 'info',
+        message: 'Dados do cliente alterados com sucesso.',
+        buttons: ['OK']
+    }).then((result) => {
+        if (result.response === 0) { 
+            event.reply('reset-form')
+        }
+    })
 })
 
 // Fim do CRUD Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
