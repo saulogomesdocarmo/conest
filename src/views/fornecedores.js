@@ -10,6 +10,7 @@ let arrayFornecedor = []
 // Passo 1 - slide (capturar os dados dos inputs do form)
 
 let formFornecedor = document.getElementById('frmFornecedor')
+let idFornecedor = document.getElementById('inputFornecedor')
 let razaoFornecedor = document.getElementById('inputNameFornecedor')
 let foneFornecedor = document.getElementById('inputPhoneFornecedor')
 let siteFornecedor = document.getElementById('inputSiteFornecedor')
@@ -86,7 +87,13 @@ function buscarFornecedor() {
 
 // Fim CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+function excluirFornecedor() {
+    api.deletarFornecedor(idFornecedor.value) // (Passo 1 - Slide)
+}
+
+// Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 api.resetarFormulario((args) => {
     document.getElementById('inputNameFornecedor').value = ''
@@ -102,3 +109,4 @@ api.resetarFormulario((args) => {
 })
 
 // Reset Form >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+

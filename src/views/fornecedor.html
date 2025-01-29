@@ -22,7 +22,8 @@
             </div>
 
             <div class="col-md-4">
-                <button class="btn btn-primary" id="btnreadfornecer" onclick="buscarFornecedor()">Buscar</button>
+                <button type="button" class="btn btn-primary" id="btnreadfornecer"
+                    onclick="buscarFornecedor()">Buscar</button>
             </div>
             <hr class="mt-4 border-primary border -1">
 
@@ -42,8 +43,7 @@
             <!-- CEP -->
             <div class="col-md-4">
                 <label for="cepFornecedor" class="form-label">CEP</label>
-                <input class="form-control" type="text" id="cepFornecedor" required maxlength="50"
-                    onblur="fornecedorendereco()">
+                <input class="form-control" type="text" id="cepFornecedor" required maxlength="50" onblur="fornecedorendereco()">
             </div>
 
 
@@ -132,7 +132,7 @@
             <div class="mt-5">
                 <button type="submit" class="btn btn-success" id="btnAdfornecer">Adicionar</button>
                 <button type="submit" class="btn btn-warning" id="btnEdfornecer">Editar</button>
-                <button type="submit" class="btn btn-danger" id="btnDelfornecer">Excluir</button>
+                <button type="button" class="btn btn-danger" id="btnDelfornecer" onclick="excluirFornecedor()">Excluir</button>
                 <button type="reset" class="btn" id="btnReset"><img src="" alt=""></button>
             </div>
         </form>

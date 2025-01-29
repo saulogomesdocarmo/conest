@@ -33,7 +33,8 @@ contextBridge.exposeInMainWorld('api', {
     novoFornecedor: (fornecedor) => ipcRenderer.send('new-supplier', fornecedor),
     buscarFornecedor: (forneNome) => ipcRenderer.send('search-supplier', forneNome),
     renderizarFornecedor: (dadosFornecedor) => ipcRenderer.on('supplier-data', dadosFornecedor),
-    
+    deletarFornecedor: (idFornecedor) => ipcRenderer.send('delete-supplier', idFornecedor),
+
     // Requisições do Produto
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),
     buscaproduto: (nomeProd) => ipcRenderer.send('search-product', nomeProd),

@@ -131,7 +131,7 @@ function suplierWindow() {
         suplier = new BrowserWindow({
             width: 800,
             height: 705,
-            autoHideMenuBar: true,
+            // autoHideMenuBar: true,
             resizable: false,
             parent: main,
             modal: true,
@@ -379,7 +379,7 @@ ipcMain.on('update-client', async (event, cliente) => {
         message: 'Dados do cliente alterados com sucesso.',
         buttons: ['OK']
     }).then((result) => {
-        if (result.response === 0) { 
+        if (result.response === 0) {
             event.reply('reset-form')
         }
     })
@@ -459,6 +459,40 @@ ipcMain.on('search-supplier', async (event, forneNome) => {
 
 // FIM DO CRUD READ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ipcMain.on('delete-supplier', async (event, idFornecedor) => {
+    // teste de recebimento dos dados do fornecedor (Passo 2 - Slide)
+    console.log(idFornecedor)
+    // confirmação antes de excluir o forncedor (IMPORTANTE!)
+    // Suplier é a variável ref a janela de fornecedores
+    const { response } = await dialog.showMessageBox(suplier, {
+        type: 'warning',
+        buttons: ['Cancelar', 'Exlcuir'],
+        title: 'Atenção!',
+        message: 'Deseja deletar o fornecedor?',
+    })
+    // apoio a lógica
+    console.log(response)
+    if (response === 1) {
+        // Passo 3 do Slide
+        try {
+            const fornecedorExcluido = await fornecedorModel.findByIdAndDelete(idFornecedor)
+            dialog.showMessageBox({
+                type: 'info',
+                title: 'Aviso',
+                message: 'Cliente excluído com Sucesso',
+                buttons: ['OK']
+            })
+            event.reply('reset-form')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+})
+
+// Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 /**************************************************/
 /*****Produtos**************************************/
