@@ -24,10 +24,7 @@ let estadoCliente = document.getElementById('inputEstado')
 let ufCliente = document.getElementById('uf')
 let numRuaCliente = document.getElementById('numRuaCliente')
 
-// CRUD - Creat / Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
+// CRUD - Creat/Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 formCliente.addEventListener('submit', async (event) => {
@@ -41,6 +38,7 @@ formCliente.addEventListener('submit', async (event) => {
 
     // Estratégia para determinar se é um novo cadastro de clientes ou a edição de um cliente já existente
     if (idCliente.value === "") {
+        // criar um objeto
         const cliente = {
             nomeCli: nomeCliente.value,
             dddCli: dddCliente.value,
@@ -58,6 +56,7 @@ formCliente.addEventListener('submit', async (event) => {
         api.novoCliente(cliente)
 
     } else {
+        // criar um novo objeto com o id do Cliente
         const cliente = {
             idCli: idCliente.value,
             nomeCli: nomeCliente.value,
@@ -71,7 +70,6 @@ formCliente.addEventListener('submit', async (event) => {
             cidadeCli: cidadeCliente.value,
             estadoCli: estadoCliente.value,
             ufCli: ufCliente.value
-
         }
         api.editarCliente(cliente)
 
@@ -80,7 +78,7 @@ formCliente.addEventListener('submit', async (event) => {
 
 })
 
-// Fim do Crud CREAT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// Fim do Crud Create /Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 // CRUD Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
