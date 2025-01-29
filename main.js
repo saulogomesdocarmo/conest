@@ -312,7 +312,7 @@ ipcMain.on('search-client', async (event, cliNome) => {
 
 // Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD Delete - CLIENTE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ipcMain.on('delete-client', async (event, idCliente) => {
     //teste de recebimento do id do cliente (passo 2 - slide)
     console.log(idCliente)
@@ -343,7 +343,42 @@ ipcMain.on('delete-client', async (event, idCliente) => {
     }
 
 })
+
 // Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('update-client', async (event, cliente) => {
+    // teste de recebimento dos dados do cliente (passo 2)
+    console.log(cliente)
+
+    try {
+        const clienteEditado = await clienteModel.findByIdAndUpdate(
+            cliente.idCli, {
+            nomeCliente: cliente.nomeCli,
+            dddCliente: cliente.dddCli,
+            foneCliente: cliente.foneCli,
+            emailCliente: cliente.emailCli,
+            cepCliente: cliente.cepCli,
+            enderecoCliente: cliente.enderecoCli,
+            bairroCliente: cliente.bairroCli,
+            cidadeCliente: cliente.cidadeCli,
+            numRuaCliente: cliente.numRuaCli,
+            estadoCliente: cliente.estadoCli,
+            ufCliente: cliente.ufCli
+        },
+            {
+                new: true
+            }
+
+        )
+    } catch (error) {
+        console.log(error)
+        
+
+    }
+})
+
+// Fim do CRUD Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 /**************************************************/
