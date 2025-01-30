@@ -5,7 +5,7 @@
 // Array usado nos métodos para manipulação de estrutura
 let arrayFornecedor = []
 
-// CRUD - Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD - Creat/Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Passo 1 - slide (capturar os dados dos inputs do form)
 
@@ -29,24 +29,47 @@ formFornecedor.addEventListener('submit', async (event) => {
     // Evitar o comportamento padrão de envio de um formulário 
     event.preventDefault()
     // Teste importante ! (Fluxo de dados )
-    // console.log(razaoFornecedor.value, foneFornecedor.value, siteFornecedor.value)
+    console.log(razaoFornecedor.value, foneFornecedor.value, siteFornecedor.value)
 
     // Passo 2 - slide (enviar as informações para o main)
     // criar um objeto
-    const fornecedor = {
-        razaoForne: razaoFornecedor.value,
-        dddForne: dddFornecedor.value,
-        foneForne: foneFornecedor.value,
-        siteForne: siteFornecedor.value,
-        cepForne: cepFornecedor.value,
-        endForne: enderecoFornecedor.value,
-        numRuaForne: numRuaFornecedor.value,
-        bairroForne: bairroFornecedor.value,
-        cidadeForne: cidadeFornecedor.value,
-        estadoForne: estadoFornecedor.value,
-        ufForne: ufFornecedor.value
+
+    // Estratégia para determinar se é um novo cadastro de fornecedores ou a edição de um fornecedor já existente
+    if (idFornecedor.value === "") {
+        // criar um objeto
+        const fornecedor = {
+            razaoForne: razaoFornecedor.value,
+            dddForne: dddFornecedor.value,
+            foneForne: foneFornecedor.value,
+            siteForne: siteFornecedor.value,
+            cepForne: cepFornecedor.value,
+            endForne: enderecoFornecedor.value,
+            numRuaForne: numRuaFornecedor.value,
+            bairroForne: bairroFornecedor.value,
+            cidadeForne: cidadeFornecedor.value,
+            estadoForne: estadoFornecedor.value,
+            ufForne: ufFornecedor.value
+        }
+        api.novoFornecedor(fornecedor)
+    } else {
+        const fornecedor = {
+            idForne: idFornecedor.value,
+            razaoForne: razaoFornecedor.value,
+            dddForne: dddFornecedor.value,
+            foneForne: foneFornecedor.value,
+            siteForne: siteFornecedor.value,
+            cepForne: cepFornecedor.value,
+            endForne: enderecoFornecedor.value,
+            numRuaForne: numRuaFornecedor.value,
+            bairroForne: bairroFornecedor.value,
+            cidadeForne: cidadeFornecedor.value,
+            estadoForne: estadoFornecedor.value,
+            ufForne: ufFornecedor.value
+        }
+        api.editarFornecedor(fornecedor)
+
     }
-    api.novoFornecedor(fornecedor)
+
 })
 
 // Fim do CRUD - Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

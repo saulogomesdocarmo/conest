@@ -494,6 +494,46 @@ ipcMain.on('delete-supplier', async (event, idFornecedor) => {
 
 // Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+// CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('update-suplier', async (event, fornecedor) => {
+    // teste de recebimento dos dados do cliente (passo 2)
+    console.log(fornecedor)
+
+    try {
+        const fornecedorEditado = await fornecedorModel.findByIdAndUpdate(
+            fornecedor.idForne, {
+            razaoFornecedor: fornecedor.razaoForne,
+            dddFornecedor: fornecedor.dddForne,
+            foneFornecedor: fornecedor.foneForne,
+            siteFornecedor: fornecedor.siteForne,
+            cepFornecedor: fornecedor.cepForne,
+            enderecoFornecedor: fornecedor.endForne,
+            bairroFornecedor: fornecedor.bairroForne,
+            cidadeFornecedor: fornecedor.cidadeForne,
+            estadoFornecedor: fornecedor.estadoForne,
+            ufFornecedor: fornecedor.ufForne,
+            numRuaFornecedor: fornecedor.numRuaForne
+        },
+            {
+                new: true
+            }
+
+        )
+    } catch (error) {
+        console.log(error)
+    }
+    dialog.showMessageBox(client, {
+        type: 'info',
+        message: 'Dados do fornecedor alterados com sucesso.',
+        buttons: ['OK']
+    }).then((result) => {
+        if (result.response === 0) {
+            event.reply('reset-form')
+        }
+    })
+})
+// Fim do CRUD Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 /**************************************************/
 /*****Produtos**************************************/
 /**************************************************/
