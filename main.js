@@ -109,7 +109,7 @@ function productWindow() {
         product = new BrowserWindow({
             width: 800,
             height: 705,
-            autoHideMenuBar: true,
+            // autoHideMenuBar: true,
             resizable: false,
             parent: main,
             modal: true,
@@ -610,3 +610,35 @@ ipcMain.on('search-code', async (event, codProd) => {
     }
 })
 // FIM DO CRUD READ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('delet-product', async (event, idProduto) => {
+    // Teste de recebimento dos dados do Fornecedor (Passo 2 - Slide)
+    console.log(idProduto)
+    // confirmação antes de excluir o forncedor (IMPORTANTE!)
+    // Suplier é a variável ref a janela de fornecedores
+    const { response } = await dialog.showMessageBox(product, {
+        type: 'warning',
+        buttons: ['Cancelar', 'Excluir'], //[0,1]
+        title: 'Atenção!',
+        message: 'Tem certeza que deseja excluir este produto?'
+    })
+    // apoio a lógica
+    console.log(response)
+    if (response === 1) {
+        // Passo 3 do Slide
+        try {
+            const produtoExcluído = await produtoModel.findByIdAndDelete(idProduto)
+            dialog.showMessageBox({
+                type: 'info',
+                title: 'Aviso',
+                message: 'Produto excluído com sucesso',
+                buttons: ['OK']
+            })
+            event.reply('reset-form')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+})
+// Fim do CRUD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

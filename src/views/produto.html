@@ -32,13 +32,13 @@
 
             <hr class="mt-4 border-primary border -1">
 
-            <!-- Id do Cliente (oculto) -->
+            <!-- Id do Produto (oculto) -->
 
             <div class="col-md-6" id="idClient">
                 <input class="form-control" type="text" id="inputProdut" placeholder="Id">
             </div>
 
-            <!-- Nome do Cliente -->
+            <!-- Nome do Produto -->
             <div class="col-md-8">
                 <label for="inputNameProduto" class="form-label">Nome do Produto</label>
                 <input class="form-control" type="tel" id="inputNameProduto" spellcheck="false" required maxlength="50">
@@ -61,7 +61,7 @@
             <div class="mt-5">
                 <button type="submit" class="btn btn-success" id="btnCreatProdut">Adicionar</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdateProdut">Editar</button>
-                <button type="button" class="btn btn-danger" id="btnDeleteProdut">Excluir</button>
+                <button type="button" class="btn btn-danger" id="btnDeleteProdut" onclick="exlcuirProduto()">Excluir</button>
                 <button type="reset" class="btn" id="btnReset"><img src="" alt=""></button>
             </div>
         </form>
