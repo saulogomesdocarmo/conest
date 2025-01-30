@@ -22,17 +22,31 @@ formProduto.addEventListener('submit', async (event) => {
 
     event.preventDefault()
 
-    // console.log(nomeProduto.value, unidadeProduto.value, codbarraProduto.value)
+    console.log(nomeProduto.value, codbarraProduto.value)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto
 
-    const produto = {
-        nomeProd: nomeProduto.value,
-        precoProd: precoProduto.value,
-        codProd: codbarraProduto.value
+    // Estratégia para determinar se é um novo cadastro de clientes ou a edição de um cliente já existente
+    if (idProduto.value === "") {
+        const produto = {
+            nomeProd: nomeProduto.value,
+            precoProd: precoProduto.value,
+            codProd: codbarraProduto.value
+        }
+        api.novoProduto(produto)
+
+    } else {
+        // criar um objeto com o Id do produto
+        const produto = {
+            idProd: idProduto.value,
+            nomeProd: nomeProduto.value,
+            precoProd: precoProduto.value,
+            codProd: codbarraProduto.value
+        }
+        api.editarProduto(produto)
     }
-    api.novoProduto(produto)
+
 })
 
 // Fim do CRUD Creat <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
