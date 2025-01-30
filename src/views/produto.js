@@ -10,6 +10,7 @@ let arrayProduto = []
 // Passo 1 - slide (capturar os dados)
 
 let formProduto = document.getElementById('frmProduto')
+let idProduto = document.getElementById('inputProdut')
 let nomeProduto = document.getElementById('inputNameProduto')
 let precoProduto = document.getElementById('inputUnidadeProduto')
 let codbarraProduto = document.getElementById('inputCodBarra')
@@ -74,7 +75,13 @@ function buscarProdutosCodigo() {
 }
 // FIM DO CRUD READ - CÓDIGO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-// RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+function excluirCliente() {
+    api.deletarProduto(idProduto.valeu) // Passo 2 do slide
+
+}
+// Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 api.resetarFormulario((args) => {
     document.getElementById('inputNameProduto').value = ''
