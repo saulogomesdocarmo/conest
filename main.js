@@ -644,7 +644,32 @@ ipcMain.on('delet-product', async (event, idProduto) => {
 // Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-ipcMain.on('update-product', async (event, produto) => { 
+ipcMain.on('update-product', async (event, produto) => {
     console.log(produto)
+
+    try {
+        const produtoEditado = await produtoModel.findByIdAndUpdate(
+            produto.idProd, {
+            nomeProduto: produto.nomeProd,
+            precoProduto: produto.precoProd,
+            codigoProduto: produto.codProd
+        },
+            {
+                new: true
+            }
+        )
+
+    } catch (error) {
+        console.log(error)
+    }
+    dialog.showMessageBox(product, {
+        type: 'info',
+        message: 'Dados do produto alterados com sucesso.',
+        buttons: ['OK']
+    }).then((result) => {
+        if (result.response === 0) {
+            event.reply('reset-form')
+        }
+    })
 })
 // Fim do CRUD Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
