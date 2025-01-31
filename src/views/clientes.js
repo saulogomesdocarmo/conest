@@ -3,10 +3,22 @@
  */
 
 // Array usado nos métodos para manipulação da estrutura de dados
+
+// A linha abaixo capitura o campo de input de busca
+const foco = document.getElementById('searchClient')
+
+// Mudas as propriedades do documento html ao iniciar a janela
+
+// document.addEventListener('DOMContentLoaded', () => { 
+//     btnCreat.disabled = true
+//     btnUpdate.
+// })
+
+
+
+
+
 let arrayCliente = []
-
-
-
 
 // Passo 1 - slide (capturar os dados dos inputs do form)
 
