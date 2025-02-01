@@ -2,6 +2,32 @@
  * Processo de Renderização do documento -> fornecedores.html
  */
 
+// A linha abaixo capitura o campo de input de busca
+const focoFornecedor = document.getElementById('searchForner')
+
+// A linha abaixo muda as propriedades do documento html ao iniciar a janela
+document.addEventListener('DOMContentLoaded', () => {
+    btnEdfornecer.disabled = true
+    btnDelfornecer.disabled = true
+    focoFornecedor.focus()
+})
+
+// Função para manipular o evento da tecla Enter
+function teclaEnter(event) {
+    if (event.key === "Enter") {
+        event.preventDefault()
+        buscarFornecedor()
+    }
+}
+
+// Função remover o manipulador da tecla Enter
+function restaurarEnter() {
+    document.getElementById('frmFornecedor').removeEventListener('keydown', teclaEnter)
+}
+
+// Manipulando a tecla Enter
+document.getElementById('frmFornecedor').removeEventListener('keydown', teclaEnter)
+
 // Array usado nos métodos para manipulação de estrutura
 let arrayFornecedor = []
 
@@ -80,32 +106,66 @@ formFornecedor.addEventListener('submit', async (event) => {
 function buscarFornecedor() {
 
     let forneNome = document.getElementById('searchForner').value
-    console.log(forneNome)
+    // console.log(forneNome)
+    if (forneNome === "") {
+        api.validarBuscaFornecedor() // Validação do campo obrigatório
+        focoFornecedor.focus()
+    } else {
+        api.buscarFornecedor()
 
-    api.buscarFornecedor()
+        api.renderizarFornecedor((event, dadosFornecedor) => {
 
-    api.renderizarFornecedor((event, dadosFornecedor) => {
+            console.log(dadosFornecedor)
 
-        console.log(dadosFornecedor)
+            const fornecedorRenderizado = JSON.parse(dadosFornecedor)
+            arrayFornecedor = fornecedorRenderizado
 
-        const fornecedorRenderizado = JSON.parse(dadosFornecedor)
-        arrayFornecedor = fornecedorRenderizado
+            arrayFornecedor.forEach((f) => {
+                document.getElementById('inputNameFornecedor').value = f.razaoFornecedor
+                document.getElementById('cepFornecedor').value = f.cepFornecedor
+                document.getElementById('dddFornecedor').value = f.dddFornecedor
+                document.getElementById('inputSiteFornecedor').value = f.siteFornecedor
+                document.getElementById('inputPhoneFornecedor').value = f.foneFornecedor
+                document.getElementById('enderecoFornecedor').value = f.enderecoFornecedor
+                document.getElementById('bairroFornecedor').value = f.bairroFornecedor
+                document.getElementById('cidadeFornecedor').value = f.cidadeFornecedor
+                document.getElementById('estadoFornecedor').value = f.estadoFornecedor
+                document.getElementById('ufFornecedor').value = f.ufFornecedor
+                document.getElementById('numRuaFornecedor').value = f.numRuaFornecedor
+                document.getElementById('inputFornecedor').value = f._id
 
-        arrayFornecedor.forEach((f) => {
-            document.getElementById('inputNameFornecedor').value = f.razaoFornecedor
-            document.getElementById('cepFornecedor').value = f.cepFornecedor
-            document.getElementById('dddFornecedor').value = f.dddFornecedor
-            document.getElementById('inputSiteFornecedor').value = f.siteFornecedor
-            document.getElementById('inputPhoneFornecedor').value = f.foneFornecedor
-            document.getElementById('enderecoFornecedor').value = f.enderecoFornecedor
-            document.getElementById('bairroFornecedor').value = f.bairroFornecedor
-            document.getElementById('cidadeFornecedor').value = f.cidadeFornecedor
-            document.getElementById('estadoFornecedor').value = f.estadoFornecedor
-            document.getElementById('ufFornecedor').value = f.ufFornecedor
-            document.getElementById('numRuaFornecedor').value = f.numRuaFornecedor
-            document.getElementById('inputFornecedor').value = f._id
+                // Limpar o campo de busca e remover o foco
+                focoFornecedor.value = ""
+                focoFornecedor.disabled = true
+
+                // desativar o botão de buscar
+                btnreadfornecer.disabled = true
+                // desativar o botão de adicionar
+                btnAdfornecer.disabled = true
+                // liberar os botões editar e exlcuir
+                document.getElementById('btnEdfornecer').disabled = false
+                document.getElementById('btnDelfornecer').disabled = false
+                // restauar o padrão da telca Enter
+                restaurarEnter()
+                // reativar os inputs das caixas
+
+            })
         })
+    }
+
+    api.setarNomeFornecedor(() => {
+        // setar o nome do cliente
+        let campoRazao = document.getElementById('searchForner').value
+        document.getElementById('inputNameFornecedor').focus
+        document.getElementById('inputNameFornecedor').value = campoRazao
+
+        // limpar o campo de busca e remover o foco
+        focoFornecedor.value = ""
+        focoFornecedor.blur()
+        // restaurar o padrão da tecla Enter
+        restaurarEnter()
     })
+
 }
 
 // Fim CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -119,17 +179,12 @@ function excluirFornecedor() {
 // Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 api.resetarFormulario((args) => {
-    document.getElementById('inputNameFornecedor').value = ''
-    document.getElementById('inputPhoneFornecedor').value = ''
-    document.getElementById('inputSiteFornecedor').value = ''
-    document.getElementById('dddFornecedor').value = ''
-    document.getElementById('cepFornecedor').value = ''
-    document.getElementById('enderecoFornecedor').value = ''
-    document.getElementById('bairroFornecedor').value = ''
-    document.getElementById('cidadeFornecedor').value = ''
-    document.getElementById('ufFornecedor').value = ''
-    document.getElementById('numRuaFornecedor').value = ''
+    resetForm()
 })
+
+function resetForm() {
+    location.reload()
+}
 
 // Reset Form >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
