@@ -73,6 +73,29 @@ formProduto.addEventListener('submit', async (event) => {
 
 // CRUD READ  NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+function buscarProdutosCodigo() {
+    let codProduto = document.getElementById('searchProduto').value
+    console.log(codProduto)
+
+    api.buscarcodigo(codProduto)
+
+    api.renderizarproduto((event, dadosProduto) => {
+        console.log(dadosProduto)
+
+        const produtoRenderizado = JSON.parse(dadosProduto)
+        arrayProduto = produtoRenderizado
+
+        console.log(arrayProduto)
+
+        arrayProduto.forEach((p) => {
+            document.getElementById('inputNameProduto').value = p.nomeProduto
+            document.getElementById('inputUnidadeProduto').value = p.precoProduto
+            document.getElementById('inputCodBarra').value = p.codigoProduto
+            document.getElementById('inputProdut').value = p._id
+        })
+    })
+}
+
 function buscarProdutos() {
 
     let nomeProd = document.getElementById('searchProduto').value
@@ -101,13 +124,6 @@ function buscarProdutos() {
 
 // CRUD READ  CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-function buscarProdutosCodigo() {
-    let codProduto = document.getElementById('searchProduto').value
-    console.log(codProduto)
-
-    api.buscarcodigo(codProduto)
-}
-// FIM DO CRUD READ - CÓDIGO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function exlcuirProduto() {
