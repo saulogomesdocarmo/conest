@@ -17,11 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
 function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
-        buscaproduto()
-        buscarcodigo()
+        buscarProdutos()
+        buscarProdutosCodigo()
     }
 }
 
+// Função para remover o manipulador do evento da tecla Enter
+function restaurarEnter() {
+    document.getElementById('frmProduto').removeEventListener('keydown', teclaEnter)
+}
+
+// Manipulando o evento (tecla Enter)
+document.getElementById('frmProduto').addEventListener('keydown', teclaEnter)
 // Array usado para manipulação de dados
 let arrayProduto = []
 
@@ -75,49 +82,112 @@ formProduto.addEventListener('submit', async (event) => {
 
 function buscarProdutosCodigo() {
     let codProduto = document.getElementById('searchProduto').value
-    console.log(codProduto)
+    // console.log(codProduto)
+    if (codProduto === "") {
+        api.validarBuscaProdutoCodigo()
+        focoProduto.focus()
+    } else {
+        api.buscarcodigo(codProduto)
 
-    api.buscarcodigo(codProduto)
+        api.renderizarproduto((event, dadosProduto) => {
+            console.log(dadosProduto)
 
-    api.renderizarproduto((event, dadosProduto) => {
-        console.log(dadosProduto)
+            const produtoRenderizado = JSON.parse(dadosProduto)
+            arrayProduto = produtoRenderizado
 
-        const produtoRenderizado = JSON.parse(dadosProduto)
-        arrayProduto = produtoRenderizado
+            console.log(arrayProduto)
 
-        console.log(arrayProduto)
+            arrayProduto.forEach((p) => {
+                document.getElementById('inputNameProduto').value = p.nomeProduto
+                document.getElementById('inputUnidadeProduto').value = p.precoProduto
+                document.getElementById('inputCodBarra').value = p.codigoProduto
+                document.getElementById('inputProdut').value = p._id
 
-        arrayProduto.forEach((p) => {
-            document.getElementById('inputNameProduto').value = p.nomeProduto
-            document.getElementById('inputUnidadeProduto').value = p.precoProduto
-            document.getElementById('inputCodBarra').value = p.codigoProduto
-            document.getElementById('inputProdut').value = p._id
+                focoProduto.value = ""
+
+                focoProduto.disabled = true
+                // btnProds.disabled = true
+
+                btnReadCode.disabled = true
+
+                btnCreatProdut.disabled = true
+
+                document.getElementById('btnUpdateProdut').disabled = false
+                document.getElementById('btnDeleteProdut').disabled = false
+
+                restaurarEnter()
+
+            })
         })
+    }
+    api.setarProduto(() => {
+        //setar o nome do cliente       
+        let campoCodeProduto = document.getElementById('searchProduto').value
+        document.getElementById('inputCodBarra').focus()
+        document.getElementById('inputCodBarra').value = campoCodeProduto
+        //limpar o campo de busca e remover o foco
+        foco.value = ""
+        foco.blur()
+        //restaurar o padrão da tecla Enter
+        restaurarEnter()
+        //reativar os inputs das caixas de texto
+        /*
+        document.querySelectorAll('.bloqueio input').forEach(input => {
+            input.disabled = false
+        })
+        */
     })
+
+
 }
 
 function buscarProdutos() {
 
     let nomeProd = document.getElementById('searchProduto').value
-    console.log(nomeProd)
+    // console.log(nomeProd)
+    if (nomeProd === "") {
+        api.validarProdutoBuscaNome()
+        focoProduto.focus()
+    } else {
+        api.buscaproduto(nomeProd)
 
-    api.buscaproduto(nomeProd)
+        api.renderizarproduto((event, dadosProduto) => {
+            console.log(dadosProduto)
 
-    api.renderizarproduto((event, dadosProduto) => {
-        console.log(dadosProduto)
+            const produtoRenderizado = JSON.parse(dadosProduto)
+            arrayProduto = produtoRenderizado
 
-        const produtoRenderizado = JSON.parse(dadosProduto)
-        arrayProduto = produtoRenderizado
+            console.log(arrayProduto)
 
-        console.log(arrayProduto)
+            arrayProduto.forEach((p) => {
+                document.getElementById('inputNameProduto').value = p.nomeProduto
+                document.getElementById('inputUnidadeProduto').value = p.precoProduto
+                document.getElementById('inputCodBarra').value = p.codigoProduto
+                document.getElementById('inputProdut').value = p._id
 
-        arrayProduto.forEach((p) => {
-            document.getElementById('inputNameProduto').value = p.nomeProduto
-            document.getElementById('inputUnidadeProduto').value = p.precoProduto
-            document.getElementById('inputCodBarra').value = p.codigoProduto
-            document.getElementById('inputProdut').value = p._id
+                focoProduto.value = ""
+                focoProduto.disabled = true
+                btnReadProdut.disabled = true
+                btnCreatProdut.disabled = true
+
+                document.getElementById('btnUpdateProdut').disabled = false
+                document.getElementById('btnDeleteProdut').disabled = false
+
+                restaurarEnter()
+            })
         })
+    }
+
+    api.setarNomeProduto(() => {
+        let campoNomeprod = document.getElementById('searchProduto').value
+        document.getElementById('inputNameProduto').focus()
+        document.getElementById('inputNameProduto').value = campoNomeprod
+
+        foco.value = ""
+        foco.blur()
+        restaurarEnter()
     })
+
 }
 
 // Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -134,7 +204,10 @@ function exlcuirProduto() {
 // RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 api.resetarFormulario((args) => {
-    document.getElementById('inputNameProduto').value = ''
-    document.getElementById('inputUnidadeProduto').value = ''
-    document.getElementById('inputCodBarra').value = ''
+    resetForm()
 })
+
+function resetForm() {
+    //recarregar a página
+    location.reload()
+}

@@ -23,8 +23,13 @@
             </div>
 
             <div class="col-md-3">
-                <button type="button"  class="btn btn-primary" id="btnReadProdut" onclick="buscarProdutos()">Nome</button>
-                <button type="button" class="btn btn-primary" id="btnCodeProdut" onclick="buscarProdutosCodigo()">Codigo</button>
+                <button type="button" class="btn btn-primary" id="btnReadProdut"
+                    onclick="buscarProdutos()">Nome</button>
+
+
+
+                <button type="button" class="btn btn-primary" id="btnReadCode"
+                    onclick="buscarProdutosCodigo()">Codigo</button>
 
             </div>
 
@@ -44,14 +49,14 @@
                 <input class="form-control" type="tel" id="inputNameProduto" spellcheck="false" required maxlength="50">
             </div>
 
-            <!-- Fone -->
+            <!-- Preço -->
             <div class="col-md-4">
                 <label for="inputUnidadeProduto" class="form-label">Preço</label>
                 <input class="form-control" type="tel" id="inputUnidadeProduto" spellcheck="false" required
                     maxlength="15">
             </div>
 
-            <!-- Email -->
+            <!-- Código do Produto -->
             <div class="col-md-8">
                 <label for="inputCodBarra" class="form-label">Código do Produto</label>
                 <input class="form-control" type="text" id="inputCodBarra" required maxlength="50">
@@ -61,7 +66,8 @@
             <div class="mt-5">
                 <button type="submit" class="btn btn-success" id="btnCreatProdut">Adicionar</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdateProdut">Editar</button>
-                <button type="button" class="btn btn-danger" id="btnDeleteProdut" onclick="exlcuirProduto()">Excluir</button>
+                <button type="button" class="btn btn-danger" id="btnDeleteProdut"
+                    onclick="exlcuirProduto()">Excluir</button>
                 <button type="reset" class="btn" id="btnReset"><img src="" alt=""></button>
             </div>
         </form>
