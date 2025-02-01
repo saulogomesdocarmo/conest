@@ -29,7 +29,7 @@ contextBridge.exposeInMainWorld('api', {
     deletarCliente: (idCliente) => ipcRenderer.send('delete-client', idCliente),
     editarCliente: (cliente) => ipcRenderer.send('update-client', cliente),
     validarBusca: () => ipcRenderer.send('dialog-search'),
-    setarNomeCliente: (args) => ipcRenderer.send('set-nameClient', args),
+    setarNomeCliente: (args) => ipcRenderer.on('set-nameClient', args),
 
     // Requisições do Fornecedor
     novoFornecedor: (fornecedor) => ipcRenderer.send('new-supplier', fornecedor),
@@ -38,6 +38,7 @@ contextBridge.exposeInMainWorld('api', {
     deletarFornecedor: (idFornecedor) => ipcRenderer.send('delete-supplier', idFornecedor),
     editarFornecedor: (fornecedor) => ipcRenderer.send('update-suplier', fornecedor),
     validarBuscaFornecedor: () => ipcRenderer.send('dialog-suplier'),
+    setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
 
     // Requisições do Produto
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),
@@ -45,6 +46,7 @@ contextBridge.exposeInMainWorld('api', {
     renderizarproduto: (dadosProduto) => ipcRenderer.on('product-data', dadosProduto),
     buscarcodigo: (codProduto) => ipcRenderer.send('search-code', codProduto),
     deletarProduto: (idProduto) => ipcRenderer.send('delet-product', idProduto),
-    editarProduto: (produto) => ipcRenderer.send('update-product', produto)
+    editarProduto: (produto) => ipcRenderer.send('update-product', produto),
+    validarBuscaProduto: () => ipcRenderer.send('dialog-suplier')
 
 })

@@ -111,7 +111,7 @@ function buscarFornecedor() {
         api.validarBuscaFornecedor() // Validação do campo obrigatório
         focoFornecedor.focus()
     } else {
-        api.buscarFornecedor()
+        api.buscarFornecedor(forneNome)
 
         api.renderizarFornecedor((event, dadosFornecedor) => {
 

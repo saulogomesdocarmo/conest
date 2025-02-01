@@ -3,6 +3,25 @@
  */
 
 
+// A linha abaixo traz foco para o campo input de buscas
+const focoProduto = document.getElementById('searchProduto')
+
+// Mudas as propriedades do documento html ao iniciar a janela
+document.addEventListener('DOMContentLoaded', () => {
+    btnUpdateProdut.disabled = true
+    btnDeleteProdut.disabled = true
+    focoProduto.focus()
+})
+
+// Função para manipluar o evento da tecla Enter
+function teclaEnter(event) {
+    if (event.key === "Enter") {
+        event.preventDefault()
+        buscaproduto()
+        buscarcodigo()
+    }
+}
+
 // Array usado para manipulação de dados
 let arrayProduto = []
 

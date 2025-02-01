@@ -4,7 +4,7 @@
 
 // Array usado nos métodos para manipulação da estrutura de dados
 
-// A linha abaixo capitura o campo de input de busca
+// A linha abaixo traz foco para o campo input de buscas
 const foco = document.getElementById('searchClient')
 
 // Mudas as propriedades do documento html ao iniciar a janela
@@ -153,7 +153,7 @@ function buscarCliente() {
                 foco.disabled = true
                 btnRead.disabled = true
                 // desativar o botão adicionar
-                btnCreate.disabled = true
+                btnCreat.disabled = true
                 // liberar os botões editar e exlcuir
                 document.getElementById('btnUpdate').disabled = false
                 document.getElementById('btnDelete').disabled = false
