@@ -20,6 +20,9 @@ const fornecedorSchema = new Schema({
     siteFornecedor: {
         type: String
     },
+    cnpjFornecedor: {
+        type: String
+    },
     cepFornecedor: {
         type: String
     },

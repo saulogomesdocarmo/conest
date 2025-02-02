@@ -38,6 +38,7 @@ let arrayFornecedor = []
 let formFornecedor = document.getElementById('frmFornecedor')
 let idFornecedor = document.getElementById('inputFornecedor')
 let razaoFornecedor = document.getElementById('inputNameFornecedor')
+let cnpjFornecedor = document.getElementById('cnpjFornecedor')
 let foneFornecedor = document.getElementById('inputPhoneFornecedor')
 let siteFornecedor = document.getElementById('inputSiteFornecedor')
 let dddFornecedor = document.getElementById('dddFornecedor')
@@ -65,6 +66,7 @@ formFornecedor.addEventListener('submit', async (event) => {
         // criar um objeto
         const fornecedor = {
             razaoForne: razaoFornecedor.value,
+            cnpjForne: cnpjFornecedor.value,
             dddForne: dddFornecedor.value,
             foneForne: foneFornecedor.value,
             siteForne: siteFornecedor.value,
@@ -81,6 +83,7 @@ formFornecedor.addEventListener('submit', async (event) => {
         const fornecedor = {
             idForne: idFornecedor.value,
             razaoForne: razaoFornecedor.value,
+            cnpjForne: cnpjFornecedor.value,
             dddForne: dddFornecedor.value,
             foneForne: foneFornecedor.value,
             siteForne: siteFornecedor.value,
@@ -123,6 +126,7 @@ function buscarFornecedor() {
             arrayFornecedor.forEach((f) => {
                 document.getElementById('inputNameFornecedor').value = f.razaoFornecedor
                 document.getElementById('cepFornecedor').value = f.cepFornecedor
+                document.getElementById('cnpjFornecedor').value = f.cnpjFornecedor
                 document.getElementById('dddFornecedor').value = f.dddFornecedor
                 document.getElementById('inputSiteFornecedor').value = f.siteFornecedor
                 document.getElementById('inputPhoneFornecedor').value = f.foneFornecedor

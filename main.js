@@ -450,6 +450,7 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
         // criar um objeto usando a classe modelo
         const novoFornecedor = new fornecedorModel({
             razaoFornecedor: fornecedor.razaoForne,
+            cnpjFornecedor: fornecedor.cnpjForne,
             dddFornecedor: fornecedor.dddForne,
             foneFornecedor: fornecedor.foneForne,
             siteFornecedor: fornecedor.siteForne,
@@ -550,6 +551,7 @@ ipcMain.on('update-suplier', async (event, fornecedor) => {
         const fornecedorEditado = await fornecedorModel.findByIdAndUpdate(
             fornecedor.idForne, {
             razaoFornecedor: fornecedor.razaoForne,
+            cnpjFornecedor: fornecedor.cnpjForne,
             dddFornecedor: fornecedor.dddForne,
             foneFornecedor: fornecedor.foneForne,
             siteFornecedor: fornecedor.siteForne,
