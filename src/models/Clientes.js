@@ -25,7 +25,7 @@ const clienteSchema = new Schema({
     cepCliente: {
         type: String
     },
-    compleCliente: {
+    complementoCliente: {
         type: String
     },
     enderecoCliente: {

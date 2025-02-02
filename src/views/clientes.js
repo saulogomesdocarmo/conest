@@ -49,7 +49,7 @@ let cidadeCliente = document.getElementById('inputCidade')
 let estadoCliente = document.getElementById('inputEstado')
 let ufCliente = document.getElementById('uf')
 let numRuaCliente = document.getElementById('numRuaCliente')
-let complementoCliente = document.getElementById('complCliente')
+let compleCliente = document.getElementById('compleCliente')
 
 
 // CRUD - Creat/Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -59,7 +59,7 @@ formCliente.addEventListener('submit', async (event) => {
     // evitar o comportamento padrão de envio em um formulário
     event.preventDefault()
     // teste importante ! (Fluxo de dados )
-    console.log(idCliente.value, nomeCliente.value, foneCliente.value, emailCliente.value)
+    console.log(idCliente.value, nomeCliente.value, foneCliente.value, emailCliente.value, compleCliente.value)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto
@@ -80,7 +80,7 @@ formCliente.addEventListener('submit', async (event) => {
             cidadeCli: cidadeCliente.value,
             estadoCli: estadoCliente.value,
             ufCli: ufCliente.value,
-            compleCli: complementoCliente.value
+            compleCli: compleCliente.value
 
         }
         api.novoCliente(cliente)
@@ -101,7 +101,7 @@ formCliente.addEventListener('submit', async (event) => {
             cidadeCli: cidadeCliente.value,
             estadoCli: estadoCliente.value,
             ufCli: ufCliente.value,
-            compleCli: complementoCliente.value
+            compleCli: compleCliente.value
         }
         api.editarCliente(cliente)
 
@@ -153,7 +153,7 @@ function buscarCliente() {
                 document.getElementById('inputEstado').value = c.estadoCliente
                 document.getElementById('uf').value = c.ufCliente
                 document.getElementById('numRuaCliente').value = c.numRuaCliente
-                document.getElementById('complCliente').value = complementoCliente
+                document.getElementById('compleCliente').value = c.complementoCliente
                 document.getElementById('inputIdClient').value = c._id
 
 
@@ -235,7 +235,7 @@ function buscarCpfCliente() {
                 document.getElementById('inputEstado').value = c.estadoCliente
                 document.getElementById('uf').value = c.ufCliente
                 document.getElementById('numRuaCliente').value = c.numRuaCliente
-                document.getElementById('complCliente').value = complementoCliente
+                document.getElementById('compleCliente').value = c.complementoCliente
                 document.getElementById('inputIdClient').value = c._id
 
                 // Limpar o campo de busca e remover o foco
