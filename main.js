@@ -274,6 +274,7 @@ ipcMain.on('new-client', async (event, cliente) => {
             bairroCliente: cliente.bairroCli,
             cidadeCliente: cliente.cidadeCli,
             numRuaCliente: cliente.numRuaCli,
+            complementoCliente: cliente.compleCli,
             estadoCliente: cliente.estadoCli,
             ufCliente: cliente.ufCli
 
@@ -410,6 +411,7 @@ ipcMain.on('update-client', async (event, cliente) => {
             bairroCliente: cliente.bairroCli,
             cidadeCliente: cliente.cidadeCli,
             numRuaCliente: cliente.numRuaCli,
+            complementoCliente: cliente.compleCli,
             estadoCliente: cliente.estadoCli,
             ufCliente: cliente.ufCli
         },

@@ -49,6 +49,8 @@ let cidadeCliente = document.getElementById('inputCidade')
 let estadoCliente = document.getElementById('inputEstado')
 let ufCliente = document.getElementById('uf')
 let numRuaCliente = document.getElementById('numRuaCliente')
+let complementoCliente = document.getElementById('complCliente')
+
 
 // CRUD - Creat/Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -77,7 +79,8 @@ formCliente.addEventListener('submit', async (event) => {
             bairroCli: bairroCliente.value,
             cidadeCli: cidadeCliente.value,
             estadoCli: estadoCliente.value,
-            ufCli: ufCliente.value
+            ufCli: ufCliente.value,
+            compleCli: complementoCliente.value
 
         }
         api.novoCliente(cliente)
@@ -97,7 +100,8 @@ formCliente.addEventListener('submit', async (event) => {
             bairroCli: bairroCliente.value,
             cidadeCli: cidadeCliente.value,
             estadoCli: estadoCliente.value,
-            ufCli: ufCliente.value
+            ufCli: ufCliente.value,
+            compleCli: complementoCliente.value
         }
         api.editarCliente(cliente)
 
@@ -149,7 +153,9 @@ function buscarCliente() {
                 document.getElementById('inputEstado').value = c.estadoCliente
                 document.getElementById('uf').value = c.ufCliente
                 document.getElementById('numRuaCliente').value = c.numRuaCliente
+                document.getElementById('complCliente').value = complementoCliente
                 document.getElementById('inputIdClient').value = c._id
+
 
                 // Limpar o campo de busca e remover o foco
                 foco.value = ""
@@ -229,13 +235,14 @@ function buscarCpfCliente() {
                 document.getElementById('inputEstado').value = c.estadoCliente
                 document.getElementById('uf').value = c.ufCliente
                 document.getElementById('numRuaCliente').value = c.numRuaCliente
+                document.getElementById('complCliente').value = complementoCliente
                 document.getElementById('inputIdClient').value = c._id
 
                 // Limpar o campo de busca e remover o foco
                 foco.value = ""
 
                 foco.disabled = true
-                
+
                 // Desativando os botões de Busca
                 btnReadCPF.disabled = true
                 btnRead.disabled = true
