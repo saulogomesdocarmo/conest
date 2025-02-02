@@ -243,6 +243,17 @@ const template = [
 /*****Clientes**************************************/
 /**************************************************/
 
+// Aviso (pop-up) ao abrir a janela
+ipcMain.on('notice-box', () => {
+    dialog.showMessageBox({
+        type: 'info',
+        title: "Atenção!",
+        message: "Preencha o campo de busca com os dados antes de iniciar",
+        buttons: ['OK']
+    })
+})
+
+
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Recebimento dos dados do fomulário do cliente
 ipcMain.on('new-client', async (event, cliente) => {
@@ -288,6 +299,15 @@ ipcMain.on('new-client', async (event, cliente) => {
 
 
 // CRUD - Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('dialog-search', () => {
+    dialog.showMessageBox({
+        type: 'warning',
+        title: 'Atenção!',
+        message: 'Preencha um nome no campo de Busca',
+        buttons: ['OK']
+    })
+})
+
 
 ipcMain.on('search-client', async (event, cliNome) => {
     // teste de recebimento do nome do cliente a ser pesquisado (Passo 2)

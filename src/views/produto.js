@@ -84,7 +84,7 @@ function buscarProdutosCodigo() {
     let codProduto = document.getElementById('searchProduto').value
     // console.log(codProduto)
     if (codProduto === "") {
-        api.validarBuscaProdutoCodigo()
+        api.validarBusca()
         focoProduto.focus()
     } else {
         api.buscarcodigo(codProduto)
@@ -146,7 +146,7 @@ function buscarProdutos() {
     let nomeProd = document.getElementById('searchProduto').value
     // console.log(nomeProd)
     if (nomeProd === "") {
-        api.validarProdutoBuscaNome()
+        api.validarBusca()
         focoProduto.focus()
     } else {
         api.buscaproduto(nomeProd)

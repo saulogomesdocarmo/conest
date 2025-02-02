@@ -108,7 +108,7 @@ function buscarFornecedor() {
     let forneNome = document.getElementById('searchForner').value
     // console.log(forneNome)
     if (forneNome === "") {
-        api.validarBuscaFornecedor() // Validação do campo obrigatório
+        validarBusca // Validação do campo obrigatório
         focoFornecedor.focus()
     } else {
         api.buscarFornecedor(forneNome)

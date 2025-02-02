@@ -22,13 +22,14 @@ contextBridge.exposeInMainWorld('api', {
     // Requisição da função que limpa os campos do sistema 
     resetarFormulario: (args) => ipcRenderer.on('reset-form', args),
 
+
+
     // Requisições do Cliente
     novoCliente: (cliente) => ipcRenderer.send('new-client', cliente),
     buscarCliente: (cliNome) => ipcRenderer.send('search-client', cliNome),
     renderizarCliente: (dadosCliente) => ipcRenderer.on('client-data', dadosCliente),
     deletarCliente: (idCliente) => ipcRenderer.send('delete-client', idCliente),
     editarCliente: (cliente) => ipcRenderer.send('update-client', cliente),
-    validarBusca: () => ipcRenderer.send('dialog-search'),
     setarNomeCliente: (args) => ipcRenderer.on('set-nameClient', args),
 
     // Requisições do Fornecedor
@@ -37,7 +38,6 @@ contextBridge.exposeInMainWorld('api', {
     renderizarFornecedor: (dadosFornecedor) => ipcRenderer.on('supplier-data', dadosFornecedor),
     deletarFornecedor: (idFornecedor) => ipcRenderer.send('delete-supplier', idFornecedor),
     editarFornecedor: (fornecedor) => ipcRenderer.send('update-suplier', fornecedor),
-    validarBuscaFornecedor: () => ipcRenderer.send('dialog-suplier'),
     setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
 
     // Requisições do Produto
@@ -47,9 +47,11 @@ contextBridge.exposeInMainWorld('api', {
     buscarcodigo: (codProduto) => ipcRenderer.send('search-code', codProduto),
     deletarProduto: (idProduto) => ipcRenderer.send('delet-product', idProduto),
     editarProduto: (produto) => ipcRenderer.send('update-product', produto),
-    validarBuscaProdutoCodigo: () => ipcRenderer.send('dialog-codeprod'),
     setarProduto: (args) => ipcRenderer.on('set-product', args),
-    validarProdutoBuscaNome: () => ipcRenderer.send('dialog-nameprdo'),
-    setarNomeProduto: (args) => ipcRenderer.on('set-name-product', args)
+    setarNomeProduto: (args) => ipcRenderer.on('set-name-product', args),
+
+    // Aviso para os preencher o campo de busca
+    validarBusca: () => ipcRenderer.send('dialog-search'),
+    avisoCliente: () => ipcRenderer.send('notice-box')
 
 })
