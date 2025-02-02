@@ -27,10 +27,12 @@ contextBridge.exposeInMainWorld('api', {
     // Requisições do Cliente
     novoCliente: (cliente) => ipcRenderer.send('new-client', cliente),
     buscarCliente: (cliNome) => ipcRenderer.send('search-client', cliNome),
+    bucarCpfCliente: (cliCPF) => ipcRenderer.send('cpf-search', cliCPF),
     renderizarCliente: (dadosCliente) => ipcRenderer.on('client-data', dadosCliente),
     deletarCliente: (idCliente) => ipcRenderer.send('delete-client', idCliente),
     editarCliente: (cliente) => ipcRenderer.send('update-client', cliente),
     setarNomeCliente: (args) => ipcRenderer.on('set-nameClient', args),
+    setarCpfCliente: (args) => ipcRenderer.on('set-cpfClient', args),
 
     // Requisições do Fornecedor
     novoFornecedor: (fornecedor) => ipcRenderer.send('new-supplier', fornecedor),
@@ -40,7 +42,7 @@ contextBridge.exposeInMainWorld('api', {
     editarFornecedor: (fornecedor) => ipcRenderer.send('update-suplier', fornecedor),
     setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
     // Aviso para os preencher o campo de busca
-    
+
 
     // Requisições do Produto
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),

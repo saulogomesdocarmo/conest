@@ -299,7 +299,7 @@ ipcMain.on('new-client', async (event, cliente) => {
 // Fim do CRUD Creat <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-// CRUD - Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD - Read - Nome >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ipcMain.on('dialog-search', () => {
     dialog.showMessageBox({
         type: 'warning',
@@ -320,6 +320,31 @@ ipcMain.on('search-client', async (event, cliNome) => {
     try {
         const dadosCliente = await clienteModel.find({
             nomeCliente: new RegExp(cliNome, 'i')
+        })
+        console.log(dadosCliente) // Teste dos passos 3 e 4 
+        // Passo 5 - slide -> enviar os dados do cliente para o renderizador
+        // JSON.stringfy converte pra JSON
+        event.reply('client-data', JSON.stringify(dadosCliente))
+
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+// CURD READ - CPF >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+ipcMain.on('cpf-search', async (event, cliCPF) => {
+    // teste de recebimento do nome do cliente a ser pesquisado (Passo 2)
+    console.log(cliCPF)
+    // Passos 3 e 4 - Pesquisar no banco de dados o cliente pelo nome
+    // find() -> buscar no banco de dados (mongoose)
+    // RegExp -> Filtro pelo nome do cliente -> 'i' insensitive (maísculo ou minúsculo)
+    // Atenção: nomeCliente -> vem do -> model | cliNome -> vem do -> renderizador
+    try {
+        const dadosCliente = await clienteModel.find({
+            cpfCliente: new RegExp(cliCPF, 'i')
         })
         console.log(dadosCliente) // Teste dos passos 3 e 4 
         // Passo 5 - slide -> enviar os dados do cliente para o renderizador
