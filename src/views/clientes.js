@@ -41,6 +41,7 @@ let nomeCliente = document.getElementById('inputNameClient')
 let foneCliente = document.getElementById('inputPhoneClient')
 let dddCliente = document.getElementById('ddd')
 let emailCliente = document.getElementById('inputEmailClient')
+let cpfCliente = document.getElementById('inputCPF')
 let cepCliente = document.getElementById('inputCEP')
 let enderecoCliente = document.getElementById('inputEndereco')
 let bairroCliente = document.getElementById('inputBairro')
@@ -69,6 +70,7 @@ formCliente.addEventListener('submit', async (event) => {
             dddCli: dddCliente.value,
             foneCli: foneCliente.value,
             emailCli: emailCliente.value,
+            cpfCli: cpfCliente.value,
             cepCli: cepCliente.value,
             enderecoCli: enderecoCliente.value,
             numRuaCli: numRuaCliente.value,
@@ -88,6 +90,7 @@ formCliente.addEventListener('submit', async (event) => {
             dddCli: dddCliente.value,
             foneCli: foneCliente.value,
             emailCli: emailCliente.value,
+            cpfCli: cpfCliente.value,
             cepCli: cepCliente.value,
             enderecoCli: enderecoCliente.value,
             numRuaCli: numRuaCliente.value,
@@ -135,6 +138,7 @@ function buscarCliente() {
             // Percorrer o Array de clientes, extrair os dados e setar(preencher os campos do formulário)
             arrayCliente.forEach((c) => {
                 document.getElementById('inputNameClient').value = c.nomeCliente
+                document.getElementById('inputCPF').value = c.cpfCliente
                 document.getElementById('inputCEP').value = c.cepCliente
                 document.getElementById('inputEmailClient').value = c.emailCliente
                 document.getElementById('ddd').value = c.dddCliente

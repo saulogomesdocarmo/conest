@@ -33,13 +33,19 @@
             </div>
 
             <!-- Nome do Cliente -->
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <label for="inputNameClient" class="form-label">Nome</label>
                 <input class="form-control" type="tel" id="inputNameClient" spellcheck="false" required maxlength="50">
             </div>
 
+            <!-- CPF -->
+            <div class="col-md-3">
+                <label for="inputCPF" class="form-label">CPF</label>
+                <input class="form-control" type="text" id="inputCPF" required maxlength="50">
+            </div>
+
             <!-- CEP -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="inputCEP" class="form-label">CEP</label>
                 <input class="form-control" type="text" id="inputCEP" required maxlength="50" onblur="checarEndereco()">
             </div>

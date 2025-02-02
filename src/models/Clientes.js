@@ -19,6 +19,9 @@ const clienteSchema = new Schema({
     emailCliente: {
         type: String
     },
+    cpfCliente: {
+        type: String
+    },
     cepCliente: {
         type: String
     },
