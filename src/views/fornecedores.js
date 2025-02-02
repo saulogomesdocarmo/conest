@@ -26,7 +26,7 @@ function restaurarEnter() {
 }
 
 // Manipulando a tecla Enter
-document.getElementById('frmFornecedor').removeEventListener('keydown', teclaEnter)
+document.getElementById('frmFornecedor').addEventListener('keydown', teclaEnter)
 
 // Array usado nos métodos para manipulação de estrutura
 let arrayFornecedor = []
@@ -108,7 +108,7 @@ function buscarFornecedor() {
     let forneNome = document.getElementById('searchForner').value
     // console.log(forneNome)
     if (forneNome === "") {
-        validarBusca // Validação do campo obrigatório
+        api.validarBusca() // Validação do campo obrigatório
         focoFornecedor.focus()
     } else {
         api.buscarFornecedor(forneNome)

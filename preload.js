@@ -39,6 +39,8 @@ contextBridge.exposeInMainWorld('api', {
     deletarFornecedor: (idFornecedor) => ipcRenderer.send('delete-supplier', idFornecedor),
     editarFornecedor: (fornecedor) => ipcRenderer.send('update-suplier', fornecedor),
     setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
+    // Aviso para os preencher o campo de busca
+    
 
     // Requisições do Produto
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),
@@ -49,9 +51,7 @@ contextBridge.exposeInMainWorld('api', {
     editarProduto: (produto) => ipcRenderer.send('update-product', produto),
     setarProduto: (args) => ipcRenderer.on('set-product', args),
     setarNomeProduto: (args) => ipcRenderer.on('set-name-product', args),
-
-    // Aviso para os preencher o campo de busca
-    validarBusca: () => ipcRenderer.send('dialog-search'),
-    avisoCliente: () => ipcRenderer.send('notice-box')
+    validarBusca: () => ipcRenderer.send('dialog-search')
+    // avisoCliente: () => ipcRenderer.send('notice-box')
 
 })

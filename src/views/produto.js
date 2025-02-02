@@ -146,7 +146,7 @@ function buscarProdutos() {
     let nomeProd = document.getElementById('searchProduto').value
     // console.log(nomeProd)
     if (nomeProd === "") {
-        api.validarBusca()
+        // api.validarBusca()
         focoProduto.focus()
     } else {
         api.buscaproduto(nomeProd)
