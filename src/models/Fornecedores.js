@@ -35,6 +35,9 @@ const fornecedorSchema = new Schema({
     numRuaFornecedor: {
         type: String
     },
+    complementoFornecedor: {
+        type: String
+    },
     cidadeFornecedor: {
         type: String
     },

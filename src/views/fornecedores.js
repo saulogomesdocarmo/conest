@@ -49,6 +49,7 @@ let cidadeFornecedor = document.getElementById('cidadeFornecedor')
 let estadoFornecedor = document.getElementById('estadoFornecedor')
 let ufFornecedor = document.getElementById('ufFornecedor')
 let numRuaFornecedor = document.getElementById('numRuaFornecedor')
+let compleFornecedor = document.getElementById('CompleFornecedor')
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 
@@ -76,7 +77,8 @@ formFornecedor.addEventListener('submit', async (event) => {
             bairroForne: bairroFornecedor.value,
             cidadeForne: cidadeFornecedor.value,
             estadoForne: estadoFornecedor.value,
-            ufForne: ufFornecedor.value
+            ufForne: ufFornecedor.value,
+            compleForne: compleFornecedor.value
         }
         api.novoFornecedor(fornecedor)
     } else {
@@ -93,7 +95,8 @@ formFornecedor.addEventListener('submit', async (event) => {
             bairroForne: bairroFornecedor.value,
             cidadeForne: cidadeFornecedor.value,
             estadoForne: estadoFornecedor.value,
-            ufForne: ufFornecedor.value
+            ufForne: ufFornecedor.value,
+            compleForne: compleFornecedor.value
         }
         api.editarFornecedor(fornecedor)
 
@@ -136,6 +139,7 @@ function buscarFornecedor() {
                 document.getElementById('estadoFornecedor').value = f.estadoFornecedor
                 document.getElementById('ufFornecedor').value = f.ufFornecedor
                 document.getElementById('numRuaFornecedor').value = f.numRuaFornecedor
+                document.getElementById('CompleFornecedor').value = f.complementoFornecedor
                 document.getElementById('inputFornecedor').value = f._id
 
                 // Limpar o campo de busca e remover o foco
