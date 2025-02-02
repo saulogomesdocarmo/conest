@@ -78,7 +78,7 @@ formProduto.addEventListener('submit', async (event) => {
 
 // Fim do CRUD Creat/Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-// CRUD READ  NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD READ  CODIGO DO PRODUTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 function buscarProdutosCodigo() {
     let codProduto = document.getElementById('searchProduto').value
@@ -108,7 +108,9 @@ function buscarProdutosCodigo() {
                 focoProduto.disabled = true
                 // btnProds.disabled = true
 
+                // Desativando os botões de busca
                 btnReadCode.disabled = true
+                btnReadProdut.disabled = true
 
                 btnCreatProdut.disabled = true
 
@@ -141,6 +143,7 @@ function buscarProdutosCodigo() {
 
 }
 
+// CRUD READ - NOME DO PRODUTO
 function buscarProdutos() {
 
     let nomeProd = document.getElementById('searchProduto').value
@@ -167,7 +170,12 @@ function buscarProdutos() {
 
                 focoProduto.value = ""
                 focoProduto.disabled = true
+
+                // desativando os botões de busca
                 btnReadProdut.disabled = true
+                btnReadCode.disabled = true
+
+
                 btnCreatProdut.disabled = true
 
                 document.getElementById('btnUpdateProdut').disabled = false

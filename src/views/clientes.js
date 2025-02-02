@@ -109,7 +109,7 @@ formCliente.addEventListener('submit', async (event) => {
 // Fim do Crud Create /Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-// CRUD Read >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD Read Nome do Cliente >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 function buscarCliente() {
     // Alert somente para testes
@@ -155,7 +155,11 @@ function buscarCliente() {
                 foco.value = ""
 
                 foco.disabled = true
+
+                // Desativando os botões de busca
                 btnRead.disabled = true
+                btnReadCPF.disabled = true
+
                 // desativar o botão adicionar
                 btnCreat.disabled = true
                 // liberar os botões editar e exlcuir
@@ -185,7 +189,8 @@ function buscarCliente() {
 
 }
 
-// Função para buscar Cliente pelo CPF 
+// CRUD READ Por CPF
+
 function buscarCpfCliente() {
     // Alert somente para testes
     // alert ("teste do botão buscar") -> O alert "mata" o Electron
@@ -230,7 +235,11 @@ function buscarCpfCliente() {
                 foco.value = ""
 
                 foco.disabled = true
+                
+                // Desativando os botões de Busca
                 btnReadCPF.disabled = true
+                btnRead.disabled = true
+
                 // desativar o botão adicionar
                 btnCreat.disabled = true
                 // liberar os botões editar e exlcuir
