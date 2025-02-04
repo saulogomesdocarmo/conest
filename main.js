@@ -325,8 +325,27 @@ ipcMain.on('search-client', async (event, cliNome) => {
         console.log(dadosCliente) // Teste dos passos 3 e 4 
         // Passo 5 - slide -> enviar os dados do cliente para o renderizador
         // JSON.stringfy converte pra JSON
-        event.reply('client-data', JSON.stringify(dadosCliente))
 
+        // Melhoria na experiência do usuário (se não existir o cliente cadstrado, enviar mensagem e questionar se o usuário deseja cadastrar um novo cliente)
+        if (dadosCliente.length === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Clientes',
+                message: 'Cliente não cadastrado.\nDeseja cadastrar este cliente?',
+                defaultId: 0,
+                buttons: ['Sim', 'Não']
+            }).then((result) => {
+                if (result.response === 0) {
+                    event.reply('set-nameClient')
+
+                } else {
+                    event.reply('reset-form')
+                }
+            })
+
+        }
+
+        event.reply('client-data', JSON.stringify(dadosCliente))
     } catch (error) {
         console.log(error)
     }
@@ -350,6 +369,26 @@ ipcMain.on('cpf-search', async (event, cliCPF) => {
         console.log(dadosCliente) // Teste dos passos 3 e 4 
         // Passo 5 - slide -> enviar os dados do cliente para o renderizador
         // JSON.stringfy converte pra JSON
+
+        if (dadosCliente.length === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Clientes',
+                message: 'Cliente não cadastrado.\nDeseja cadastrar esse cliente?',
+                defaultId: 0,
+                buttons: ['Sim', 'Não']
+            }).then((result) => {
+                console.log(result)
+                if (result.response === 0) {
+                    //enviar ao renderizador um pedido para setar o nome do cliente (trazendo do campo de busca) e liberar o botão adicionar
+                    event.replay(
+                        'set-cpfClient'
+                    )
+                } else {
+                    //enviar ao renderizador um pedido para limpar os campos do formulário
+                } event.reply('reset-form')
+            })
+        }
         event.reply('client-data', JSON.stringify(dadosCliente))
 
     } catch (error) {
@@ -499,6 +538,25 @@ ipcMain.on('search-supplier', async (event, forneNome) => {
             razaoFornecedor: new RegExp(forneNome, 'i')
         })
         console.log(dadosFornecedor)
+
+        if (dadosFornecedor.length === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Clientes',
+                message: 'Fornecedor não cadastrado.\nDeseja cadastrar este Fornecedor?',
+                defaultId: 0,
+                buttons: ['Sim', 'Não']
+            }).then((result) => {
+                if (result.response === 0) {
+                    event.reply('set-nameSuplier')
+
+                } else {
+                    event.reply('reset-form')
+                }
+            })
+        }
+
+
 
         event.reply('supplier-data', JSON.stringify(dadosFornecedor))
 

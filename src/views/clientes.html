@@ -42,7 +42,7 @@
             <!-- CPF -->
             <div class="col-md-3">
                 <label for="inputCPF" class="form-label">CPF</label>
-                <input class="form-control" type="text" id="inputCPF" required maxlength="50">
+                <input class="form-control" type="text" id="inputCPF" required maxlength="50" onblur="buscaCPF()">
             </div>
 
             <!-- CEP -->
@@ -86,7 +86,7 @@
             <!-- Complemento -->
             <div class="col-md-4">
                 <label for="compleCliente" class="form-label">Complemento</label>
-                <input class="form-control" type="text" id="compleCliente" required maxlength="50">
+                <input class="form-control" type="text" id="compleCliente" maxlength="50">
             </div>
 
 
@@ -145,8 +145,8 @@
             <div class="mt-5">
                 <button type="submit" class="btn btn-success" id="btnCreat">Adicionar</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdate">Editar</button>
-                <button type="button" class="btn btn-danger"  id="btnDelete" onclick="excluirCliente()">Excluir</button>
-                <button type="reset" class="btn" id="btnReset"></button>
+                <button type="button" class="btn btn-danger" id="btnDelete" onclick="excluirCliente()">Excluir</button>
+                <button type="reset" class="btn" id="btnReset" onclick="resetForm()"></button>
             </div>
         </form>
     </div>

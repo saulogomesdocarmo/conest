@@ -52,6 +52,7 @@ let numRuaCliente = document.getElementById('numRuaCliente')
 let compleCliente = document.getElementById('compleCliente')
 
 
+
 // CRUD - Creat/Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
@@ -159,6 +160,7 @@ function buscarCliente() {
 
                 // Limpar o campo de busca e remover o foco
                 foco.value = ""
+
 
                 foco.disabled = true
 
