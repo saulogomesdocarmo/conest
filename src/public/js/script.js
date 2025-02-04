@@ -47,5 +47,54 @@ function fornecedorendereco() {
 
 
 
+//  Cadastrat cpf 
+
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[.-]/g, ""); // Remove pontos e traços
+    
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+        return false; // Verifica se o CPF tem 11 dígitos ou se são todos iguais
+    }
+    
+    let soma = 0, resto;
+    
+    // Validação do primeiro dígito verificador
+    for (let i = 0; i < 9; i++) {
+        soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.charAt(9))) return false;
+    
+    soma = 0;
+    // Validação do segundo dígito verificador
+    for (let i = 0; i < 10; i++) {
+        soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.charAt(10))) return false;
+    
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("cpf-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let cpfInput = document.getElementById("cpf").value;
+        let resultado = document.getElementById("resultado");
+        
+        if (validarCPF(cpfInput)) {
+            resultado.textContent = "CPF Válido!";
+            resultado.style.color = "green";
+        } else {
+            resultado.textContent = "CPF Inválido!";
+            resultado.style.color = "red";
+        }
+    });
+});
+
+
+
 
 
