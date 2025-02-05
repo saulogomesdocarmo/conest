@@ -49,52 +49,58 @@ function fornecedorendereco() {
 
 //  Cadastrat cpf 
 
-function validarCPF(cpf) {
-    cpf = cpf.replace(/[.-]/g, ""); // Remove pontos e traços
+function validarCPF(input) {
+    function validarCPF(cpf) {
+        // Remover caracteres não numéricos
+        cpf = cpf.replace(/[^\d]+/g, '');
     
-    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
-        return false; // Verifica se o CPF tem 11 dígitos ou se são todos iguais
-    }
-    
-    let soma = 0, resto;
-    
-    // Validação do primeiro dígito verificador
-    for (let i = 0; i < 9; i++) {
-        soma += parseInt(cpf.charAt(i)) * (10 - i);
-    }
-    resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.charAt(9))) return false;
-    
-    soma = 0;
-    // Validação do segundo dígito verificador
-    for (let i = 0; i < 10; i++) {
-        soma += parseInt(cpf.charAt(i)) * (11 - i);
-    }
-    resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.charAt(10))) return false;
-    
-    return true;
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("cpf-form").addEventListener("submit", function(event) {
-        event.preventDefault();
-        let cpfInput = document.getElementById("cpf").value;
-        let resultado = document.getElementById("resultado");
-        
-        if (validarCPF(cpfInput)) {
-            resultado.textContent = "CPF Válido!";
-            resultado.style.color = "green";
-        } else {
-            resultado.textContent = "CPF Inválido!";
-            resultado.style.color = "red";
+        // Verificar se o CPF tem 11 caracteres
+        if (cpf.length !== 11) {
+            return false;
         }
-    });
-});
-
-
-
-
-
+    
+        // Verificar se o CPF é uma sequência de números repetidos (ex: 111.111.111-11)
+        if (/^(\d)\1{10}$/.test(cpf)) {
+            return false;
+        }
+    
+        // Validar o primeiro dígito verificador
+        let soma = 0;
+        let peso = 10;
+        for (let i = 0; i < 9; i++) {
+            soma += parseInt(cpf[i]) * peso;
+            peso--;
+        }
+        let resto = soma % 11;
+        let digito1 = resto < 2 ? 0 : 11 - resto;
+        if (parseInt(cpf[9]) !== digito1) {
+            return false;
+        }
+    
+        // Validar o segundo dígito verificador
+        soma = 0;
+        peso = 11;
+        for (let i = 0; i < 10; i++) {
+            soma += parseInt(cpf[i]) * peso;
+            peso--;
+        }
+        resto = soma % 11;
+        let digito2 = resto < 2 ? 0 : 11 - resto;
+        if (parseInt(cpf[10]) !== digito2) {
+            return false;
+        }
+    
+        return true;
+    }
+    
+    const cpf = input.value; // Pega o valor do input
+    const campoCpf = document.getElementById('inputCPF');
+    
+    if (!validarCPF(cpf)) {
+        campoCpf.style.borderColor = 'red'; // Destaca o campo em vermelho
+        campoCpf.setCustomValidity("CPF inválido!"); // Define uma mensagem de erro customizada
+    } else {
+        campoCpf.style.borderColor = 'green'; // Destaca o campo em verde
+        campoCpf.setCustomValidity(""); // Limpa qualquer mensagem de erro
+    }
+}

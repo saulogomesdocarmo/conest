@@ -10,6 +10,9 @@ const clienteSchema = new Schema({
     nomeCliente: {
         type: String
     },
+    cpfCliente: {
+        type: String
+    },
     dddCliente: {
         type: String
     },
@@ -17,9 +20,6 @@ const clienteSchema = new Schema({
         type: String
     },
     emailCliente: {
-        type: String
-    },
-    cpfCliente: {
         type: String
     },
     cepCliente: {
