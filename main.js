@@ -351,50 +351,6 @@ ipcMain.on('search-client', async (event, cliNome) => {
     }
 })
 
-// CURD READ - CPF >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
-ipcMain.on('cpf-search', async (event, cliCPF) => {
-    // teste de recebimento do nome do cliente a ser pesquisado (Passo 2)
-    console.log(cliCPF)
-    // Passos 3 e 4 - Pesquisar no banco de dados o cliente pelo nome
-    // find() -> buscar no banco de dados (mongoose)
-    // RegExp -> Filtro pelo nome do cliente -> 'i' insensitive (maísculo ou minúsculo)
-    // Atenção: nomeCliente -> vem do -> model | cliNome -> vem do -> renderizador
-    try {
-        const dadosCliente = await clienteModel.find({
-            cpfCliente: new RegExp(cliCPF, 'i')
-        })
-        console.log(dadosCliente) // Teste dos passos 3 e 4 
-        // Passo 5 - slide -> enviar os dados do cliente para o renderizador
-        // JSON.stringfy converte pra JSON
-
-        if (dadosCliente.length === 0) {
-            dialog.showMessageBox({
-                type: 'warning',
-                title: 'Clientes',
-                message: 'Cliente não cadastrado.\nDeseja cadastrar esse cliente?',
-                defaultId: 0,
-                buttons: ['Sim', 'Não']
-            }).then((result) => {
-                console.log(result)
-                if (result.response === 0) {
-                    //enviar ao renderizador um pedido para setar o nome do cliente (trazendo do campo de busca) e liberar o botão adicionar
-                    event.replay(
-                        'set-cpfClient'
-                    )
-                } else {
-                    //enviar ao renderizador um pedido para limpar os campos do formulário
-                } event.reply('reset-form')
-            })
-        }
-        event.reply('client-data', JSON.stringify(dadosCliente))
-
-    } catch (error) {
-        console.log(error)
-    }
-})
 
 // Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -691,7 +647,23 @@ ipcMain.on('search-product', async (event, nomeProd,) => {
             nomeProduto: new RegExp(nomeProd, 'i')
         })
 
+        if (dadosProduto.length === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Produtos',
+                message: 'Produto não cadastrado.\nDeseja cadastrar este cliente?',
+                defaultId: 0,
+                buttons: ['Sim', 'Não']
+            }).then((result) => {
+                if (result.response === 0) {
+                    event.reply('set-name-product')
 
+                } else {
+                    event.reply('reset-form')
+                }
+            })
+
+        }
 
         console.log(dadosProduto)
 

@@ -166,7 +166,7 @@ function buscarCliente() {
 
                 // Desativando os botões de busca
                 btnRead.disabled = true
-                btnReadCPF.disabled = true
+                // btnReadCPF.disabled = true
 
                 // desativar o botão adicionar
                 btnCreat.disabled = true

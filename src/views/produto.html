@@ -15,17 +15,29 @@
     </div>
     <div class="container">
 
-        <form id="frmProduto" class="mt-2 row gl-3">
-            <!-- Buscar Cliente -->
-            <div class="col-md-9">
-                <input type="text" class="form-control" id="searchProduto" maxlength="50" spellcheck="false"
-                    placeholder="Buscar produto por nome ou código">
+        <form id="frmProduto" class=" row g-3 mt-2 row gl-3">
+            <!-- Buscar produto por Código -->
+            <!-- <div class="col-md-6">
+                <input type="text" class="form-control" id="searchProduto" maxlength="50" spellcheck="false">
             </div>
 
-            <div class="col-md-3">
-                <button type="button" class="btn btn-primary" id="btnReadProdut"onclick="buscarProdutos()">Nome</button>
-                <button type="button" class="btn btn-primary" id="btnReadCode" onclick="buscarProdutosCodigo()">Codigo</button>
+            <div class="col-md-4">
+                <img src="../public/img/barcode.png" alt="barcode">
+            </div> -->
+
+
+            <!-- Busca produto por Nome -->
+            <div class="col-md-6 mt-3">
+                <input type="text" class="form-control" id="searchProduto" maxlength="50" spellcheck="false">
             </div>
+
+            <div class="col-md-3 mt-3">
+                <button type="button" class="btn btn-primary" id="btnReadProdut"
+                    onclick="buscarProdutos()">Nome</button>
+            </div>
+
+            <!-- <button type="button" class="btn btn-primary" id="btnReadCode"
+            onclick="buscarProdutosCodigo()">Codigo</button> -->
 
 
 
@@ -62,7 +74,7 @@
                 <button type="submit" class="btn btn-warning" id="btnUpdateProdut">Editar</button>
                 <button type="button" class="btn btn-danger" id="btnDeleteProdut"
                     onclick="exlcuirProduto()">Excluir</button>
-                <button type="reset" class="btn" id="btnReset"><img src="" alt=""></button>
+                <button type="reset" class="btn" id="btnReset"  onclick="resetForm()"><img src="" alt=""></button>
             </div>
         </form>
     </div>

@@ -18,7 +18,7 @@ function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarProdutos()
-        buscarProdutosCodigo()
+       
     }
 }
 
@@ -40,7 +40,7 @@ let formProduto = document.getElementById('frmProduto')
 let idProduto = document.getElementById('inputProdut')
 let nomeProduto = document.getElementById('inputNameProduto')
 let precoProduto = document.getElementById('inputUnidadeProduto')
-let codbarraProduto = document.getElementById('inputCodBarra')
+
 
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
@@ -54,12 +54,12 @@ formProduto.addEventListener('submit', async (event) => {
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto
 
-    // Estratégia para determinar se é um novo cadastro de clientes ou a edição de um cliente já existente
+    // Estratégia para determinar se é um novo cadastro de produto ou a edição de um cliente já existente
     if (idProduto.value === "") {
         const produto = {
             nomeProd: nomeProduto.value,
             precoProd: precoProduto.value,
-            codProd: codbarraProduto.value
+            
         }
         api.novoProduto(produto)
 
@@ -68,8 +68,7 @@ formProduto.addEventListener('submit', async (event) => {
         const produto = {
             idProd: idProduto.value,
             nomeProd: nomeProduto.value,
-            precoProd: precoProduto.value,
-            codProd: codbarraProduto.value
+           
         }
         api.editarProduto(produto)
     }
@@ -80,68 +79,6 @@ formProduto.addEventListener('submit', async (event) => {
 
 // CRUD READ  CODIGO DO PRODUTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-function buscarProdutosCodigo() {
-    let codProduto = document.getElementById('searchProduto').value
-    // console.log(codProduto)
-    if (codProduto === "") {
-        api.validarBusca()
-        focoProduto.focus()
-    } else {
-        api.buscarcodigo(codProduto)
-
-        api.renderizarproduto((event, dadosProduto) => {
-            console.log(dadosProduto)
-
-            const produtoRenderizado = JSON.parse(dadosProduto)
-            arrayProduto = produtoRenderizado
-
-            console.log(arrayProduto)
-
-            arrayProduto.forEach((p) => {
-                document.getElementById('inputNameProduto').value = p.nomeProduto
-                document.getElementById('inputUnidadeProduto').value = p.precoProduto
-                document.getElementById('inputCodBarra').value = p.codigoProduto
-                document.getElementById('inputProdut').value = p._id
-
-                focoProduto.value = ""
-
-                focoProduto.disabled = true
-                // btnProds.disabled = true
-
-                // Desativando os botões de busca
-                btnReadCode.disabled = true
-                btnReadProdut.disabled = true
-
-                btnCreatProdut.disabled = true
-
-                document.getElementById('btnUpdateProdut').disabled = false
-                document.getElementById('btnDeleteProdut').disabled = false
-
-                restaurarEnter()
-
-            })
-        })
-    }
-    api.setarProduto(() => {
-        //setar o nome do cliente       
-        let campoCodeProduto = document.getElementById('searchProduto').value
-        document.getElementById('inputCodBarra').focus()
-        document.getElementById('inputCodBarra').value = campoCodeProduto
-        //limpar o campo de busca e remover o foco
-        foco.value = ""
-        foco.blur()
-        //restaurar o padrão da tecla Enter
-        restaurarEnter()
-        //reativar os inputs das caixas de texto
-        /*
-        document.querySelectorAll('.bloqueio input').forEach(input => {
-            input.disabled = false
-        })
-        */
-    })
-
-
-}
 
 // CRUD READ - NOME DO PRODUTO
 function buscarProdutos() {
@@ -165,7 +102,6 @@ function buscarProdutos() {
             arrayProduto.forEach((p) => {
                 document.getElementById('inputNameProduto').value = p.nomeProduto
                 document.getElementById('inputUnidadeProduto').value = p.precoProduto
-                document.getElementById('inputCodBarra').value = p.codigoProduto
                 document.getElementById('inputProdut').value = p._id
 
                 focoProduto.value = ""
@@ -173,7 +109,6 @@ function buscarProdutos() {
 
                 // desativando os botões de busca
                 btnReadProdut.disabled = true
-                btnReadCode.disabled = true
 
 
                 btnCreatProdut.disabled = true
