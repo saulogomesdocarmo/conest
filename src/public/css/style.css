@@ -7,9 +7,9 @@
     display: none;
 }
 
-#idProdut {
+/* #idProdut {
     display: none;
-}
+} */
 
 
 
@@ -62,4 +62,16 @@ footer p {
 
 footer img {
     margin-right: 10px;
+}
+
+/* Imagem do Produto */
+#imageProductPreview {
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    width: 260px;
+    height: 260px;
+    padding: 5px;
+    position: fixed;
+    right: 50px;
+    bottom: 30px;
 }
