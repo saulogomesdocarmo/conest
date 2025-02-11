@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnDeleteProdut.disabled = true
     focoProduto.focus()
     focoprodutoBarcode.focus()
-
-
 })
 
 // Função para manipluar o evento da tecla Enter
@@ -22,7 +20,6 @@ function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarProdutos()
-
     }
 }
 
@@ -79,7 +76,6 @@ formProduto.addEventListener('submit', async (event) => {
         }
         api.editarProduto(produto)
     }
-
 })
 
 // Fim do CRUD Creat/Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -117,8 +113,6 @@ function buscarProdutos() {
 
                 // desativando os botões de busca
                 btnReadProdut.disabled = true
-
-
                 btnCreatProdut.disabled = true
 
                 document.getElementById('btnUpdateProdut').disabled = false

@@ -610,6 +610,8 @@ ipcMain.on('update-suplier', async (event, fornecedor) => {
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Recebimento dos dados do fomulário de produtos
 
+
+
 ipcMain.on('new-product', async (event, produto) => {
     console.log(produto)
 
@@ -617,7 +619,7 @@ ipcMain.on('new-product', async (event, produto) => {
         const novoProduto = new produtoModel({
             nomeProduto: produto.nomeProd,
             precoProduto: produto.precoProd,
-            barCodeProduto: produto. codigoProd
+            barCodeProduto: produto.codigoProd
 
         })
 
@@ -628,9 +630,11 @@ ipcMain.on('new-product', async (event, produto) => {
             title: 'Aviso',
             message: 'Produto cadastrado com sucesso.',
             buttons: ['OK']
+        }).then((result) => {
+            if (result.response === 0) {
+                event.reply('reset-form')
+            }
         })
-
-        event.reply('reset-form')
 
     } catch (error) {
         console.log(error)
@@ -640,6 +644,8 @@ ipcMain.on('new-product', async (event, produto) => {
 // Fim do CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // CRUD READ nome - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 
 ipcMain.on('search-product', async (event, nomeProd,) => {
     console.log(nomeProd)
@@ -653,7 +659,7 @@ ipcMain.on('search-product', async (event, nomeProd,) => {
             dialog.showMessageBox({
                 type: 'warning',
                 title: 'Produtos',
-                message: 'Produto não cadastrado.\nDeseja cadastrar este cliente?',
+                message: 'Produto não cadastrado.\nDeseja cadastrar este produto?',
                 defaultId: 0,
                 buttons: ['Sim', 'Não']
             }).then((result) => {
