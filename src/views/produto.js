@@ -63,8 +63,8 @@ formProduto.addEventListener('submit', async (event) => {
     if (idProduto.value === "") {
         const produto = {
             nomeProd: nomeProduto.value,
-            precoProduto: precoProduto.value,
-            barCodeProd: codeProduto.value
+            precoProd: precoProduto.value,
+            codigoProd: codeProduto.value
         }
         api.novoProduto(produto)
 
@@ -73,8 +73,8 @@ formProduto.addEventListener('submit', async (event) => {
         const produto = {
             idProd: idProduto.value,
             nomeProd: nomeProduto.value,
-            barCodeProd: codeProduto.value,
-            precoProduto: precoProduto.value,
+            precoProd: precoProduto.value,
+            codigoProd: codeProduto.value
 
         }
         api.editarProduto(produto)
@@ -147,7 +147,7 @@ function buscarProdutos() {
 
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-function exlcuirProduto() {
+function apagarProduto() {
     api.deletarProduto(idProduto.value) // Passo 2 do slide
 
 }
