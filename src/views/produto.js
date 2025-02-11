@@ -4,13 +4,17 @@
 
 
 // A linha abaixo traz foco para o campo input de buscas
-const focoProduto = document.getElementById('searchProduto')
+const focoProduto = document.getElementById('searchProdutoNome')
+const focoprodutoBarcode = document.getElementById('searchProdutoBarCode')
 
 // Mudas as propriedades do documento html ao iniciar a janela
 document.addEventListener('DOMContentLoaded', () => {
     btnUpdateProdut.disabled = true
     btnDeleteProdut.disabled = true
     focoProduto.focus()
+    focoprodutoBarcode.focus()
+
+
 })
 
 // Função para manipluar o evento da tecla Enter
@@ -18,7 +22,7 @@ function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarProdutos()
-       
+
     }
 }
 
@@ -39,7 +43,8 @@ let arrayProduto = []
 let formProduto = document.getElementById('frmProduto')
 let idProduto = document.getElementById('inputProdut')
 let nomeProduto = document.getElementById('inputNameProduto')
-let precoProduto = document.getElementById('inputUnidadeProduto')
+let codeProduto = document.getElementById('inputCodBarra')
+let precoProduto = document.getElementById('inputPrecoProduto')
 
 
 
@@ -49,7 +54,7 @@ formProduto.addEventListener('submit', async (event) => {
 
     event.preventDefault()
 
-    console.log(nomeProduto.value, codbarraProduto.value)
+    console.log(nomeProduto.value, codeProduto.value)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto
@@ -58,8 +63,8 @@ formProduto.addEventListener('submit', async (event) => {
     if (idProduto.value === "") {
         const produto = {
             nomeProd: nomeProduto.value,
-            precoProd: precoProduto.value,
-            
+            precoProduto: precoProduto.value,
+            barCodeProd: codeProduto.value
         }
         api.novoProduto(produto)
 
@@ -68,7 +73,9 @@ formProduto.addEventListener('submit', async (event) => {
         const produto = {
             idProd: idProduto.value,
             nomeProd: nomeProduto.value,
-           
+            barCodeProd: codeProduto.value,
+            precoProduto: precoProduto.value,
+
         }
         api.editarProduto(produto)
     }
@@ -83,7 +90,7 @@ formProduto.addEventListener('submit', async (event) => {
 // CRUD READ - NOME DO PRODUTO
 function buscarProdutos() {
 
-    let nomeProd = document.getElementById('searchProduto').value
+    let nomeProd = document.getElementById('searchProdutoNome').value
     // console.log(nomeProd)
     if (nomeProd === "") {
         // api.validarBusca()
@@ -101,8 +108,9 @@ function buscarProdutos() {
 
             arrayProduto.forEach((p) => {
                 document.getElementById('inputNameProduto').value = p.nomeProduto
-                document.getElementById('inputUnidadeProduto').value = p.precoProduto
+                document.getElementById('inputCodBarra').value = p.barCodeProduto
                 document.getElementById('inputProdut').value = p._id
+                document.getElementById('inputPrecoProduto').value = p.precoProduto
 
                 focoProduto.value = ""
                 focoProduto.disabled = true
@@ -122,7 +130,7 @@ function buscarProdutos() {
     }
 
     api.setarNomeProduto(() => {
-        let campoNomeprod = document.getElementById('searchProduto').value
+        let campoNomeprod = document.getElementById('searchProdutoNome').value
         document.getElementById('inputNameProduto').focus()
         document.getElementById('inputNameProduto').value = campoNomeprod
 

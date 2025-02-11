@@ -15,7 +15,7 @@
     </div>
 
     <div class="container">
-        <form id="frmFornecedor" class="mt-2 row gl-3">
+        <form id="frmFornecedor" class="mt-2 row gl-4">
             <!-- Buscar Fornecedor -->
             <div class="col-md-6">
                 <input type="text" class="form-control" id="searchForner" maxlength="30" spellcheck="false">
@@ -61,6 +61,12 @@
                 <input class="form-control" type="text" id="inputSiteFornecedor" required maxlength="50">
             </div>
 
+            <!-- Botão (Fornecedor) -->
+            <!-- <div class="col-md-3 ">
+                <button type="button" class="btn btn-primary form-label form-control" id="btnreadfornecer"
+                    onclick="buscarFornecedor()">Buscar</button>
+            </div> -->
+
             <!-- DDD -->
             <div class="col-md-2">
                 <label for="dddFornecedor" class="form-label">DDD</label>
@@ -89,7 +95,7 @@
             <!-- Complemento -->
             <div class="col-md-4">
                 <label for="CompleFornecedor" class="form-label">Complemento</label>
-                <input class="form-control" type="text" id="CompleFornecedor"  maxlength="50">
+                <input class="form-control" type="text" id="CompleFornecedor" maxlength="50">
             </div>
 
             <!-- Bairro -->
@@ -148,7 +154,7 @@
                 <button type="submit" class="btn btn-warning" id="btnEdfornecer">Editar</button>
                 <button type="button" class="btn btn-danger" id="btnDelfornecer"
                     onclick="excluirFornecedor()">Excluir</button>
-                <button type="reset" class="btn" id="btnReset"  onclick="resetForm()"><img src="" alt=""></button>
+                <button type="reset" class="btn" id="btnReset" onclick="resetForm()"><img src="" alt=""></button>
             </div>
         </form>
     </div>

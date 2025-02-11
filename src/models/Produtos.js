@@ -14,7 +14,7 @@ const produtoSchema = new Schema({
     precoProduto: {
         type: String
     },
-    codigoProduto: {
+    barCodeProduto: {
         type: String
     }
 })

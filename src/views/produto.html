@@ -13,20 +13,19 @@
 
     <div class="container">
         <h1 class="mt-3">Produtos</h1>
-        <form id="frmProduto" class=" row g-3 mt-2 row gl-3">
+        <form id="frmProduto" class="row g-2 mt-3">
             <!-- Buscar produto por Código -->
             <div class="col-md-6">
-                <input type="text" class="form-control" id="searchProduto" maxlength="50" spellcheck="false">
+                <input type="text" class="form-control" id="searchProdutoBarCode" maxlength="50" spellcheck="false">
             </div>
 
             <div class="col-md-4">
-                <img src="../public/img/barcode.png" alt="barcode">
+                <img src="../public/img/barcode.png" alt="barcode" class="img-fluid">
             </div>
-
 
             <!-- Busca produto por Nome -->
             <div class="col-md-6 mt-3">
-                <input type="text" class="form-control" id="searchProduto" maxlength="50" spellcheck="false">
+                <input type="text" class="form-control" id="searchProdutoNome" maxlength="50" spellcheck="false">
             </div>
 
             <div class="col-md-3 mt-3">
@@ -34,50 +33,44 @@
                     onclick="buscarProdutos()">Nome</button>
             </div>
 
-            <!-- <button type="button" class="btn btn-primary" id="btnReadCode"
-            onclick="buscarProdutosCodigo()">Codigo</button> -->
+            <hr class="mt-4 border-primary border-1">
 
-
-
-            <hr class="mt-4 border-primary border -1">
-
-            <!-- Id do Produto (pode ser usado como código interno) -->
-
-            <div class="col-md-6" id="idProdut">
-                <label for="inputProdut" class="form-label">
-                    ID do Produto</label>
+            <!-- Id do Produto -->
+            <div class="col-md-6">
+                <label for="inputProdut" class="form-label">ID do Produto</label>
                 <input class="form-control" type="text" id="inputProdut" placeholder="Id">
             </div>
-
-
-            <!-- Barcode -->
-            <div class="col-md-6">
-                <label for="inputCodBarra" class="form-label">Código do Produto</label>
-                <input class="form-control" type="text" id="inputCodBarra" required maxlength="50">
-            </div>
-
 
             <!-- Nome do Produto -->
             <div class="col-md-6">
                 <label for="inputNameProduto" class="form-label">Nome do Produto</label>
-                <input class="form-control" type="text" id="inputNameProduto" spellcheck="false" required
-                    maxlength="50">
+                <input class="form-control" type="text" id="inputNameProduto" spellcheck="false" required maxlength="50">
             </div>
 
-
-            <!-- imagem do produto -->
+            <!-- Código e Nome do Produto -->
             <div class="col-md-5">
-                <img src="../public/img/camera.png" alt="imagem" id="imageProductPreview">
+                <label for="inputCodBarra" class="form-label">Código do Produto</label>
+                <input class="form-control mb-2" type="text" id="inputCodBarra" required maxlength="50">
+
+                <label for="inputPrecoProduto" class="form-label">Preço do Produto</label>
+                <input class="form-control" type="text" id="inputPrecoProduto" required maxlength="50">
             </div>
-            <input type="file" id="imageProduct">
+
+            <!-- Imagem do produto -->
+            <div class="col-md-5">
+                <img src="../public/img/camera.png" alt="imagem" id="imageProductPreview" class="img-fluid">
+            </div>
+
+            <div class="col-md-7">
+                <input type="file" id="imageProduct" class="form-control">
+            </div>
+
             <!-- Botões -->
-            <div class="col-12">
-                <br><br><br>
+            <div class="col-12 mt-3">
                 <button type="submit" class="btn btn-success" id="btnCreatProdut">Adicionar</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdateProdut">Editar</button>
-                <button type="button" class="btn btn-danger" id="btnDeleteProdut"
-                    onclick="exlcuirProduto()">Excluir</button>
-                <button type="reset" class="btn" id="btnReset" onclick="resetForm()"><img src="" alt=""></button>
+                <button type="button" class="btn btn-danger" id="btnDeleteProdut" onclick="excluirProduto()">Excluir</button>
+                <button type="reset"  id="btnReset" onclick="resetForm()"></button>
             </div>
         </form>
     </div>

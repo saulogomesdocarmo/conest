@@ -551,6 +551,7 @@ ipcMain.on('delete-supplier', async (event, idFornecedor) => {
                 buttons: ['OK']
             })
             event.reply('reset-form')
+
         } catch (error) {
             console.log(error)
         }
@@ -616,7 +617,8 @@ ipcMain.on('new-product', async (event, produto) => {
         const novoProduto = new produtoModel({
             nomeProduto: produto.nomeProd,
             precoProduto: produto.precoProd,
-            codigoProduto: produto.codProd
+            barCodeProduto: produto.codeProduto
+
         })
 
         await novoProduto.save()
