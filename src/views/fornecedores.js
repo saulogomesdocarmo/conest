@@ -31,7 +31,7 @@ document.getElementById('frmFornecedor').addEventListener('keydown', teclaEnter)
 // Array usado nos métodos para manipulação de estrutura
 let arrayFornecedor = []
 
-// CRUD - Creat/Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD - Creat/Update >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Passo 1 - slide (capturar os dados dos inputs do form)
 

@@ -20,6 +20,7 @@ function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarProdutos()
+        
     }
 }
 
@@ -138,6 +139,59 @@ function buscarProdutos() {
 // Fim do CRUD Read <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD READ  CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+function buscarcodigo() {
+
+    let nomeProd = document.getElementById('searchProdutoBarCode').value
+    // console.log(nomeProd)
+    if (nomeProd === "") {
+        // api.validarBusca()
+        focoProduto.focus()
+    } else {
+        api.buscarcodigo(nomeProd)
+
+        api.renderizarproduto((event, dadosProduto) => {
+            console.log(dadosProduto)
+
+            const produtoRenderizado = JSON.parse(dadosProduto)
+            arrayProduto = produtoRenderizado
+
+            console.log(arrayProduto)
+
+            arrayProduto.forEach((p) => {
+                document.getElementById('inputNameProduto').value = p.nomeProduto
+                document.getElementById('inputCodBarra').value = p.barCodeProduto
+                document.getElementById('inputProdut').value = p._id
+                document.getElementById('inputPrecoProduto').value = p.precoProduto
+
+                focoProduto.value = ""
+                focoProduto.disabled = true
+
+                // desativando os botões de busca
+                btnReadProdut.disabled = true
+                btnCreatProdut.disabled = true
+
+                document.getElementById('btnUpdateProdut').disabled = false
+                document.getElementById('btnDeleteProdut').disabled = false
+
+                restaurarEnter()
+            })
+        })
+    }
+
+    api.setarNomeProduto(() => {
+        let campoNomeprod = document.getElementById('searchProdutoBarCode').value
+        document.getElementById('inputCodBarra').focus()
+        document.getElementById('inputCodBarra').value = campoNomeprod
+
+        foco.value = ""
+        foco.blur()
+        restaurarEnter()
+    })
+
+}
+
+// Fim do CRUD READ CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

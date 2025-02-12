@@ -645,8 +645,6 @@ ipcMain.on('new-product', async (event, produto) => {
 
 // CRUD READ nome - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
-
 ipcMain.on('search-product', async (event, nomeProd,) => {
     console.log(nomeProd)
 
@@ -693,6 +691,23 @@ ipcMain.on('search-code', async (event, codProd) => {
             codigoProduto: new RegExp(codProd, 'i')
         })
 
+        if (dadosProduto.length === "") {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Produtos',
+                message: 'Produto não cadastrado.\nDeseja cadastrar este produto?',
+                defaultId: 0,
+                buttons: ['Sim', 'Não']
+            }).then((result) => {
+                if (result.response === 0) {
+                    event.reply('set-product')
+
+                } else {
+                    event.reply('reset-form')
+                }
+            })
+
+        }
         console.log(codeProduto)
 
         event.reply('product-data', JSON.stringify(codeProduto))
