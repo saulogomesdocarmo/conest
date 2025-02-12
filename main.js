@@ -303,7 +303,7 @@ ipcMain.on('new-client', async (event, cliente) => {
 // CRUD - Read - Nome >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ipcMain.on('dialog-search', () => {
     dialog.showMessageBox({
-        type: 'warning',
+        type: 'info',
         title: 'Atenção!',
         message: 'Preencha um nome no campo de Busca',
         buttons: ['OK']
