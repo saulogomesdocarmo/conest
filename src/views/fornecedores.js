@@ -31,7 +31,7 @@ document.getElementById('frmFornecedor').addEventListener('keydown', teclaEnter)
 // Função para acessar site
 
 function acessarSite() {
-    let urlFornecedor = document.getElementById('inputSiteSupplier').value.trim()
+    let urlFornecedor = document.getElementById('inputSiteFornecedor').value.trim()
     let siteErro = document.getElementById('siteErro')
 
     // Se ainda não existir, cria a mensagem de erro no HTML
@@ -41,7 +41,7 @@ function acessarSite() {
         siteErro.style.color = 'red'
         siteErro.style.fontSize = '0.9em'
         siteErro.style.marginTop = '5px'
-        document.getElementById('inputSiteSupplier').after(siteErro)
+        document.getElementById('inputSiteFornecedor').after(siteErro)
     }
 
     // Verifica se o campo está vazio ou contém valor padrão
