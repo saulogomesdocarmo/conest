@@ -41,6 +41,7 @@ contextBridge.exposeInMainWorld('api', {
     deletarFornecedor: (idFornecedor) => ipcRenderer.send('delete-supplier', idFornecedor),
     editarFornecedor: (fornecedor) => ipcRenderer.send('update-suplier', fornecedor),
     setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
+    abrirSite: (urlSite) => ipcRenderer.send('url-site', urlSite),
     // Aviso para os preencher o campo de busca
 
 

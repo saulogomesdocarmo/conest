@@ -601,6 +601,12 @@ ipcMain.on('update-suplier', async (event, fornecedor) => {
         }
     })
 })
+
+// Acessar site externo 
+ipcMain.on('url-site', (event, urlSite) => {
+    let url = urlSite.url
+    shell.openExternal(url)
+})
 // Fim do CRUD Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 /**************************************************/

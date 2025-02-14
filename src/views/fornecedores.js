@@ -28,6 +28,50 @@ function restaurarEnter() {
 // Manipulando a tecla Enter
 document.getElementById('frmFornecedor').addEventListener('keydown', teclaEnter)
 
+// Função para acessar site
+
+function acessarSite() {
+    let urlFornecedor = document.getElementById('inputSiteSupplier').value.trim()
+    let siteErro = document.getElementById('siteErro')
+
+    // Se ainda não existir, cria a mensagem de erro no HTML
+    if (!siteErro) {
+        siteErro = document.createElement('div')
+        siteErro.id = 'siteErro'
+        siteErro.style.color = 'red'
+        siteErro.style.fontSize = '0.9em'
+        siteErro.style.marginTop = '5px'
+        document.getElementById('inputSiteSupplier').after(siteErro)
+    }
+
+    // Verifica se o campo está vazio ou contém valor padrão
+    if (!urlFornecedor || urlFornecedor === "https://") {
+        siteErro.textContent = "Por favor, insira um site válido antes de acessar."
+        return
+    }
+
+    // Valida se a URL começa com 'https://'
+    if (!/^https:\/\/.+/.test(urlFornecedor)) {
+        siteErro.textContent = "URL inválida! O site deve começar com 'https://'."
+        return
+    }
+
+    // Remove a mensagem de erro se a URL for válida
+    siteErro.textContent = ""
+
+    // Bloquear a navegação caso a URL seja inválida
+    try {
+        // Tentativa de abrir o site
+        api.abrirSite({ url: urlFornecedor })
+    } catch (error) {
+        siteErro.textContent = "Erro ao tentar acessar o site. Verifique a URL."
+    }
+}
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
 // Array usado nos métodos para manipulação de estrutura
 let arrayFornecedor = []
 
@@ -185,6 +229,20 @@ function excluirFornecedor() {
 }
 
 // Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// Função para acessar site >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+function acessarSite() {
+    let urlFornecedor = document.getElementById('inputSiteFornecedor').value
+    // console.log(urlFornecedor)
+    const url = {
+        url: urlFornecedor
+    }
+    api.abrirSite(url)
+}
+
+
+// Função para resetar formulário >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..
 
 api.resetarFormulario((args) => {
     resetForm()
