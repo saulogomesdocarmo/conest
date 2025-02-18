@@ -436,6 +436,12 @@ ipcMain.on('update-client', async (event, cliente) => {
 /*****Fornecedores**************************************/
 /**************************************************/
 
+// Acessar site externo 
+ipcMain.on('url-site', (event, urlSite) => {
+    let url = urlSite.url
+    shell.openExternal(url)
+})
+
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Recebimento dos dados do fomulário do fornecedor
 ipcMain.on('new-supplier', async (event, fornecedor) => {
@@ -602,11 +608,7 @@ ipcMain.on('update-suplier', async (event, fornecedor) => {
     })
 })
 
-// Acessar site externo 
-ipcMain.on('url-site', (event, urlSite) => {
-    let url = urlSite.url
-    shell.openExternal(url)
-})
+
 // Fim do CRUD Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 /**************************************************/

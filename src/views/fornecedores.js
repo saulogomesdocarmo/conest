@@ -30,43 +30,80 @@ document.getElementById('frmFornecedor').addEventListener('keydown', teclaEnter)
 
 // Função para acessar site
 
+let usuarioRemoveuHTTPS = false; // Flag para rastrear se o usuário apagou o HTTPS
+
+// Função acessar site >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function acessarSite() {
-    let urlFornecedor = document.getElementById('inputSiteFornecedor').value.trim()
-    let siteErro = document.getElementById('siteErro')
+    let urlFornecedor = document.getElementById('inputSiteFornecedor').value.trim();
 
-    // Se ainda não existir, cria a mensagem de erro no HTML
-    if (!siteErro) {
-        siteErro = document.createElement('div')
-        siteErro.id = 'siteErro'
-        siteErro.style.color = 'red'
-        siteErro.style.fontSize = '0.9em'
-        siteErro.style.marginTop = '5px'
-        document.getElementById('inputSiteFornecedor').after(siteErro)
-    }
-
-    // Verifica se o campo está vazio ou contém valor padrão
-    if (!urlFornecedor || urlFornecedor === "https://") {
-        siteErro.textContent = "Por favor, insira um site válido antes de acessar."
+    // Validação rigorosa
+    if (!urlFornecedor) {
+        api.mostrarErro('URL não pode estar vazia')
         return
     }
 
-    // Valida se a URL começa com 'https://'
-    if (!/^https:\/\/.+/.test(urlFornecedor)) {
-        siteErro.textContent = "URL inválida! O site deve começar com 'https://'."
-        return
-    }
-
-    // Remove a mensagem de erro se a URL for válida
-    siteErro.textContent = ""
-
-    // Bloquear a navegação caso a URL seja inválida
     try {
-        // Tentativa de abrir o site
+        const urlObj = new URL(urlFornecedor)
+        if (!['http:', 'https:'].includes(urlObj.protocol)) {
+            api.mostrarErro('Protocolo inválido. Use HTTP/HTTPS.')
+            return
+        }
+
+        // Forçar HTTPS mesmo se o usuário digitar HTTP
+        if (urlObj.protocol === 'http:') {
+            urlObj.protocol = 'https:'
+            urlFornecedor = urlObj.href
+        }
+
         api.abrirSite({ url: urlFornecedor })
     } catch (error) {
-        siteErro.textContent = "Erro ao tentar acessar o site. Verifique a URL."
+        api.mostrarErro('URL inválida. Formato correto: https://www.exemplo.com')
     }
 }
+
+// Adicionar o https via javascript
+document.getElementById('inputSiteFornecedor').addEventListener('input', function (e) {
+    const input = e.target;
+    const valor = input.value.trim();
+
+    // Verifica se o valor começa com https://
+    if (!valor.startsWith('https://')) {
+        // Se não começar, força o https://
+        input.value = 'https://' + valor.replace(/^https?:\/\//, '');
+    }
+
+    // Mantém o cursor no final
+    input.setSelectionRange(input.value.length, input.value.length);
+});
+
+document.getElementById('inputSiteFornecedor').addEventListener('keydown', function (e) {
+    const input = e.target;
+    const valor = input.value;
+
+    // Impede a remoção do https://
+    if (e.key === 'Backspace' && valor.length <= 8) { // 8 = length de "https://"
+        e.preventDefault();
+    }
+
+    // Impede a navegação para antes do https://
+    if (e.key === 'ArrowLeft' && input.selectionStart <= 8) {
+        input.setSelectionRange(8, 8);
+        e.preventDefault();
+    }
+});
+
+document.getElementById('inputSiteFornecedor').addEventListener('paste', function (e) {
+    e.preventDefault();
+    const texto = (e.clipboardData || window.clipboardData).getData('text');
+
+    // Remove qualquer protocolo existente e adiciona https://
+    const novoValor = 'https://' + texto.replace(/^https?:\/\//, '');
+    this.value = novoValor;
+
+    // Mantém o cursor no final
+    this.setSelectionRange(novoValor.length, novoValor.length);
+});
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -101,7 +138,30 @@ formFornecedor.addEventListener('submit', async (event) => {
     // Evitar o comportamento padrão de envio de um formulário 
     event.preventDefault()
     // Teste importante ! (Fluxo de dados )
-    console.log(razaoFornecedor.value, foneFornecedor.value, siteFornecedor.value)
+    // console.log(razaoFornecedor.value, foneFornecedor.value, siteFornecedor.value)
+
+       // Validar se o site é válido ou não
+       const siteValue = siteFornecedor.value.trim()
+       if (siteValue) {
+           try {
+               const url = new URL(siteValue)
+   
+               // Verifica se o protocolo é válido
+               if (!['http:', 'https:'].includes(url.protocol)) {
+                   api.mostrarErro('Protocolo inválido. Use HTTP ou HTTPS.')
+                   return
+               }
+   
+               // Verifica se o domínio é válido
+               if (!url.hostname.includes('.')) {
+                   api.mostrarErro('Domínio inválido. Exemplo: www.exemplo.com')
+                   return
+               }
+           } catch (error) {
+               api.mostrarErro('URL inválida. Formato correto: https://www.exemplo.com')
+               return
+           }
+       }
 
     // Passo 2 - slide (enviar as informações para o main)
     // criar um objeto
