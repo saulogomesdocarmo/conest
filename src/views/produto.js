@@ -5,6 +5,7 @@
 
 // A linha abaixo traz foco para o campo input de buscas
 const focoprodutoBarcode = document.getElementById('searchProdutoBarCode')
+const focoProduto = document.getElementById('searchProdutoNome')
 
 // Mudas as propriedades do documento html ao iniciar a janela
 document.addEventListener('DOMContentLoaded', () => {
@@ -73,7 +74,9 @@ formProduto.addEventListener('submit', async (event) => {
         const produto = {
             nomeProd: nomeProduto.value,
             precoProd: precoProduto.value,
-            barcodePro: barcodeProduto.value
+            barcodePro: barcodeProduto.value,
+            caminhoImagemPro: caminhoImagem ? caminhoImagem : ""
+
         }
         api.novoProduto(produto)
 
@@ -91,8 +94,6 @@ formProduto.addEventListener('submit', async (event) => {
 })
 
 // Fim do CRUD Creat/Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-// CRUD READ  CODIGO DO PRODUTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 // CRUD READ - NOME DO PRODUTO
@@ -151,15 +152,15 @@ function buscarProdutos() {
 
 // CRUD READ  CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-function buscarcodigo() {
+function barcodeSearch() {
 
-    let nomeProd = document.getElementById('searchProdutoBarCode').value
+    let barcode = document.getElementById('searchProdutoBarCode').value
     // console.log(nomeProd)
-    if (nomeProd === "") {
+    if (barcode === "") {
         // api.validarBusca()
-        focoProduto.focus()
+        focoprodutoBarcode.focus()
     } else {
-        api.buscarcodigo(nomeProd)
+        api.buscarcodigo(barcodePro)
 
         api.renderizarproduto((event, dadosProduto) => {
             console.log(dadosProduto)
@@ -175,8 +176,8 @@ function buscarcodigo() {
                 document.getElementById('inputProdut').value = p._id
                 document.getElementById('inputPrecoProduto').value = p.precoProduto
 
-                focoProduto.value = ""
-                focoProduto.disabled = true
+                focoprodutoBarcode.value = ""
+                focoprodutoBarcode.disabled = true
 
                 // desativando os botões de busca
                 btnReadProdut.disabled = true
@@ -191,9 +192,9 @@ function buscarcodigo() {
     }
 
     api.setarNomeProduto(() => {
-        let campoNomeprod = document.getElementById('searchProdutoBarCode').value
+        let barCodeNameProd = document.getElementById('searchProdutoBarCode').value
         document.getElementById('inputCodBarra').focus()
-        document.getElementById('inputCodBarra').value = campoNomeprod
+        document.getElementById('inputCodBarra').value = barCodeNameProd
 
         foco.value = ""
         foco.blur()
