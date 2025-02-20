@@ -638,11 +638,9 @@ ipcMain.on('new-product', async (event, produto) => {
             title: 'Aviso',
             message: 'Produto cadastrado com sucesso.',
             buttons: ['OK']
-        }).then((result) => {
-            if (result.response === 0) {
-                event.reply('reset-form')
-            }
         })
+
+        event.reply('reset-form')
 
     } catch (error) {
         console.log(error)

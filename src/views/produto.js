@@ -4,14 +4,12 @@
 
 
 // A linha abaixo traz foco para o campo input de buscas
-const focoProduto = document.getElementById('searchProdutoNome')
 const focoprodutoBarcode = document.getElementById('searchProdutoBarCode')
 
 // Mudas as propriedades do documento html ao iniciar a janela
 document.addEventListener('DOMContentLoaded', () => {
     btnUpdateProdut.disabled = true
     btnDeleteProdut.disabled = true
-    focoProduto.focus()
     focoprodutoBarcode.focus()
 })
 
