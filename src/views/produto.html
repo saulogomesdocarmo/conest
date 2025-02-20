@@ -44,7 +44,8 @@
             <!-- Nome do Produto -->
             <div class="col-md-6">
                 <label for="inputNameProduto" class="form-label">Nome do Produto</label>
-                <input class="form-control" type="text" id="inputNameProduto" spellcheck="false" required maxlength="50">
+                <input class="form-control" type="text" id="inputNameProduto" spellcheck="false" required
+                    maxlength="50">
             </div>
 
             <!-- Código e Preço do Produto -->
@@ -56,21 +57,23 @@
                 <input class="form-control" type="text" id="inputPrecoProduto" required maxlength="50">
             </div>
 
+            <!-- Upload de Imagem -->
+            <div class="col-12">
+                <input type="button" class="btn btn-secondary" value="Upload de imagem" onclick="uploadImage()">
+            </div>
+
             <!-- Imagem do produto -->
             <div class="col-md-5">
                 <img src="../public/img/camera.png" alt="imagem" id="imageProductPreview" class="img-fluid">
-            </div>
-
-            <div class="col-md-7">
-                <input type="file" id="imageProduct" class="form-control">
             </div>
 
             <!-- Botões -->
             <div class="col-12 mt-3">
                 <button type="submit" class="btn btn-success" id="btnCreatProdut">Adicionar</button>
                 <button type="submit" class="btn btn-warning" id="btnUpdateProdut">Editar</button>
-                <button type="button" class="btn btn-danger" id="btnDeleteProdut" onclick="apagarProduto()">Excluir</button>
-                <button type="reset"  id="btnReset" onclick="resetForm()"></button>
+                <button type="button" class="btn btn-danger" id="btnDeleteProdut"
+                    onclick="apagarProduto()">Excluir</button>
+                <button type="reset" id="btnReset" onclick="resetForm()"></button>
             </div>
         </form>
     </div>

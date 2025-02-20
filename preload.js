@@ -56,6 +56,7 @@ contextBridge.exposeInMainWorld('api', {
     setarProduto: (args) => ipcRenderer.on('set-product', args),
     setarNomeProduto: (args) => ipcRenderer.on('set-name-product', args),
     validarBusca: () => ipcRenderer.send('dialog-search'),
-    avisoCliente: () => ipcRenderer.send('notice-box')
+    avisoCliente: () => ipcRenderer.send('notice-box'),
+    selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog')
 
 })

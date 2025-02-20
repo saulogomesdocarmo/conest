@@ -18,7 +18,7 @@ function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarProdutos()
-        
+
     }
 }
 
@@ -32,17 +32,30 @@ document.getElementById('frmProduto').addEventListener('keydown', teclaEnter)
 // Array usado para manipulação de dados
 let arrayProduto = []
 
-// CRUD Creat/Update>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 // Passo 1 - slide (capturar os dados)
 
 let formProduto = document.getElementById('frmProduto')
 let idProduto = document.getElementById('inputProdut')
 let nomeProduto = document.getElementById('inputNameProduto')
-let codeProduto = document.getElementById('inputCodBarra')
+let barcodeProduto = document.getElementById('inputCodBarra')
 let precoProduto = document.getElementById('inputPrecoProduto')
+let caminhoImagemProduto = document.getElementById('pathImageProduct')
+let imagem = document.getElementById('imageProductPreview')
 
+// variavel usada para armazenar o caminho da imagem
+let caminhoImagem
 
+// CRUD Creat/Update>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// solicitar ao main o uso do explorador de arquivos e armazenar o caminho da imagem selecionada na variável caminhoImagem
+
+async function uploadImage() {
+    caminhoImagem = await api.selecionarArquivo()
+    console.log(caminhoImagem)
+    imagem.src = `file://${caminhoImagem}`
+}
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 
@@ -50,7 +63,7 @@ formProduto.addEventListener('submit', async (event) => {
 
     event.preventDefault()
 
-    console.log(nomeProduto.value, codeProduto.value)
+    console.log(nomeProduto.value, barcodeProduto.value, caminhoImagem)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto
@@ -60,7 +73,7 @@ formProduto.addEventListener('submit', async (event) => {
         const produto = {
             nomeProd: nomeProduto.value,
             precoProd: precoProduto.value,
-            codigoProd: codeProduto.value
+            barcodePro: barcodeProduto.value
         }
         api.novoProduto(produto)
 
@@ -70,7 +83,7 @@ formProduto.addEventListener('submit', async (event) => {
             idProd: idProduto.value,
             nomeProd: nomeProduto.value,
             precoProd: precoProduto.value,
-            codigoProd: codeProduto.value
+            barcodePro: barcodeProduto.value
 
         }
         api.editarProduto(produto)
