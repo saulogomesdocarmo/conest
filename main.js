@@ -16,6 +16,10 @@ const clienteModel = require('./src/models/Clientes.js')
 const fornecedorModel = require('./src/models/Fornecedores.js')
 
 const produtoModel = require('./src/models/Produtos.js')
+
+// importar bibliotecas nativa do JS para manipular arquivos 
+const fs = require('fs')
+
 // Janela principal
 let win
 function createWindow() {
@@ -616,18 +620,63 @@ ipcMain.on('update-suplier', async (event, fornecedor) => {
 /**************************************************/
 
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ipcMain.handle('open-file-dialog', async () => {
+    const { canceled, filePaths } = await dialog.showOpenDialog({
+        title: "Selecionar imagem",
+        properties: ['openFile'],
+        filters: [
+            {
+                name: 'Imagens',
+                extensions: ['png', 'jpg', 'jpeg']
+            }
+        ]
+    })
+
+    if (canceled === true || filePaths.length === 0) {
+        return null
+    } else {
+        return filePaths[0]
+    }
+})
+
+
+
 // Recebimento dos dados do fomulário de produtos
-
-
 
 ipcMain.on('new-product', async (event, produto) => {
     console.log(produto)
 
     try {
+
+        if (produto.caminhoImagemPro) {
+
+            const uploadDir = path.join(__dirname, 'uploads')
+            if (!fs.existsSync(uploadDir)) {
+                fs.mkdirSync(uploadDir)
+            }
+
+            //===================================== (imagens #2)
+            // Gerar um nome único para o arquivo (para não sobrescrever)
+            const fileName = `${Date.now()}_${path.basename(produto.caminhoImagemPro)}`
+            //console.log(fileName) // apoio a lógica
+            const uploads = path.join(uploadDir, fileName)
+
+            //===================================== (imagens #3)
+            //Copiar o arquivo de imagem para pasta uploads
+            fs.copyFileSync(produto.caminhoImagemPro, uploads)
+
+            //===================================== (imagens #4)
+            // alterar a variavel caminhoImagemSalvo para uploads
+            caminhoImagemSalvo = uploads
+
+
+        }
         const novoProduto = new produtoModel({
             nomeProduto: produto.nomeProd,
             precoProduto: produto.precoProd,
-            barCodeProduto: produto.codigoProd
+            barCodeProduto: produto.barcodePro,
+            caminhoImagemPro: caminhoImagemSalvo
 
         })
 
@@ -689,12 +738,12 @@ ipcMain.on('search-product', async (event, nomeProd,) => {
 // FIM DO CRUD READ nome <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // CRUD READ codigo - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-ipcMain.on('search-code', async (event, codProd) => {
-    console.log(codProd)
+ipcMain.on('search-code', async (event, barcodePro) => {
+    console.log(barcodePro)
 
     try {
         const codeProduto = await produtoModel.find({
-            codigoProduto: new RegExp(codProd, 'i')
+            codigoProduto: new RegExp(barcodePro, 'i')
         })
 
         if (dadosProduto.length === "") {
@@ -714,7 +763,7 @@ ipcMain.on('search-code', async (event, codProd) => {
             })
 
         }
-        console.log(codeProduto)
+        console.log(barcodePro)
 
         event.reply('product-data', JSON.stringify(codeProduto))
 

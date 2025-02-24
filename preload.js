@@ -50,12 +50,13 @@ contextBridge.exposeInMainWorld('api', {
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),
     buscaproduto: (nomeProd) => ipcRenderer.send('search-product', nomeProd),
     renderizarproduto: (dadosProduto) => ipcRenderer.on('product-data', dadosProduto),
-    buscarcodigo: (codProduto) => ipcRenderer.send('search-code', codProduto),
+    buscarcodigo: ( barcodePro) => ipcRenderer.send('search-code',  barcodePro),
     deletarProduto: (idProduto) => ipcRenderer.send('delet-product', idProduto),
     editarProduto: (produto) => ipcRenderer.send('update-product', produto),
     setarProduto: (args) => ipcRenderer.on('set-product', args),
     setarNomeProduto: (args) => ipcRenderer.on('set-name-product', args),
     validarBusca: () => ipcRenderer.send('dialog-search'),
-    avisoCliente: () => ipcRenderer.send('notice-box')
+    avisoCliente: () => ipcRenderer.send('notice-box'),
+    selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog')
 
 })

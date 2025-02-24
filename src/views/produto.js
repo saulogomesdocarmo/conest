@@ -5,6 +5,7 @@
 
 // A linha abaixo traz foco para o campo input de buscas
 const focoprodutoBarcode = document.getElementById('searchProdutoBarCode')
+const focoProduto = document.getElementById('searchProdutoNome')
 
 // Mudas as propriedades do documento html ao iniciar a janela
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,7 +19,7 @@ function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarProdutos()
-        
+
     }
 }
 
@@ -32,17 +33,30 @@ document.getElementById('frmProduto').addEventListener('keydown', teclaEnter)
 // Array usado para manipulação de dados
 let arrayProduto = []
 
-// CRUD Creat/Update>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 // Passo 1 - slide (capturar os dados)
 
 let formProduto = document.getElementById('frmProduto')
 let idProduto = document.getElementById('inputProdut')
 let nomeProduto = document.getElementById('inputNameProduto')
-let codeProduto = document.getElementById('inputCodBarra')
+let barcodeProduto = document.getElementById('inputCodBarra')
 let precoProduto = document.getElementById('inputPrecoProduto')
+let caminhoImagemProduto = document.getElementById('pathImageProduct')
+let imagem = document.getElementById('imageProductPreview')
 
+// variavel usada para armazenar o caminho da imagem
+let caminhoImagem
 
+// CRUD Creat/Update>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// solicitar ao main o uso do explorador de arquivos e armazenar o caminho da imagem selecionada na variável caminhoImagem
+
+async function uploadImage() {
+    caminhoImagem = await api.selecionarArquivo()
+    console.log(caminhoImagem)
+    imagem.src = `file://${caminhoImagem}`
+}
 
 // Evento associado ao botão adicionar (Quando o botão for pressionado)
 
@@ -50,7 +64,7 @@ formProduto.addEventListener('submit', async (event) => {
 
     event.preventDefault()
 
-    console.log(nomeProduto.value, codeProduto.value)
+    console.log(nomeProduto.value, barcodeProduto.value, caminhoImagem)
 
     // Passo 2 - slide (envio das informações para o main)
     // cirar um objeto
@@ -60,7 +74,9 @@ formProduto.addEventListener('submit', async (event) => {
         const produto = {
             nomeProd: nomeProduto.value,
             precoProd: precoProduto.value,
-            codigoProd: codeProduto.value
+            barcodePro: barcodeProduto.value,
+            caminhoImagemPro: caminhoImagem ? caminhoImagem : ""
+
         }
         api.novoProduto(produto)
 
@@ -70,7 +86,7 @@ formProduto.addEventListener('submit', async (event) => {
             idProd: idProduto.value,
             nomeProd: nomeProduto.value,
             precoProd: precoProduto.value,
-            codigoProd: codeProduto.value
+            barcodePro: barcodeProduto.value
 
         }
         api.editarProduto(produto)
@@ -78,8 +94,6 @@ formProduto.addEventListener('submit', async (event) => {
 })
 
 // Fim do CRUD Creat/Update <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-// CRUD READ  CODIGO DO PRODUTO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 // CRUD READ - NOME DO PRODUTO
@@ -138,15 +152,15 @@ function buscarProdutos() {
 
 // CRUD READ  CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-function buscarcodigo() {
+function barcodeSearch() {
 
-    let nomeProd = document.getElementById('searchProdutoBarCode').value
+    let barcode = document.getElementById('searchProdutoBarCode').value
     // console.log(nomeProd)
-    if (nomeProd === "") {
+    if (barcode === "") {
         // api.validarBusca()
-        focoProduto.focus()
+        focoprodutoBarcode.focus()
     } else {
-        api.buscarcodigo(nomeProd)
+        api.buscarcodigo(barcodePro)
 
         api.renderizarproduto((event, dadosProduto) => {
             console.log(dadosProduto)
@@ -162,8 +176,8 @@ function buscarcodigo() {
                 document.getElementById('inputProdut').value = p._id
                 document.getElementById('inputPrecoProduto').value = p.precoProduto
 
-                focoProduto.value = ""
-                focoProduto.disabled = true
+                focoprodutoBarcode.value = ""
+                focoprodutoBarcode.disabled = true
 
                 // desativando os botões de busca
                 btnReadProdut.disabled = true
@@ -178,9 +192,9 @@ function buscarcodigo() {
     }
 
     api.setarNomeProduto(() => {
-        let campoNomeprod = document.getElementById('searchProdutoBarCode').value
+        let barCodeNameProd = document.getElementById('searchProdutoBarCode').value
         document.getElementById('inputCodBarra').focus()
-        document.getElementById('inputCodBarra').value = campoNomeprod
+        document.getElementById('inputCodBarra').value = barCodeNameProd
 
         foco.value = ""
         foco.blur()

@@ -16,10 +16,13 @@ const produtoSchema = new Schema({
     },
     barCodeProduto: {
         type: String
+    },
+    caminhoImagemProduto: {
+        type: String
     }
 })
 
 // exportar para o main
 // Para modificar o nome da coleção ("tabela"),basta, 
 // modificar na linha abaixo  o rótulo 'Clientes', sempre iniciando com letra maíscula
-module.exports = model ('Produtos', produtoSchema)
+module.exports = model('Produtos', produtoSchema)
