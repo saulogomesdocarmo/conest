@@ -36,6 +36,7 @@ let idProduto = document.getElementById('inputProdut')
 let barcodeProduto = document.getElementById('inputCodBarra')
 let nomeProduto = document.getElementById('inputNameProduto')
 let precoProduto = document.getElementById('inputPrecoProduto')
+let caminhoImagemProduto = document.getElementById('')
 
 
 
