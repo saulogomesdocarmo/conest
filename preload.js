@@ -42,11 +42,10 @@ contextBridge.exposeInMainWorld('api', {
     editarFornecedor: (fornecedor) => ipcRenderer.send('update-suplier', fornecedor),
     setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
     abrirSite: (urlSite) => ipcRenderer.send('url-site', urlSite),
-    mostrarErro:(mensagem) => ipcRenderer.send('mostrar-erro',mensagem),
+    mostrarErro: (mensagem) => ipcRenderer.send('mostrar-erro', mensagem),
     // Aviso para os preencher o campo de busca
 
-
-    // Requisições do Produto
+    novoProduto: (produto) => ipcRenderer.send('new-product', produto),
     validarBusca: () => ipcRenderer.send('dialog-search'),
     avisoCliente: () => ipcRenderer.send('notice-box'),
     selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog')

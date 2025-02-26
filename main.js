@@ -620,4 +620,85 @@ ipcMain.on('update-suplier', async (event, fornecedor) => {
 /**************************************************/
 
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// Obter o caminho da imagem (executar o open dialog)
+ipcMain.handle('open-file-dialog', async () => {
+    const { canceled, filePaths } = await dialog.showOpenDialog({
+        title: "Selecionar Imagem",
+        properties: ['openFile'],
+        filters: [
+            {
+                name: 'Imagens',
+                extensions: ['png', 'jpg', 'jpeg']
+            }
+        ]
+    })
+
+    if (canceled === true || filePaths.length === 0) {
+        return null
+    } else {
+        return filePaths[0] // retorna o caminho do arquivo
+    }
+})
+
+ipcMain.on('new-product', async (event, produto) => {
+    // Teste de recebimento dos dados do produto
+    console.log(produto) // teste do passo 2 (recebimento do produto)
+
+    // Resolução do BUG (quando a imagem não for salva)
+    let caminhoImagemSalvo = ""
+
+    try {
+        if (produto.caminhoImagemPro) {
+            // (Imagem #1)
+            //Criar a pasta uploads se não existir
+            //__dirname (caminho absoluto)
+
+            const uploadDir = path.join(__dirname, 'uploads')
+            if (!fs.existsSync(uploadDir)) {
+                fs.mkdirSync(uploadDir)
+            }
+
+            //===================================== (imagens #2)
+            // Gerar um nome único para o arquivo (para não sobrescrever)
+
+            const fileName = `${Date.now()}_${path.basename(produto.caminhoImagemPro)}}`
+            // console.log(fileName) // apoio a lógica
+            const uploads = path.join(uploadDir, fileName)
+            //===================================== (imagens #3)
+            //Copiar o arquivo de imagem para pasta uploads
+            fs.copyFileSync(produto.caminhoImagemPro, uploads)
+
+            //===================================== (imagens #4)
+            // alterar a variavel caminhoImagemSalvo para uploads
+            caminhoImagemSalvo = uploads
+        }
+
+        // Cadastrar Produto no Banco de Dados
+        const novoProduto = new produtoModel({
+            barCodeProduto: produto.barcodePro,
+            nomeProduto: produto.nomePro,
+            precoProduto: produto.precoPro,
+            caminhoImagemProduto: caminhoImagemSalvo//salvando caminho correto no banco
+        })
+
+        // adicionar o produto no banco de dados
+        await novoProduto.save()
+
+        // confirmação 
+        dialog.showMessageBox({
+            type: 'info',
+            message: 'Produto cadastrado com sucesso.',
+            buttons: ['OK']
+        }).then((result) => {
+            if (result.response === 0) { 
+                event.reply('reset-form')
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+
 
