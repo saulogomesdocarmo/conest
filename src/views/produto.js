@@ -72,12 +72,64 @@ formProduto.addEventListener('submit', async (event) => {
     api.novoProduto(produto)
 })
 
+// CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+function buscarProdutoCode() {
+    let barcode = document.getElementById('searchProdutoBarCode').value
+    // console.log(barcode) // teste passo 1 do fluxo (slides)
 
+    // validação
+    if (barcode === "") {
+        api.validarBusca()
+        focoCode.focus()
+    } else {
+        api.buscarProdutoCode(barcode) // Passo 2 de 
+        // Fluxo (slides)
+        // Recebimento dos dados do produto
+        api.renderizarProduto((event, dadosProduto) => {    // teste do passo 5
+            console.log(dadosProduto)
+            // Passo 6 Renderização dos dados do produto
+            const produtoRenderizado = JSON.parse(dadosProduto)
+            arrayProduto = produtoRenderizado
+            // percorrer o vetor de produtos e extrair os dados e setar (preencher) os campos do formulário
 
+            arrayProduto.array.forEach((p) => {
+                document.getElementById('inputProdut').value = p._id
+                document.getElementById('inputCodBarra').value = p.barcodeProduto
+                document.getElementById('inputNameProduto').value = p.nomeProduto
+                document.getElementById('inputPrecoProduto').value = p.precoProduto
 
+                // ######## Renderizar Imagem#####
+                // se exister imagem cadastrada 
 
+                if (p.caminhoImagemProduto) {
+                    imagem.src = p.caminhoImagemProduto
+                }
 
+                // limpar o campo de busca, remover o foco e desativar a busca
+                focoCode.value = ""
+                focoCode.disabled = true
+                // liberar os  botões editar e exlcuir e bloquear o botão adicionar
+                document.getElementById('btnUpdateProdut').disabled = false
+                document.getElementById('btnDeleteProdut').disabled = false
+                document.getElementById('btnCreatProdut').disabled = true
+            });
+        })
+    }
+}
+
+// Setar o campo do código de barras (se o produto não estiver cadastrado)
+
+api.setarBarcode(() => {
+    // setar o barcode do produto
+    let campoBarcode = document.getElementById('searchProdutoBarCode').value
+    document.getElementById('inputCodBarra').value = campoBarcode
+    // limpar o campo de busca e remover o foco
+    focoCode.value = ""
+    document.getElementById('inputNameProduto').focus()
+    //restaurar a teclaEnter (associar ao botão adicionar)
+    restaurarEnter()
+})
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function apagarProduto() {
@@ -96,9 +148,3 @@ function resetForm() {
     location.reload()
 }
 
-// CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-function buscarProdutoCode() {
-    let barcode = document.getElementById('searchProdutoBarCode').value
-    // console.log(barcode) // teste passo 1 do fluxo (slides)
-}
