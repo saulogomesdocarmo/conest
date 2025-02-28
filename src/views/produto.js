@@ -137,7 +137,7 @@ api.setarBarcode(() => {
 // CRUD Read Código Nome >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 function buscarProdutos() {
-    let produtonome = document.getElementById('searchProdutoNome').value
+    let produtonome = document.getElementById('inputNameProduto').value
     console.log(produtonome)
 
     if (produtonome === 0) {
@@ -177,11 +177,11 @@ function buscarProdutos() {
 
 api.setarNomeProduto(() => {
     //setar o barcode do produto
-    let produtonome = document.getElementById('searchProdutoNome').value
+    let produtonome = document.getElementById('inputNameProduto').value
     document.getElementById('inputBarcodeProduct').value = produtonome
     // limpar o campo de busca e remover o foco
     focoProduto.value = ""
-    document.getElementById('inputNameProduct').focus()
+    // document.getElementById('inputNameProduct').focus()
     // restaurar a tecla enter (associar ao botão adicionar)
     restaurarEnter()
 })

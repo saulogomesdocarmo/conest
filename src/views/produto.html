@@ -23,34 +23,29 @@
                 <img src="../public/img/barcode.png" alt="barcode" class="img-fluid">
             </div>
 
-            <!-- Busca produto por Nome -->
-            <div class="col-md-6 mt-3">
-                <input type="text" class="form-control" id="searchProdutoNome" maxlength="50" spellcheck="false"
-                    >
-            </div>
-
-            <div class="col-md-3 mt-3">
-                <button type="button" class="btn btn-primary" id="btnReadProdut"
-                    onclick="buscarProdutos()">Nome</button>
-            </div>
-
             <hr class="mt-4 border-primary border-1">
 
             <!-- Id do Produto -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="inputProdut" class="form-label">ID do Produto</label>
                 <input class="form-control" type="text" id="inputProdut" placeholder="Id">
             </div>
 
             <!-- Nome do Produto -->
-            <div class="col-md-6">
+            <div class="col-md-6 ">
                 <label for="inputNameProduto" class="form-label">Nome do Produto</label>
                 <input class="form-control" type="text" id="inputNameProduto" spellcheck="false" required
                     maxlength="50">
             </div>
 
+            <div class="col-md-2">
+                <img src="../public/img/lupa02.png" alt="barcode" class="img-fluid" id="lupa"
+                    onclick="buscarProdutos()">
+            </div>
+
+
             <!-- Código e Preço do Produto -->
-            <div class="col-md-5">
+            <div class="col-md-7">
                 <label for="inputCodBarra" class="form-label">Código de Barra</label>
                 <input class="form-control mb-2" type="text" id="inputCodBarra" required maxlength="50">
 

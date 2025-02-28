@@ -47,10 +47,11 @@ contextBridge.exposeInMainWorld('api', {
 
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),
     validarBusca: () => ipcRenderer.send('dialog-search'),
+    // validarBuscaNome: () => ipcRenderer.send('dialog-name'),
     setarBarcode: (args) => ipcRenderer.on('set-barcode', args),
     setarNomeProduto: (args) => ipcRenderer.on('set-nome-product', args),
     buscarProdutoCode: (barcode) => ipcRenderer.send('search-code-product', barcode),
-    buscarProdutoNome: (produtonome) => ipcRenderer.send('search-name-product',produtonome),
+    buscarProdutoNome: (produtonome) => ipcRenderer.send('search-name-product', produtonome),
     renderizarProduto: (dadosProduto) => ipcRenderer.on('product-data', dadosProduto),
     avisoCliente: () => ipcRenderer.send('notice-box'),
     selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog')
