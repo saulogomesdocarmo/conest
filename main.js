@@ -692,7 +692,7 @@ ipcMain.on('new-product', async (event, produto) => {
             message: 'Produto cadastrado com sucesso.',
             buttons: ['OK']
         }).then((result) => {
-            if (result.response === 0) { 
+            if (result.response === 0) {
                 event.reply('reset-form')
             }
         })
@@ -703,6 +703,43 @@ ipcMain.on('new-product', async (event, produto) => {
 
 
 // CRUD READ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ipcMain.on('search-code-product', async (event, barcode) => {
+    console.log(barcode) // teste do passo 2
+
+    try {
+        // Passo 3 e 4 (fluxo do slide)
+        const dadosProduto = await produtoModel.find({
+            barCodeProduto: barcode
+        })
+        console.log(dadosProduto) // teste Passo 4 
+        // validação (se não existir produto cadastrado)
+        if (dadosProduto.length === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Produtos',
+                message: 'Produto não cadastrado.\nDeseja cadastrar esse produto?',
+                defaultId: 0,
+                buttons: ['SIM', 'NÃO']
+            }).then((result) => {
+                console.log(result)
+                if (result.response === 0) {
+                    // enviar ao renderizador um pedido para setar o código de barras
+                    event.reply('set-barcode')
+                } else {
+                    // enviar ao renderizador um pedido para limpar os campos do formulário
+                    event.reply('reset-form')
+                }
+            })
+        }
+        // Passo 5: Fluxo (envio dos dados do produto ao renderizador)
+        event.reply('product-data', JSON.stringify(dadosProduto))
+    } catch (error) {
+
+    }
+})
+
+
 
 
 
