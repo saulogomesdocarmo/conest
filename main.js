@@ -702,18 +702,18 @@ ipcMain.on('new-product', async (event, produto) => {
 })
 
 
-// CRUD READ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ipcMain.on('search-code-product', async (event, barcode) => {
-    console.log(barcode) // teste do passo 2
+    console.log(barcode) 
 
     try {
-        // Passo 3 e 4 (fluxo do slide)
+        
         const dadosProduto = await produtoModel.find({
             barCodeProduto: barcode
         })
-        console.log(dadosProduto) // teste Passo 4 
-        // validação (se não existir produto cadastrado)
+        console.log(dadosProduto) 
+
         if (dadosProduto.length === 0) {
             dialog.showMessageBox({
                 type: 'warning',
@@ -724,21 +724,58 @@ ipcMain.on('search-code-product', async (event, barcode) => {
             }).then((result) => {
                 console.log(result)
                 if (result.response === 0) {
-                    // enviar ao renderizador um pedido para setar o código de barras
+                   
                     event.reply('set-barcode')
                 } else {
-                    // enviar ao renderizador um pedido para limpar os campos do formulário
+                   
                     event.reply('reset-form')
                 }
             })
         }
-        // Passo 5: Fluxo (envio dos dados do produto ao renderizador)
+       
         event.reply('product-data', JSON.stringify(dadosProduto))
     } catch (error) {
 
     }
 })
 
+// FIM CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('search-name-product', async (event, produtonome) => {
+    console.log(produtonome)
+
+    try {
+        const dadosProdutoNome = await produtoModel.find({
+            nomeProduto: produtonome
+        })
+        console.log(produtonome)
+
+        if (produtonome === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Produtos',
+                message: 'Produto não cadastrado.\nDeseja cadastrar este produto?',
+                defaultId: 0,
+                buttons: ['Sim', 'Não'],
+
+            }).then((result) => {
+                console.log(result)
+                if (result.response === 0) {
+                    event.reply('set-nome-product')
+
+                } else {
+                    event.reply('reset-form')
+                }
+            })
+        }
+
+        event.reply('product-data', JSON.stringify(dadosProdutoNome))
+
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 
 
