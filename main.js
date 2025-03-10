@@ -742,41 +742,12 @@ ipcMain.on('search-code-product', async (event, barcode) => {
 // FIM CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-ipcMain.on('search-name-product', async (event, produtonome) => {
-    console.log(produtonome)
 
-    try {
-        const dadosProdutoNome = await produtoModel.find({
-            nomeProduto: produtonome
-        })
-        console.log(produtonome)
 
-        if (produtonome === 0) {
-            dialog.showMessageBox({
-                type: 'warning',
-                title: 'Produtos',
-                message: 'Produto não cadastrado.\nDeseja cadastrar este produto?',
-                defaultId: 0,
-                buttons: ['Sim', 'Não'],
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-            }).then((result) => {
-                console.log(result)
-                if (result.response === 0) {
-                    event.reply('set-nome-product')
 
-                } else {
-                    event.reply('reset-form')
-                }
-            })
-        }
-
-        event.reply('product-data', JSON.stringify(dadosProdutoNome))
-
-    } catch (error) {
-        console.log(error)
-    }
-})
-
+// FIm do CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 

@@ -17,7 +17,7 @@ function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
         buscarProdutoCode()
-        buscarProdutos()
+        // buscarProdutos()
     }
 }
 
@@ -115,6 +115,7 @@ function buscarProdutoCode() {
                 document.getElementById('btnUpdateProdut').disabled = false
                 document.getElementById('btnDeleteProdut').disabled = false
                 document.getElementById('btnCreatProdut').disabled = true
+                restaurarEnter()
             });
         })
     }
@@ -136,63 +137,9 @@ api.setarBarcode(() => {
 
 // CRUD Read Código Nome >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-function buscarProdutos() {
-    let produtonome = document.getElementById('inputNameProduto').value
-    console.log(produtonome)
-
-    if (produtonome === 0) {
-        api.validarBusca()
-    } else {
-        api.buscarProdutoNome(produtonome)
-        api.renderizarProduto((event, dadosProduto) => {
-            console.log(dadosProduto)
-
-            const produtoRenderizadoNome = JSON.parse(dadosProduto)
-
-            arrayProduto = produtoRenderizadoNome
-
-            arrayProduto.forEach((p) => {
-                document.getElementById('inputProdut').value = p._id
-                document.getElementById('inputCodBarra').value = p.barcodeProduto
-                document.getElementById('inputNameProduto').value = p.nomeProduto
-                document.getElementById('inputPrecoProduto').value = p.precoProduto
-
-                if (p.caminhoImagemProduto) {
-                    imagem.src = p.caminhoImagemProduto
-                }
-
-                focoProduto.value = ""
-                foco.disabled = true
-
-                document.getElementById('btnUpdateProdut').disabled = false
-                document.getElementById('btnDeleteProdut').disabled = false
-                document.getElementById('btnCreatProdut').disabled = true
-
-                restaurarEnter()
-
-            })
-        })
-    }
-}
-
-api.setarNomeProduto(() => {
-    //setar o barcode do produto
-    let produtonome = document.getElementById('inputNameProduto').value
-    document.getElementById('inputBarcodeProduct').value = produtonome
-    // limpar o campo de busca e remover o foco
-    focoProduto.value = ""
-    // document.getElementById('inputNameProduct').focus()
-    // restaurar a tecla enter (associar ao botão adicionar)
-    restaurarEnter()
-})
-
-
-
-
-
-
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function apagarProduto() {
+    console.log(idProduto.value) // passo 1 (fluxo-do-slide)
     api.deletarProduto(idProduto.value) // Passo 2 do slide
 
 }
