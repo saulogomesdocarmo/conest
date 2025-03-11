@@ -742,6 +742,8 @@ ipcMain.on('search-code-product', async (event, barcode) => {
 
 //CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+// Fim CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -779,6 +781,35 @@ ipcMain.on('delete-product', async (event, idProduto) => {
 })
 // FIm do CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+// CRUD UPDATE
+
+ipcMain.on('update-product', async (event, produto) => {
+    console.log(produto)
+
+    try {
+        const produtoEditado = await produtoModel.findByIdAndUpdate(
+            produto.idPro, {
+            barCodeProduto: produto.barcodePro,
+            nomeProduto: produto.nomePro,
+            precoProduto: produto.precoPro,
+        },
+            {
+                new: true
+            }
+        )
+    } catch (error) {
+        console.log(error)
+    }
+    dialog.showMessageBox(product, {
+        type: 'info',
+        message: 'Dados do produto alterados com sucesso.',
+        buttons: ['OK']
+    }).then((result) => {
+        if (result.response === 0) {
+            event.reply('reset-form')
+        }
+    })
+})
 
 
 

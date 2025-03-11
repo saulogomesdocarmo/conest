@@ -65,13 +65,27 @@ formProduto.addEventListener('submit', async (event) => {
     // criar um objeto
     // caminhoImagemPro: caminhoImagem ? caminhoImagem : "" 
     // ? : (operador ternário (if else)) correção de BUG se não existir caminho da imagem (se nenhuma imagem selecionada) enviar uma string vazia ""
-    const produto = {
-        barcodePro: barcodeProduto.value,
-        nomePro: nomeProduto.value,
-        precoPro: precoProduto.value,
-        caminhoImagemPro: caminhoImagem ? caminhoImagem : ""
+    if (idProduto.value === "") {
+        const produto = {
+            barcodePro: barcodeProduto.value,
+            nomePro: nomeProduto.value,
+            precoPro: precoProduto.value,
+            caminhoImagemPro: caminhoImagem ? caminhoImagem : ""
+        }
+        api.novoProduto(produto)
+
+    } else {
+
+        const produto = {
+            idPro: idProduto.value,
+            barcodePro: barcodeProduto.value,
+            nomePro: nomeProduto.value,
+            precoPro: precoProduto.value,
+            caminhoImagemPro: caminhoImagem ? caminhoImagem : ""
+        }
+        api.editarProduto(produto)
     }
-    api.novoProduto(produto)
+
 })
 
 // CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
