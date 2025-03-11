@@ -95,9 +95,9 @@ function buscarProdutoCode() {
             arrayProduto = produtoRenderizado
             // percorrer o vetor de produtos e extrair os dados e setar (preencher) os campos do formulário
 
-            arrayProduto.array.forEach((p) => {
+            arrayProduto.forEach((p) => {
                 document.getElementById('inputProdut').value = p._id
-                document.getElementById('inputCodBarra').value = p.barcodeProduto
+                document.getElementById('inputCodBarra').value = p.barCodeProduto
                 document.getElementById('inputNameProduto').value = p.nomeProduto
                 document.getElementById('inputPrecoProduto').value = p.precoProduto
 

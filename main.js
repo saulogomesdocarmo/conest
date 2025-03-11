@@ -708,7 +708,6 @@ ipcMain.on('search-code-product', async (event, barcode) => {
     console.log(barcode) 
 
     try {
-        
         const dadosProduto = await produtoModel.find({
             barCodeProduto: barcode
         })
