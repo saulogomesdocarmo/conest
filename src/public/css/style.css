@@ -29,7 +29,18 @@
     border: none;
     cursor: pointer;
     margin-top: 30px;
-    
+
+}
+
+#scanner {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 60px;
+    margin-left: 10px;
+
 }
 
 #btnReset {
@@ -100,4 +111,24 @@ body {
     bottom: 20px;
     object-fit: cover;
 
+}
+
+
+
+
+.input-group {
+    display: flex; /* Faz o botão e o input ficarem lado a lado */
+    align-items: center; /* Alinha verticalmente */
+}
+
+.input-group input {
+    flex-grow: 1; /* Faz o input ocupar o espaço disponível */
+    margin-right: 10px; /* Adiciona um espaço entre o input e o botão */
+    border-radius: 5px;
+}
+
+.input-group button {
+    margin-left: 10px;
+    border-radius: 5px; /* Adiciona uma margem no lado esquerdo do botão */
+    /* Caso queira aumentar ainda mais o espaço, pode ajustar o valor de 10px */
 }

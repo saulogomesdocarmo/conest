@@ -20,7 +20,7 @@
             </div>
 
             <div class="col-md-4">
-                <img src="../public/img/barcode.png" alt="barcode" class="img-fluid">
+                <img src="../public/img/barcode.png" alt="barcode" class="img-fluid" id="scanner">
             </div>
 
             <hr class="mt-4 border-primary border-1">
@@ -32,15 +32,14 @@
             </div>
 
             <!-- Nome do Produto -->
-            <div class="col-md-6 ">
+            <div class="col-md-6">
                 <label for="inputNameProduto" class="form-label">Nome do Produto</label>
-                <input class="form-control" type="text" id="inputNameProduto" spellcheck="false" required
-                    maxlength="50">
+                <div class="input-group">
+                    <input class="form-control ml-3" type="text" id="inputNameProduto" spellcheck="false" required maxlength="50">
+                    <button type="button" class="btn btn-danger" id="btnDeleteProdut" onclick="apagarProduto()">Excluir</button>
+                </div>
             </div>
-
-            <div class="col-md-2">
-                <img src="../public/img/lupa02.png" alt="barcode" class="img-fluid" id="lupa">
-            </div>
+            
 
 
             <!-- Código e Preço do Produto -->

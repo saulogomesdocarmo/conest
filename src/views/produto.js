@@ -3,7 +3,7 @@
  */
 
 const focoCode = document.getElementById('searchProdutoBarCode')
-const focoProduto = document.getElementById('searchProdutoNome')
+
 
 // configuração inicial do formulário
 document.addEventListener('DOMContentLoaded', () => {
