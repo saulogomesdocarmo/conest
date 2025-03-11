@@ -791,7 +791,7 @@ ipcMain.on('update-product', async (event, produto) => {
             produto.idPro, {
             barCodeProduto: produto.barcodePro,
             nomeProduto: produto.nomePro,
-            precoProduto: produto.precoPro,
+            precoProduto: produto.precoPro
         },
             {
                 new: true
