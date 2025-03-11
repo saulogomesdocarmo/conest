@@ -705,13 +705,13 @@ ipcMain.on('new-product', async (event, produto) => {
 // CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ipcMain.on('search-code-product', async (event, barcode) => {
-    console.log(barcode) 
+    console.log(barcode)
 
     try {
         const dadosProduto = await produtoModel.find({
             barCodeProduto: barcode
         })
-        console.log(dadosProduto) 
+        console.log(dadosProduto)
 
         if (dadosProduto.length === 0) {
             dialog.showMessageBox({
@@ -723,15 +723,15 @@ ipcMain.on('search-code-product', async (event, barcode) => {
             }).then((result) => {
                 console.log(result)
                 if (result.response === 0) {
-                   
+
                     event.reply('set-barcode')
                 } else {
-                   
+
                     event.reply('reset-form')
                 }
             })
         }
-       
+
         event.reply('product-data', JSON.stringify(dadosProduto))
     } catch (error) {
 
@@ -745,7 +745,38 @@ ipcMain.on('search-code-product', async (event, barcode) => {
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+ipcMain.on('delete-product', async (event, idProduto) => {
 
+    // Teste de recebimento do ID do produto (passo 2)
+    console.log(idProduto)
+    // Confirmação de exclusão
+    // confirmação antes de excluir o cliente (IMPORTANTE!)
+    // client é a variável ref a janela de clientes
+    const { response } = await dialog.showMessageBox(product, {
+        type: 'warning',
+        buttons: ['Cancelar', 'Excluir'], //[0,1]
+        title: 'Atenção!',
+        message: 'Tem certeza que deseja excluir este Produto?'
+    })
+    // apoio a lógica
+    console.log(response)
+    if (response === 1) {
+        //Passo 3 slide
+        try {
+            const produtoDeletado = await produtoModel.findByIdAndDelete(idProduto)
+            dialog.showMessageBox({
+                type: 'info',
+                title: 'Aviso',
+                message: 'Produto excluído com sucesso',
+                buttons: ['OK']
+            })
+            event.reply('reset-form')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+})
 // FIm do CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 

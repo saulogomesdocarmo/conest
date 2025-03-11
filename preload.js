@@ -50,6 +50,7 @@ contextBridge.exposeInMainWorld('api', {
     setarBarcode: (args) => ipcRenderer.on('set-barcode', args),
     buscarProdutoCode: (barcode) => ipcRenderer.send('search-code-product', barcode),
     renderizarProduto: (dadosProduto) => ipcRenderer.on('product-data', dadosProduto),
+    deletarProduto: (idProduto) => ipcRenderer.send('delete-product', idProduto),
     avisoCliente: () => ipcRenderer.send('notice-box'),
     selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog')
 
