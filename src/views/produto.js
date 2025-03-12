@@ -129,7 +129,7 @@ function buscarProdutoCode() {
     // Passo 2 de 
     // Fluxo (slides)
     // Recebimento dos dados do produto
-    api.renderizarProduto((event, dadosBarcode) => {
+    api.renderizarProdutoCode((event, dadosBarcode) => {
         try {
             if (!dadosBarcode || dadosBarcode === "[]" || dadosBarcode.length === 0) {
                 if (confirm("Código de barras não encotrado. Deseja cadastrar um novo produto ?")) {
@@ -178,7 +178,37 @@ function buscarProdutoNome() {
         api.validarBusca();
         focoName.focus();
     } else {
-        
+
+        api.buscarProdutoNome(nomeProduto)
+
+        api.renderizarProduto((event, dadosProduto) => { 
+            console.log(dadosProduto);
+            
+            const produtoRenderizado = JSON.parse(dadosProduto);
+            arrayProduto = produtoRenderizado;
+
+            console.log(arrayProduto)
+
+            arrayProduto.forEach((c) => {
+                document.getElementById('inputNameProduct').value = c.nomeProduto;  // Preencher o nome do produto
+                document.getElementById('inputBarcodeProduct').value = c.barcodeProduto;
+                document.getElementById('inputPriceProduct').value = c.precoProduto;
+                document.getElementById('inputIdProduct').value = c._id;
+               
+                // Limpar o campo de busca e remover o foco
+                foco.value = "";
+                foco.disabled = true;
+                btnRead.disabled = true;
+                btnCreate.disabled = true;
+               
+                // Liberar os botões editar e excluir
+                document.getElementById('btnUpdate').disabled = false;
+                document.getElementById('btnDelete').disabled = false;
+               
+                // Restaurar o padrão da tecla Enter
+                restaurarEnter();
+            })
+        });
     }
 }
 // Fim CRUD READ NOME
