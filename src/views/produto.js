@@ -2,6 +2,7 @@
  * Processo de Renderização do Documento -> produto.html
  */
 
+const focoName = document.getElementById('searchProductName')
 const focoCode = document.getElementById('searchProdutoBarCode')
 
 
@@ -9,15 +10,37 @@ const focoCode = document.getElementById('searchProdutoBarCode')
 document.addEventListener('DOMContentLoaded', () => {
     btnUpdateProdut.disabled = true
     btnDeleteProdut.disabled = true
-    focoCode.focus()
+    focoName.focus()
+
+    // Adiciona o evento para o campo de código de barras
+    document.getElementById('searchProdutoBarCode').addEventListener('input', (event) => {
+        // Verifica se o campo de barcode foi alterado (presumimos que o leitor de código de barras digite diretamente)
+        if (event.target.value.length > 0) {
+            // Coloca o valor escaneado diretamente no campo de Barcode (não no nome do produto)
+            document.getElementById('inputCodBarra').value = event.target.value;
+
+
+            // Dispara a função de busca do produto por barcode
+            buscarProdutoCode()
+        }
+    });
 })
 
-// Função para manipular o envento da tecla ENTER
+// Manipulação do evento Enter para buscar por nome ou barcode
 function teclaEnter(event) {
     if (event.key === "Enter") {
         event.preventDefault()
-        buscarProdutoCode()
-        // buscarProdutos()
+
+        const valorBusca = focoName.value || focoCode.value;
+
+        if (focoName === document.activeElement) {
+            buscarProdutoNome(valorBusca)
+
+        }
+
+        else if (focoCode === document.activeElement) {
+            buscarProdutoCode(valorBusca)
+        }
     }
 }
 
@@ -31,6 +54,7 @@ document.getElementById('frmProduto').addEventListener('keydown', teclaEnter)
 
 // Array usado nos métodos para manipulação da estrutura de dados
 let arrayProduto = []
+let arrayBarcode = []
 
 // captura dos inputs do formulário
 let formProduto = document.getElementById('frmProduto')
@@ -89,52 +113,75 @@ formProduto.addEventListener('submit', async (event) => {
 })
 
 // CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 function buscarProdutoCode() {
-    let barcode = document.getElementById('searchProdutoBarCode').value
+    let barcode = document.getElementById('searchProdutoBarCode').value.trim();
     // console.log(barcode) // teste passo 1 do fluxo (slides)
 
     // validação
     if (barcode === "") {
         api.validarBusca()
-        focoCode.focus()
-    } else {
-        api.buscarProdutoCode(barcode) // Passo 2 de 
-        // Fluxo (slides)
-        // Recebimento dos dados do produto
-        api.renderizarProduto((event, dadosProduto) => {    // teste do passo 5
-            console.log(dadosProduto)
-            // Passo 6 Renderização dos dados do produto
-            const produtoRenderizado = JSON.parse(dadosProduto)
-            arrayProduto = produtoRenderizado
-            // percorrer o vetor de produtos e extrair os dados e setar (preencher) os campos do formulário
+        focoName.focus();
+        return;
+    }
 
-            arrayProduto.forEach((p) => {
-                document.getElementById('inputProdut').value = p._id
-                document.getElementById('inputCodBarra').value = p.barCodeProduto
-                document.getElementById('inputNameProduto').value = p.nomeProduto
-                document.getElementById('inputPrecoProduto').value = p.precoProduto
+    api.buscarProdutoCode(barcode)
 
-                // ######## Renderizar Imagem#####
-                // se exister imagem cadastrada 
-
-                if (p.caminhoImagemProduto) {
-                    imagem.src = p.caminhoImagemProduto
+    // Passo 2 de 
+    // Fluxo (slides)
+    // Recebimento dos dados do produto
+    api.renderizarProduto((event, dadosBarcode) => {
+        try {
+            if (!dadosBarcode || dadosBarcode === "[]" || dadosBarcode.length === 0) {
+                if (confirm("Código de barras não encotrado. Deseja cadastrar um novo produto ?")) {
+                    document.getElementById('inputCodBarra').value = barcode
+                    document.getElementById('inputNameProduto').focus();
+                    document.getElementById('btnCreatProdut').disabled = false;
+                } else {
+                    document.getElementById('searchProdutoBarCode').value = "";
                 }
 
-                // limpar o campo de busca, remover o foco e desativar a busca
-                focoCode.value = ""
-                focoCode.disabled = true
-                // liberar os  botões editar e exlcuir e bloquear o botão adicionar
-                document.getElementById('btnUpdateProdut').disabled = false
-                document.getElementById('btnDeleteProdut').disabled = false
-                document.getElementById('btnCreatProdut').disabled = true
-                restaurarEnter()
-            });
-        })
-    }
+                return;
+            }
+
+            const barcodeRenderizado = JSON.parse(dadosBarcode)
+            if (barcodeRenderizado.length > 0) {
+                const produto = barcodeRenderizado[0];
+
+                document.getElementById('inputNameProduto').value = produto.nomeProduto;
+                document.getElementById('inputCodBarra').value = produto.barCodeProduto;
+                document.getElementById('inputPrecoProduto').value = produto.precoProduto
+                document.getElementById('inputProdut').value = produto._id
+
+                focoName.value = "";
+                focoName.disabled = true;
+                btnReadProduct.disabled = true;
+                btnCreatProdut.disabled = true;
+
+                document.getElementById('btnUpdateProdut').disabled = false;
+                document.getElementById('btnDeleteProdut').disabled = false;
+            }
+        } catch (error) {
+            console.error("Erro ao processar os dados do produto:", error)
+        }
+    })
+
 }
 
+
+//CRUD READ NOME
+
+function buscarProdutoNome() {
+
+    let nomeProduto = document.getElementById('searchProductName').value
+
+    if (nomeProduto === 0) {
+        api.validarBusca();
+        focoName.focus();
+    } else {
+        
+    }
+}
+// Fim CRUD READ NOME
 // Setar o campo do código de barras (se o produto não estiver cadastrado)
 
 api.setarBarcode(() => {
