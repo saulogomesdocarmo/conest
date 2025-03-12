@@ -786,20 +786,41 @@ ipcMain.on('delete-product', async (event, idProduto) => {
 ipcMain.on('update-product', async (event, produto) => {
     console.log(produto)
 
-    try {
-        const produtoEditado = await produtoModel.findByIdAndUpdate(
-            produto.idPro, {
-            barCodeProduto: produto.barcodePro,
-            nomeProduto: produto.nomePro,
-            precoProduto: produto.precoPro
-        },
-            {
-                new: true
-            }
-        )
-    } catch (error) {
-        console.log(error)
+    if (produto.caminhoImagemPro === "") {
+
+        try {
+            const produtoEditado = await produtoModel.findByIdAndUpdate(
+                produto.idPro, {
+                barCodeProduto: produto.barcodePro,
+                nomeProduto: produto.nomePro,
+                precoProduto: produto.precoPro
+            },
+                {
+                    new: true
+                }
+            )
+        } catch (error) {
+            console.log(error)
+        }
+
+    } else {
+        try {
+            const produtoEditado = await produtoModel.findByIdAndUpdate(
+                produto.idPro, {
+                barCodeProduto: produto.barcodePro,
+                nomeProduto: produto.nomePro,
+                precoProduto: produto.precoPro,
+                caminhoImagemProduto: produto.caminhoImagemPro
+            },
+                {
+                    new: true
+                }
+            )
+        } catch (error) {
+            console.log(error)
+        }
     }
+
     dialog.showMessageBox(product, {
         type: 'info',
         message: 'Dados do produto alterados com sucesso.',

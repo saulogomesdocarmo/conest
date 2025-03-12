@@ -89,6 +89,8 @@ formProduto.addEventListener('submit', async (event) => {
     // criar um objeto
     // caminhoImagemPro: caminhoImagem ? caminhoImagem : "" 
     // ? : (operador ternário (if else)) correção de BUG se não existir caminho da imagem (se nenhuma imagem selecionada) enviar uma string vazia ""
+
+    // Estratégia usada para diferenciar adicionar/editat (se existir idProduto)
     if (idProduto.value === "") {
         const produto = {
             barcodePro: barcodeProduto.value,
