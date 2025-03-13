@@ -113,6 +113,57 @@ formProduto.addEventListener('submit', async (event) => {
     }
 
 })
+//CRUD READ NOME
+
+function buscarProdutoNome() {
+
+    let nomeProduto = focoName.value;
+
+    if (nomeProduto === "") {
+        api.validarBusca();
+        focoName.focus();
+    } else {
+
+        api.buscarProdutoNome(nomeProduto)
+
+        api.renderizarProduto((event, dadosProduto) => {
+            console.log(dadosProduto);
+
+            const produtoRenderizado = JSON.parse(dadosProduto);
+            arrayProduto = produtoRenderizado;
+
+            console.log(arrayProduto)
+
+            if (arrayProduto.length > 0) {
+
+            } else {
+
+            }
+            arrayProduto.forEach((p) => {
+                document.getElementById('inputNameProduct').value = p.nomeProduto;  // Preencher o nome do produto
+                document.getElementById('inputBarcodeProduct').value = p.barcodeProduto;
+                document.getElementById('inputPriceProduct').value = p.precoProduto;
+                document.getElementById('inputIdProduct').value = p._id;
+
+                // Renderizar a imagem do produto (se existir )
+
+                // Limpar o campo de busca e remover o foco
+                foco.value = "";
+                foco.disabled = true;
+                btnRead.disabled = true;
+                btnCreate.disabled = true;
+
+                // Liberar os botões editar e excluir
+                document.getElementById('btnUpdate').disabled = false;
+                document.getElementById('btnDelete').disabled = false;
+
+                // Restaurar o padrão da tecla Enter
+                restaurarEnter();
+            })
+        });
+    }
+}
+
 
 // CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function buscarProdutoCode() {
@@ -169,50 +220,6 @@ function buscarProdutoCode() {
 
 }
 
-
-//CRUD READ NOME
-
-function buscarProdutoNome() {
-
-    let nomeProduto = document.getElementById('searchProductName').value
-
-    if (nomeProduto === 0) {
-        api.validarBusca();
-        focoName.focus();
-    } else {
-
-        api.buscarProdutoNome(nomeProduto)
-
-        api.renderizarProduto((event, dadosProduto) => { 
-            console.log(dadosProduto);
-            
-            const produtoRenderizado = JSON.parse(dadosProduto);
-            arrayProduto = produtoRenderizado;
-
-            console.log(arrayProduto)
-
-            arrayProduto.forEach((c) => {
-                document.getElementById('inputNameProduct').value = c.nomeProduto;  // Preencher o nome do produto
-                document.getElementById('inputBarcodeProduct').value = c.barcodeProduto;
-                document.getElementById('inputPriceProduct').value = c.precoProduto;
-                document.getElementById('inputIdProduct').value = c._id;
-               
-                // Limpar o campo de busca e remover o foco
-                foco.value = "";
-                foco.disabled = true;
-                btnRead.disabled = true;
-                btnCreate.disabled = true;
-               
-                // Liberar os botões editar e excluir
-                document.getElementById('btnUpdate').disabled = false;
-                document.getElementById('btnDelete').disabled = false;
-               
-                // Restaurar o padrão da tecla Enter
-                restaurarEnter();
-            })
-        });
-    }
-}
 // Fim CRUD READ NOME
 // Setar o campo do código de barras (se o produto não estiver cadastrado)
 
