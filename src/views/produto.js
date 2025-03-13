@@ -10,20 +10,8 @@ const focoCode = document.getElementById('searchProdutoBarCode')
 document.addEventListener('DOMContentLoaded', () => {
     btnUpdateProdut.disabled = true
     btnDeleteProdut.disabled = true
-    focoName.focus()
 
-    // Adiciona o evento para o campo de código de barras
-    document.getElementById('searchProdutoBarCode').addEventListener('input', (event) => {
-        // Verifica se o campo de barcode foi alterado (presumimos que o leitor de código de barras digite diretamente)
-        if (event.target.value.length > 0) {
-            // Coloca o valor escaneado diretamente no campo de Barcode (não no nome do produto)
-            document.getElementById('inputCodBarra').value = event.target.value;
-
-
-            // Dispara a função de busca do produto por barcode
-            buscarProdutoCode()
-        }
-    });
+    focoCode.focus()
 })
 
 // Manipulação do evento Enter para buscar por nome ou barcode
@@ -33,12 +21,12 @@ function teclaEnter(event) {
 
         const valorBusca = focoName.value || focoCode.value;
 
-        if (focoName === document.activeElement) {
+        if (focoCode === document.activeElement) {
             buscarProdutoNome(valorBusca)
 
         }
 
-        else if (focoCode === document.activeElement) {
+        else if (focoName === document.activeElement) {
             buscarProdutoCode(valorBusca)
         }
     }
@@ -46,7 +34,8 @@ function teclaEnter(event) {
 
 // Função para remover o manipulador do evento da tecla Enter 
 function restaurarEnter() {
-    document.getElementById('frmProduto').removeEventListener('keydown', teclaEnter)
+    document.getElementById('frmProduto').removeEventListener('keydown', teclaEnter);
+    document.getElementById('frmProduto').addEventListener('keydown', teclaEnter) // Reativa o listner
 }
 
 // manipulando o evento (tecla Enter)
@@ -84,7 +73,7 @@ async function uploadImage() {
 formProduto.addEventListener('submit', async (event) => {
     event.preventDefault()
     // teste de recebimento dos inputs do formulário
-    console.log(barcodeProduto.value, nomeProduto.value, precoProduto.value, caminhoImagem)
+    // console.log(barcodeProduto.value, nomeProduto.value, precoProduto.value, caminhoImagem)
 
     // criar um objeto
     // caminhoImagemPro: caminhoImagem ? caminhoImagem : "" 
@@ -135,123 +124,121 @@ function buscarProdutoNome() {
             console.log(arrayProduto)
 
             if (arrayProduto.length > 0) {
+                arrayProduto.forEach((p) => {
+                    document.getElementById('inputNameProduct').value = p.nomeProduto;  // Preencher o nome do produto
+                    document.getElementById('inputBarcodeProduct').value = p.barcodeProduto;
+                    document.getElementById('inputPriceProduct').value = p.precoProduto;
+                    document.getElementById('inputIdProduct').value = p._id;
+
+                    // Renderizar a imagem do produto (se existir )
+
+                    if (p.caminhoImagemProduto) {
+                        imagem.src = p.caminhoImagemProduto;
+                    } else {
+                        imagem.src = "../public/img/camera.png"; // Imagem padrão se não houver caminho
+                    }
+
+                    // Limpar o campo de busca e remover o foco
+                    focoName.value = "";
+
+                    btnRead.disabled = true;
+                    btnCreate.disabled = true;
+
+                    btnUpdateProdut.disabled = false;
+                    btnDeleteProdut.disabled = false;
+                    // Restaurar o padrão da tecla Enter
+                    restaurarEnter();
+
+                    desativarCampoBusca();
+                });
 
             } else {
 
+                btnCreate.disabled = false;
+
+                btnUpdateProdut.disabled = true;
+                btnDeleteProdut.disabled = true;
+
+                desativarCampoBusca();
             }
-            arrayProduto.forEach((p) => {
-                document.getElementById('inputNameProduct').value = p.nomeProduto;  // Preencher o nome do produto
-                document.getElementById('inputBarcodeProduct').value = p.barcodeProduto;
-                document.getElementById('inputPriceProduct').value = p.precoProduto;
-                document.getElementById('inputIdProduct').value = p._id;
-
-                // Renderizar a imagem do produto (se existir )
-
-                // Limpar o campo de busca e remover o foco
-                foco.value = "";
-                foco.disabled = true;
-                btnRead.disabled = true;
-                btnCreate.disabled = true;
-
-                // Liberar os botões editar e excluir
-                document.getElementById('btnUpdate').disabled = false;
-                document.getElementById('btnDelete').disabled = false;
-
-                // Restaurar o padrão da tecla Enter
-                restaurarEnter();
-            })
         });
     }
 }
 
+// Captura o evento para setar o nome do produto
+
+api.setarNomeProduto((event, nomeProduto) => {
+    document.getElementById('inputNameProduto').value = nomeProduto; // preenche o campo nome do produto
+    document.getElementById('searchProductName').value = ""; // Limpa o campo de busca
+
+    btnCreate.disabled = false; // Habilita o botão adiconar 
+
+    desativarCampoBusca();
+
+    // Colocar o foco no campo de nome do produto
+    document.getElementById('inputNameProduto').focus();
+})
 
 // CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-function buscarProdutoCode() {
+let isProcessing = false; // varivél para controlar o estado do processamento
+
+function buscarProdutoCode(barcode) {
+    if (isProcessing) return; // Se já estiver processando,ignora
+    isProcessing = true; // Marca como processando
     let barcode = document.getElementById('searchProdutoBarCode').value.trim();
     // console.log(barcode) // teste passo 1 do fluxo (slides)
 
     // validação
     if (barcode === "") {
-        api.validarBusca()
-        focoName.focus();
-        return;
+        api.validarBusca();
+        focoCode.focus();
+    } else {
+        api.buscarProdutoCode(barcode)
+
+        api.renderizarProdutoCode((event, dadosBarcode) => {
+            const barcodeRenderizado = JSON.parse(dadosBarcode)
+            arrayBarcode = barcodeRenderizado
+
+            if (arrayBarcode.length > 0) {
+
+                arrayBarcode.forEach((p) => { 
+                    document.getElementById('').value =
+                    document.getElementById('').value =
+                    document.getElementById('').value =
+                    document.getElementById('').value =
+                })
+            }
+        })
     }
 
-    api.buscarProdutoCode(barcode)
+
 
     // Passo 2 de 
     // Fluxo (slides)
     // Recebimento dos dados do produto
-    api.renderizarProdutoCode((event, dadosBarcode) => {
-        try {
-            if (!dadosBarcode || dadosBarcode === "[]" || dadosBarcode.length === 0) {
-                if (confirm("Código de barras não encotrado. Deseja cadastrar um novo produto ?")) {
-                    document.getElementById('inputCodBarra').value = barcode
-                    document.getElementById('inputNameProduto').focus();
-                    document.getElementById('btnCreatProdut').disabled = false;
-                } else {
-                    document.getElementById('searchProdutoBarCode').value = "";
-                }
 
-                return;
-            }
 
-            const barcodeRenderizado = JSON.parse(dadosBarcode)
-            if (barcodeRenderizado.length > 0) {
-                const produto = barcodeRenderizado[0];
+    // Fim CRUD READ NOME
 
-                document.getElementById('inputNameProduto').value = produto.nomeProduto;
-                document.getElementById('inputCodBarra').value = produto.barCodeProduto;
-                document.getElementById('inputPrecoProduto').value = produto.precoProduto
-                document.getElementById('inputProdut').value = produto._id
+    // FIM do CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-                focoName.value = "";
-                focoName.disabled = true;
-                btnReadProduct.disabled = true;
-                btnCreatProdut.disabled = true;
+    // CRUD Read Código Nome >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-                document.getElementById('btnUpdateProdut').disabled = false;
-                document.getElementById('btnDeleteProdut').disabled = false;
-            }
-        } catch (error) {
-            console.error("Erro ao processar os dados do produto:", error)
-        }
+    // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    function apagarProduto() {
+        console.log(idProduto.value) // passo 1 (fluxo-do-slide)
+        api.deletarProduto(idProduto.value) // Passo 2 do slide
+
+    }
+    // Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    // RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    api.resetarFormulario((args) => {
+        resetForm()
     })
 
+    function resetForm() {
+        //recarregar a página
+        location.reload()
+    }
 }
-
-// Fim CRUD READ NOME
-// Setar o campo do código de barras (se o produto não estiver cadastrado)
-
-api.setarBarcode(() => {
-    // setar o barcode do produto
-    let campoBarcode = document.getElementById('searchProdutoBarCode').value
-    document.getElementById('inputCodBarra').value = campoBarcode
-    // limpar o campo de busca e remover o foco
-    focoCode.value = ""
-    document.getElementById('inputNameProduto').focus()
-    //restaurar a teclaEnter (associar ao botão adicionar)
-    restaurarEnter()
-})
-// FIM do CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-// CRUD Read Código Nome >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-function apagarProduto() {
-    console.log(idProduto.value) // passo 1 (fluxo-do-slide)
-    api.deletarProduto(idProduto.value) // Passo 2 do slide
-
-}
-// Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-// RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-api.resetarFormulario((args) => {
-    resetForm()
-})
-
-function resetForm() {
-    //recarregar a página
-    location.reload()
-}
-

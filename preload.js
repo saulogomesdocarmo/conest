@@ -49,6 +49,7 @@ contextBridge.exposeInMainWorld('api', {
     editarProduto: (produto) => ipcRenderer.send('update-product', produto),
     validarBusca: () => ipcRenderer.send('dialog-search'),
     setarBarcode: (args) => ipcRenderer.on('set-barcode', args),
+    setarNomeProduto: (args) => ipcRenderer.on('set-name', args),
     buscarProdutoCode: (barcode) => ipcRenderer.send('search-code-product', barcode),
     buscarProdutoNome: (nomeProduto) => ipcRenderer.send('search-name', nomeProduto),
     renderizarProduto: (dadosProduto) => ipcRenderer.on('product-data', dadosProduto),
