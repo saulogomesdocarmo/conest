@@ -201,44 +201,133 @@ function buscarProdutoCode(barcode) {
 
             if (arrayBarcode.length > 0) {
 
-                arrayBarcode.forEach((p) => { 
-                    document.getElementById('').value =
-                    document.getElementById('').value =
-                    document.getElementById('').value =
-                    document.getElementById('').value =
-                })
+                arrayBarcode.forEach((p) => {
+                    document.getElementById('inputProdut').value = p._id;
+                    document.getElementById('inputNameProduto').value = p.nomeProduto;
+                    document.getElementById('inputCodBarra').value = p.barCodeProduto;
+                    document.getElementById('inputPrecoProduto').value = p.precoProduto;
+
+                    // Renderizar a imagem do produto (se existir)
+                    if (p.caminhoImagemProduto) {
+                        imagem.src = p.caminhoImagemProduto
+                        //Atualiza o src da imagem
+                    } else {
+                        imagem.src = "../public/img/camera.png"; // Imagem padrão se não houver caminho
+                    }
+
+                    // Limpar o campo de busca e remover o foco
+
+                    focoCode.value = "";
+                    btnRead.disabled = true;
+                    btnCreatProdut.disabled = true;
+
+                    btnUpdateProdut.disabled = false;
+                    btnDeleteProdut.disabled = false;
+                    restaurarEnter()
+
+                    desativarCampoBusca();
+                });
+
+            } else {
+                // Produto não encontrado
+                btnCreatProdut.disabled = false;
+                btnUpdateProdut.disabled = true;
+                btnDeleteProdut.disabled = true;
+
+                desativarCampoBusca();
             }
+
+            isProcessing = false
         })
     }
+}
 
+focoCode.value = "";
 
+// Captura o evento para setar o código de barras
+api.setarBarcode((event, barCode) => {
+    document.getElementById('inputCodBarra').value = barCode; // Preenche o campo de código de barras
+    document.getElementById('searchProdutoBarCode').value = ""; // Limpa o campo de busca
+    btnCreate.disabled = false; // Habilita o botão de adicionar
 
-    // Passo 2 de 
-    // Fluxo (slides)
-    // Recebimento dos dados do produto
+    // Desabilitar os campos de busca
+    desabilitarCamposBusca();
 
+    // Colocar o foco no campo de código de barras
+    document.getElementById('inputCodBarra').focus();
+});
 
-    // Fim CRUD READ NOME
+let timeoutId;
 
-    // FIM do CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+focoCode.addEventListener('input', function () {
+    clearTimeout(timeoutId); // Limpa o timeout anterior
+    timeoutId = setTimeout(() => {
+        if (focoCode.value !== "") {
+            const enterEvent = new KeyboardEvent('keydown', {
+                bubbles: true,
+                cancelable: true,
+                key: "Enter",
+                keyCode: 13,
+                which: 13,
+            });
+            focoCode.dispatchEvent(enterEvent); // Dispara o evento "Enter"
+        }
+    }, 200); // Atraso de 200ms (ajuste conforme necessário)
+});
 
-    // CRUD Read Código Nome >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// FIM do CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    function apagarProduto() {
-        console.log(idProduto.value) // passo 1 (fluxo-do-slide)
-        api.deletarProduto(idProduto.value) // Passo 2 do slide
+// CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+function apagarProduto() {
+    console.log(idProduto.value) // passo 1 (fluxo-do-slide)
+    api.deletarProduto(idProduto.value) // Passo 2 do slide
 
-    }
-    // Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    // RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+}
+// Fim do CRUD Delete <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    api.resetarFormulario((args) => {
-        resetForm()
-    })
+// Função para desabilitar os campos de busca
+function desativarCampoBusca() {
+    document.getElementById('searchProductName').disabled = true; // Desabilita o campo de busca por nome 
+    document.getElementById('searchProdutoBarCode').disabled = true; // Desabilita o campo de busca por código de barras
+}
 
-    function resetForm() {
-        //recarregar a página
-        location.reload()
+// Função para navegar entre os campos com a tecla Enter
+function navegarComEnter(event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // Impede o comportamento padrão do Enter
+
+        // Obtém o campo atual 
+        const campoAtual = event.target;
+
+        // Obtém todos os campos do formulário 
+        const campos = Array.from(document.querySelector('#frmProduto input[required'));
+
+        // Encontra o índice do campo atual
+        const indiceAtual = campos.indexOf(campoAtual);
+
+        // Se o campo atual for o último, envia o formulário
+        if (indiceAtual === campos.length - 1) {
+            document.getElementById('frmProduto').dispatchEvent(new Event('subimt'))
+        } else {
+            // Move o foco para o próximo campo
+            campos[indiceAtual + 1].focus();
+        }
     }
 }
+
+// Adiciona o evento de tecla Enter a todos os campos required
+document.querySelectorAll('#frmProduto input[required]').forEach(campo => {
+    campo.addEventListener('keydown', navegarComEnter);
+});
+ 
+// RESTAR FORMULÁRIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+api.resetarFormulario((args) => {
+    resetForm()
+})
+
+function resetForm() {
+    //recarregar a página
+    location.reload()
+}
+

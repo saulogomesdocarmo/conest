@@ -708,12 +708,12 @@ ipcMain.on('search-code-product', async (event, barcode) => {
     console.log(barcode)
 
     try {
-        const dadosProduto = await produtoModel.find({
-            barCodeProduto: barcode
+        const dadosProdutoCode = await produtoModel.find({
+            barCodeProduto: new RegExp(barcodeProduto, 'i')
         })
-        console.log(dadosProduto)
+        console.log(dadosProdutoCode)
 
-        if (dadosProduto.length === 0) {
+        if (dadosProdutoCode.length === 0) {
             dialog.showMessageBox({
                 type: 'warning',
                 title: 'Produtos',
@@ -732,7 +732,7 @@ ipcMain.on('search-code-product', async (event, barcode) => {
             })
         }
 
-        event.reply('product-data', JSON.stringify(dadosProduto))
+        event.reply('product-data', JSON.stringify(dadosProdutoCode))
     } catch (error) {
 
     }
