@@ -620,9 +620,8 @@ ipcMain.on('update-suplier', async (event, fornecedor) => {
 /**************************************************/
 
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 // Obter o caminho da imagem (executar o open dialog)
-
-
 ipcMain.handle('open-file-dialog', async () => {
     const { canceled, filePaths } = await dialog.showOpenDialog({
         title: "Selecionar Imagem",
