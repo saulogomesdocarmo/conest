@@ -56,6 +56,7 @@ contextBridge.exposeInMainWorld('api', {
     renderizarProdutoCode: (dadosBarcode) => ipcRenderer.send('data-code', dadosBarcode),
     deletarProduto: (idProduto) => ipcRenderer.send('delete-product', idProduto),
     avisoCliente: () => ipcRenderer.send('notice-box'),
-    selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog')
+    selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog'),
+    validacaoCNPJ: (args) => ipcRenderer.on('cnpj-validate', args)
 
 })

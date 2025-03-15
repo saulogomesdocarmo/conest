@@ -300,7 +300,7 @@ function navegarComEnter(event) {
         const campoAtual = event.target;
 
         // Obtém todos os campos do formulário 
-        const campos = Array.from(document.querySelector('#frmProduto input[required'));
+        const campos = Array.from(document.querySelector('#frmProduto input[required]'));
 
         // Encontra o índice do campo atual
         const indiceAtual = campos.indexOf(campoAtual);

@@ -140,28 +140,28 @@ formFornecedor.addEventListener('submit', async (event) => {
     // Teste importante ! (Fluxo de dados )
     // console.log(razaoFornecedor.value, foneFornecedor.value, siteFornecedor.value)
 
-       // Validar se o site é válido ou não
-       const siteValue = siteFornecedor.value.trim()
-       if (siteValue) {
-           try {
-               const url = new URL(siteValue)
-   
-               // Verifica se o protocolo é válido
-               if (!['http:', 'https:'].includes(url.protocol)) {
-                   api.mostrarErro('Protocolo inválido. Use HTTP ou HTTPS.')
-                   return
-               }
-   
-               // Verifica se o domínio é válido
-               if (!url.hostname.includes('.')) {
-                   api.mostrarErro('Domínio inválido. Exemplo: www.exemplo.com')
-                   return
-               }
-           } catch (error) {
-               api.mostrarErro('URL inválida. Formato correto: https://www.exemplo.com')
-               return
-           }
-       }
+    // Validar se o site é válido ou não
+    const siteValue = siteFornecedor.value.trim()
+    if (siteValue) {
+        try {
+            const url = new URL(siteValue)
+
+            // Verifica se o protocolo é válido
+            if (!['http:', 'https:'].includes(url.protocol)) {
+                api.mostrarErro('Protocolo inválido. Use HTTP ou HTTPS.')
+                return
+            }
+
+            // Verifica se o domínio é válido
+            if (!url.hostname.includes('.')) {
+                api.mostrarErro('Domínio inválido. Exemplo: www.exemplo.com')
+                return
+            }
+        } catch (error) {
+            api.mostrarErro('URL inválida. Formato correto: https://www.exemplo.com')
+            return
+        }
+    }
 
     // Passo 2 - slide (enviar as informações para o main)
     // criar um objeto
@@ -205,7 +205,25 @@ formFornecedor.addEventListener('submit', async (event) => {
         api.editarFornecedor(fornecedor)
 
     }
-
+    
+    api.validacaoCNPJ(() => {
+        // Pegar o valor do campo de busca
+        let campoCNPJ = document.getElementById('searchForner').value;
+    
+        // Definir o foco no campo CNPJ e mudar a borda para vermelho
+        let cnpjField = document.getElementById('cnpjFornecedor');
+        cnpjField.focus(); // Garantir que o foco é aplicado
+        cnpjField.style.outline = "2px solid red"; // Muda o foco para vermelho
+        cnpjField.value = campoCNPJ;
+    
+        // Limpar o campo de busca e remover o foco
+        let foco = document.getElementById('searchForner');
+        foco.value = "";
+        foco.blur();
+    
+        // Restaurar o padrão da tecla Enter
+        restaurarEnter();
+    });
 })
 
 // Fim do CRUD - Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -311,6 +329,10 @@ api.resetarFormulario((args) => {
 function resetForm() {
     location.reload()
 }
+
+
+
+
 
 // Reset Form >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

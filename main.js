@@ -446,6 +446,13 @@ ipcMain.on('url-site', (event, urlSite) => {
     shell.openExternal(url)
 })
 
+// Limpeza do campo CNPJ
+ipcMain.on('cnpj-validate', (event) => {
+    if (clearCNPJ) {
+        document.getElementById('cepFornecedor').value = ''; // Substitua 'cnpjInput' pelo ID real do campo de CNPJ
+    }
+});
+
 // CRUD Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Recebimento dos dados do fomulário do fornecedor
 ipcMain.on('new-supplier', async (event, fornecedor) => {
@@ -487,7 +494,24 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
         event.reply('reset-form')
 
     } catch (error) {
-        console.log(error)
+        // Verifica se o erro é de chave duplicada (CNPJ já cadastrado)
+        if (error.code = 11000) {
+            dialog.showMessageBox({
+                type: 'error',
+                title: "Atenção",
+                message: "ERRO: O CNPJ já está cadastrado",
+                buttons: ['OK']
+            }).then((result) => {
+                if (result.response === 0) { // O índice do botão 'OK' é 0
+                    event.reply('cnpj-validate');
+                } else {
+                    event.reply('reset-form')
+                }
+            })
+
+        } else {
+            console.error("Erro inesperado:", error);
+        }
     }
 })
 

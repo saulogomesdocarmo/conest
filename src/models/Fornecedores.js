@@ -24,7 +24,9 @@ const fornecedorSchema = new Schema({
         type: String
     },
     cepFornecedor: {
-        type: String
+        type: String,
+        unique: true,
+        index: true
     },
     enderecoFornecedor: {
         type: String
