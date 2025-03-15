@@ -665,6 +665,7 @@ ipcMain.handle('open-file-dialog', async () => {
     }
 })
 
+// Recebimento dos dados do formulário do produto
 ipcMain.on('new-product', async (event, produto) => {
     // Teste de recebimento dos dados do produto
     console.log(produto) // teste do passo 2 (recebimento do produto)
@@ -673,6 +674,7 @@ ipcMain.on('new-product', async (event, produto) => {
     let caminhoImagemSalvo = ""
 
     try {
+        // Validação de imagens
         if (produto.caminhoImagemPro) {
             // (Imagem #1)
             //Criar a pasta uploads se não existir
@@ -724,6 +726,37 @@ ipcMain.on('new-product', async (event, produto) => {
     }
 })
 
+// CRUD CREATE/ CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on('new-barcode', async (event, produto) => {
+
+    console.log(produto)
+
+    try {
+        // Criar um novo objeto usando a classe modelo
+        const novoBarcode = new produtoModel({
+            nomeProduto: produto.nomePro,
+            barCodeProduto: produto.barcodePro,
+            precoProduto: produto.precoProduto
+        })
+        // A linha abaixo usa a biblioteca moongose
+        await novoBarcode.save()
+
+        // Confirmação de cliente adicionado no banco de dados
+
+        dialog.showMessageBox({
+            type: 'info',
+            title: 'Aviso',
+            message: "Produto Adicionado com Sucesso",
+            buttons: ['OK']
+        })
+        // Enviar uma resposta para o renderizador resetar o formulário
+        event.reply('reset-form')
+
+    } catch (error) {
+
+    }
+})
+// FIM CRUD CREATE/ CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
