@@ -502,10 +502,9 @@ ipcMain.on('new-supplier', async (event, fornecedor) => {
                 message: "ERRO: O CNPJ já está cadastrado",
                 buttons: ['OK']
             }).then((result) => {
-                if (result.response === 0) { // O índice do botão 'OK' é 0
-                    event.reply('cnpj-validate');
-                } else {
-                    event.reply('reset-form')
+
+                if (result.response === 0) {
+                    event.reply('cnpj-invalido')
                 }
             })
 
@@ -722,6 +721,7 @@ ipcMain.on('new-product', async (event, produto) => {
             }
         })
     } catch (error) {
+        
         console.log(error)
     }
 })
@@ -757,6 +757,11 @@ ipcMain.on('new-barcode', async (event, produto) => {
     }
 })
 // FIM CRUD CREATE/ CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ipcMain.on(''())
+// Fim CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 // CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -795,10 +800,6 @@ ipcMain.on('search-code-product', async (event, barcode) => {
 })
 
 // FIM CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-//CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-// Fim CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 // CRUD Delete >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

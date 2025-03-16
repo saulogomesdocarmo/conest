@@ -57,6 +57,7 @@ contextBridge.exposeInMainWorld('api', {
     deletarProduto: (idProduto) => ipcRenderer.send('delete-product', idProduto),
     avisoCliente: () => ipcRenderer.send('notice-box'),
     selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog'),
-    validacaoCNPJ: (args) => ipcRenderer.on('cnpj-validate', args)
+
+    cnpjInvalido: (callback) => ipcRenderer.on('cnpj-invalido', callback)
 
 })

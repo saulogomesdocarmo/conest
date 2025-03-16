@@ -12,6 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
     focoFornecedor.focus()
 })
 
+// Receber a mensagem CNPJ inválido
+api.cnpjInvalido(() => { 
+    document.getElementById('cnpjFornecedor').classList.add('campo-invalido')
+})
+
+// Remover a borda vermelha ao digitar
+document.getElementById('cnpjFornecedor').addEventListener('input', () => {
+    document.getElementById('cnpjFornecedor').classList.remove('campo-invalido')
+})
+
+
 // Função para manipular o evento da tecla Enter
 function teclaEnter(event) {
     if (event.key === "Enter") {
@@ -205,25 +216,8 @@ formFornecedor.addEventListener('submit', async (event) => {
         api.editarFornecedor(fornecedor)
 
     }
-    
-    api.validacaoCNPJ(() => {
-        // Pegar o valor do campo de busca
-        let campoCNPJ = document.getElementById('searchForner').value;
-    
-        // Definir o foco no campo CNPJ e mudar a borda para vermelho
-        let cnpjField = document.getElementById('cnpjFornecedor');
-        cnpjField.focus(); // Garantir que o foco é aplicado
-        cnpjField.style.outline = "2px solid red"; // Muda o foco para vermelho
-        cnpjField.value = campoCNPJ;
-    
-        // Limpar o campo de busca e remover o foco
-        let foco = document.getElementById('searchForner');
-        foco.value = "";
-        foco.blur();
-    
-        // Restaurar o padrão da tecla Enter
-        restaurarEnter();
-    });
+
+
 })
 
 // Fim do CRUD - Creat >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
