@@ -185,7 +185,7 @@ let isProcessing = false; // varivél para controlar o estado do processamento
 function buscarProdutoCode(barcode) {
     if (isProcessing) return; // Se já estiver processando,ignora
     isProcessing = true; // Marca como processando
-    let barcode = document.getElementById('searchProdutoBarCode').value.trim();
+
     // console.log(barcode) // teste passo 1 do fluxo (slides)
 
     // validação
@@ -272,7 +272,7 @@ focoCode.addEventListener('input', function () {
             });
             focoCode.dispatchEvent(enterEvent); // Dispara o evento "Enter"
         }
-    }, 200); // Atraso de 200ms (ajuste conforme necessário)
+    }); // Atraso de 200ms (ajuste conforme necessário)
 });
 
 // FIM do CRUD Read Código de Barras >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

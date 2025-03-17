@@ -715,14 +715,28 @@ ipcMain.on('new-product', async (event, produto) => {
             type: 'info',
             message: 'Produto cadastrado com sucesso.',
             buttons: ['OK']
-        }).then((result) => {
-            if (result.response === 0) {
-                event.reply('reset-form')
-            }
         })
+
+        event.reply('reset-form')
+
     } catch (error) {
-        
-        console.log(error)
+
+        if (error.code === 11000) {
+            dialog.showMessageBox({
+                type: 'error',
+                title: 'Atenção!',
+                message: "Barcode já cadastrado\nVerifique se digitou corretamente.",
+                buttons: ['OK']
+            }).then((result) => {
+                // Quando o usuário clicar em "OK", enviar uma mensagem ao renderizador para destacar o campo de barcode
+                if (result.response === 0) { // 0 é o índice do botão "OK"
+                    event.reply('barcode-invalido') // Envia uma mensagem ao renderizador
+                }
+            })
+        } else {
+            console.log(error)
+        }
+
     }
 })
 
@@ -753,13 +767,59 @@ ipcMain.on('new-barcode', async (event, produto) => {
         event.reply('reset-form')
 
     } catch (error) {
-
+        if (error.code === 11000) {
+            dialog.showMessageBox({
+                type: 'error',
+                title: 'Atenção!',
+                message: "Barcode já cadastrado\nVerifique se digitou corretamente.",
+                buttons: ['OK']
+            }).then((result) => {
+                // Quando o usuário clicar em "OK", enviar uma mensagem ao renderizador para destacar o campo de barcode
+                if (result.response === 0) { // 0 é o índice do botão "OK"
+                    event.reply('barcode-invalido') // Envia uma mensagem ao renderizador
+                }
+            })
+        } else {
+            console.log(error)
+        }
     }
 })
 // FIM CRUD CREATE/ CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-ipcMain.on(''())
+ipcMain.on('search-name', async (event, proNome) => {
+
+    console.log(proNome)
+
+    try {
+        const dadosProduto = await produtoModel.find({
+            nomeProduto: new RegExp(proNome, 'i')
+        })
+
+        if (dadosProduto.length === 0) {
+            dialog.showMessageBox({
+                type: 'warning',
+                title: 'Produto',
+                message: 'Produto não cadastrado.\nDeseja cadastrar este produto?',
+                buttons: ['Sim', 'Não']
+            }).then((result) => {
+                console.log(result);
+                if (result.response === 0) {
+                    // Enviar ao renderizador um pedido para setar o nome do produto (trazendo do campo de busca) e liberar o botão adicionar
+                    event.reply('set-name', proNome); // Envia o nome do produto para o renderizador
+                } else {
+                    // Enviar ao renderizador um pedido para limpar os campos do formulário
+                    event.reply('reset-form');
+                }
+            });
+        } else {
+            event.reply('data-product', JSON.stringify(dadosProduto));
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+})
 // Fim CRUD READ/NOME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -794,8 +854,9 @@ ipcMain.on('search-code-product', async (event, barcode) => {
         }
 
         event.reply('product-data', JSON.stringify(dadosProdutoCode))
-    } catch (error) {
 
+    } catch (error) {
+        console.log(error)
     }
 })
 

@@ -51,13 +51,15 @@ contextBridge.exposeInMainWorld('api', {
     setarBarcode: (args) => ipcRenderer.on('set-barcode', args),
     setarNomeProduto: (args) => ipcRenderer.on('set-name', args),
     buscarProdutoCode: (barcode) => ipcRenderer.send('search-code-product', barcode),
-    buscarProdutoNome: (nomeProduto) => ipcRenderer.send('search-name', nomeProduto),
+    buscarProdutoNome: (proNome) => ipcRenderer.send('search-name', proNome),
     renderizarProduto: (dadosProduto) => ipcRenderer.on('product-data', dadosProduto),
     renderizarProdutoCode: (dadosBarcode) => ipcRenderer.send('data-code', dadosBarcode),
     deletarProduto: (idProduto) => ipcRenderer.send('delete-product', idProduto),
     avisoCliente: () => ipcRenderer.send('notice-box'),
     selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog'),
 
-    cnpjInvalido: (callback) => ipcRenderer.on('cnpj-invalido', callback)
+    cnpjInvalido: (callback) => ipcRenderer.on('cnpj-invalido', callback),
+
+    barcodeInvalido: (callback) => ipcRenderer.on('barcode-invalido', callback)
 
 })
