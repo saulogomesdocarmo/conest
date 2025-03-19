@@ -825,12 +825,12 @@ ipcMain.on('search-name', async (event, proNome) => {
 
 // CRUD READ /CÓDIGO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-ipcMain.on('search-code-product', async (event, barcode) => {
-    console.log(barcode)
+ipcMain.on('search-code-product', async (event, barcodeProduto) => {
+    console.log(barcodeProduto)
 
     try {
         const dadosProdutoCode = await produtoModel.find({
-            barCodeProduto: new RegExp(barcodeProduto, 'i')
+            barcodeProduto: new RegExp(barcodeProduto, 'i')
         })
         console.log(dadosProdutoCode)
 
