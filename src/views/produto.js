@@ -248,7 +248,7 @@ focoCode.value = "";
 api.setarBarcode((event, barCode) => {
     document.getElementById('inputCodBarra').value = barCode; // Preenche o campo de código de barras
     document.getElementById('searchProdutoBarCode').value = ""; // Limpa o campo de busca
-    btnCreate.disabled = false; // Habilita o botão de adicionar
+    btnCreatProdut.disabled = false; // Habilita o botão de adicionar
 
     // Desabilitar os campos de busca
     desabilitarCamposBusca();
@@ -270,7 +270,7 @@ focoCode.addEventListener('input', function () {
                 keyCode: 13,
                 which: 13,
             });
-            focoCode.dispatchEvent(enterEvent); // Dispara o evento "Enter"
+            // focoCode.dispatchEvent(enterEvent); // Dispara o evento "Enter"
         }
     }); // Atraso de 200ms (ajuste conforme necessário)
 });
