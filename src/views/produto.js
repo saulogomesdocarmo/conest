@@ -204,7 +204,7 @@ function buscarProdutoCode(barcode) {
                 arrayBarcode.forEach((p) => {
                     document.getElementById('inputProdut').value = p._id;
                     document.getElementById('inputNameProduto').value = p.nomeProduto;
-                    document.getElementById('inputCodBarra').value = p.barCodeProduto;
+                    document.getElementById('inputCodBarra').value = p.barcodeProduto;
                     document.getElementById('inputPrecoProduto').value = p.precoProduto;
 
                     // Renderizar a imagem do produto (se existir)
@@ -289,6 +289,11 @@ function apagarProduto() {
 function desativarCampoBusca() {
     document.getElementById('searchProductName').disabled = true; // Desabilita o campo de busca por nome 
     document.getElementById('searchProdutoBarCode').disabled = true; // Desabilita o campo de busca por código de barras
+}
+
+function habilitarCamposBusca() {
+    document.getElementById('searchProductName').disabled = false; // Habilita o campo de busca por nome
+    document.getElementById('searchProdutoBarCode').disabled = false; // Habilita o campo de busca por barcode
 }
 
 // Função para navegar entre os campos com a tecla Enter

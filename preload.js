@@ -15,9 +15,11 @@ contextBridge.exposeInMainWorld('api', {
     // Requisições para as funções que criam as janelas
     closeAbout: () => ipcRenderer.send('close-about'),
     janelaClientes: () => ipcRenderer.send('open-client'),
-    productWindow: () => ipcRenderer.send('view-product'),
-    suplierWindow: () => ipcRenderer.send('view-suplier'),
-    relatorioWindow: () => ipcRenderer.send('view-report'),
+    productWindow: () => ipcRenderer.send('open-product'),
+    suplierWindow: () => ipcRenderer.send('open-supplier'),
+    relatorioWindow: () => ipcRenderer.send('open-report'),
+
+
 
     // Requisição da função que limpa os campos do sistema 
     resetarFormulario: (args) => ipcRenderer.on('reset-form', args),
