@@ -1089,3 +1089,20 @@ async function gerarRelatorioProduto() {
         console.log(error)
     }
 }
+
+//relatorios.html
+// Adicione esses listeners junto com os outros existentes
+ipcMain.on('gerar-relatorio-clientes', () => gerarRelatorioClientes());
+ipcMain.on('gerar-relatorio-fornecedores', () => gerarRelatorioFornecedores());
+ipcMain.on('gerar-relatorio-produtos', () => gerarRelatorioProdutos());
+
+// Handler para carregar fornecedores
+ipcMain.handle('carregar-fornecedores', async () => {
+    try {
+        const fornecedores = await fornecedorModel.find({}, 'nomeFornecedor').sort({ nomeFornecedor: 1 });
+        return fornecedores.map(f => f.nomeFornecedor);
+    } catch (error) {
+        console.error('Erro ao buscar fornecedores:', error);
+        return [];
+    }
+});

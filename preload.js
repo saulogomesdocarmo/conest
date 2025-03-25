@@ -62,6 +62,11 @@ contextBridge.exposeInMainWorld('api', {
 
     cnpjInvalido: (callback) => ipcRenderer.on('cnpj-invalido', callback),
 
-    barcodeInvalido: (callback) => ipcRenderer.on('barcode-invalido', callback)
+    barcodeInvalido: (callback) => ipcRenderer.on('barcode-invalido', callback),
+
+
+    gerarRelatorioClientes: () => ipcRenderer.send('gerar-relatorio-clientes'),
+    gerarRelatorioFornecedores: () => ipcRenderer.send('gerar-relatorio-fornecedores'),
+    gerarRelatorioProdutos: () => ipcRenderer.send('gerar-relatorio-produtos')
 
 })
