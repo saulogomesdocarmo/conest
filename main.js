@@ -1096,6 +1096,7 @@ ipcMain.on('gerar-relatorio-clientes', () => gerarRelatorioClientes())
 ipcMain.on('gerar-relatorio-fornecedores', () => gerarRelatorioFornecedores())
 ipcMain.on('gerar-relatorio-produtos', () => gerarRelatorioProdutos())
 
+
 // Handler para carregar fornecedores
 ipcMain.handle('carregar-fornecedores', async () => {
     try {

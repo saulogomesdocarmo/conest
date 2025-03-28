@@ -29,7 +29,8 @@
             </div>
 
             <div class="col-md-4">
-                <button type="button" class="btn btn-primary" id="btnReadProduct" onclick="buscarProdutoNome()">Buscar</button>
+                <button type="button" class="btn btn-primary" id="btnReadProduct"
+                    onclick="buscarProdutoNome()">Buscar</button>
             </div>
 
             <hr class="mt-4 border-primary border-1">
@@ -48,12 +49,20 @@
             </div>
 
             <!-- Código e Preço do Produto -->
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <label for="inputCodBarra" class="form-label">Código de Barra</label>
                 <input class="form-control mb-2" type="text" id="inputCodBarra" required maxlength="50">
 
                 <label for="inputPrecoProduto" class="form-label">Preço do Produto</label>
                 <input class="form-control" type="text" id="inputPrecoProduto" required maxlength="50">
+            </div>
+
+            <!-- Fornecedor -->
+            <div class="col-md-6">
+                <label for="selectSupplier" class="form-label">Fornecedor</label>
+                <select class="form-control" id="selectSupplier" required>
+                    <option value="">Selecione Fornecedor</option>
+                </select>
             </div>
 
             <!-- Upload de Imagem -->

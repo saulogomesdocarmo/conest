@@ -45,6 +45,7 @@ contextBridge.exposeInMainWorld('api', {
     setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
     abrirSite: (urlSite) => ipcRenderer.send('url-site', urlSite),
     mostrarErro: (mensagem) => ipcRenderer.send('mostrar-erro', mensagem),
+    carregarFornecedores: () => ipcRenderer.invoke('carregar-fornecedores'),
     // Aviso para os preencher o campo de busca
 
     novoProduto: (produto) => ipcRenderer.send('new-product', produto),

@@ -12,7 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
     btnDeleteProdut.disabled = true
 
     focoCode.focus()
+    carregarFornecedores()
+
 })
+
+// Função para carregar os fornecedores do banco de dados
+async function carregarFornecedores() {
+    const selectFornecedor = document.getElementById('selectSupplier');
+    selectFornecedor.innerHTML = '<option value="">Carregando fornecedores...</option>';
+    
+    try {
+        // Buscar fornecedores através da API
+        const fornecedores = await api.carregarFornecedores();
+        
+        // Limpar e adicionar opção padrão
+        selectFornecedor.innerHTML = '<option value="">Selecione um fornecedor</option>';
+        
+        // Adicionar cada fornecedor como opção
+        fornecedores.forEach(nome => {
+            const option = document.createElement('option');
+            option.value = nome;
+            option.textContent = nome;
+            selectFornecedor.appendChild(option);
+        });
+        
+    } catch (error) {
+        console.error('Erro ao carregar fornecedores:', error);
+        selectFornecedor.innerHTML = '<option value="">Erro ao carregar fornecedores</option>';
+    }
+}
 
 // Manipulação do evento Enter para buscar por nome ou barcode
 function teclaEnter(event) {
@@ -53,6 +81,7 @@ let nomeProduto = document.getElementById('inputNameProduto')
 let precoProduto = document.getElementById('inputPrecoProduto')
 let caminhoImagemProduto = document.getElementById('pathImageProduct')
 let imagem = document.getElementById('imageProductPreview')
+let fornecedorProduto = document.getElementById('selectSupplier'); // Alterado para o select
 
 // variável usada para armazenar o caminho da imagem
 let caminhoImagem
@@ -335,4 +364,34 @@ function resetForm() {
     //recarregar a página
     location.reload()
 }
+
+// Função para carregar os fornecedores do banco de dados
+async function carregarFornecedores() {
+    const selectFornecedor = document.getElementById('selectSupplier');
+    selectFornecedor.innerHTML = '<option value="">Carregando fornecedores...</option>';
+    
+    try {
+        // Usa a API para buscar os fornecedores (não o model diretamente)
+        const fornecedores = await api.carregarFornecedores();
+        
+        selectFornecedor.innerHTML = '<option value="">Selecione um fornecedor</option>';
+        
+        fornecedores.forEach(nome => {
+            const option = document.createElement('option');
+            option.value = nome;
+            option.textContent = nome;
+            selectFornecedor.appendChild(option);
+        });
+        
+    } catch (error) {
+        console.error('Erro ao carregar fornecedores:', error);
+        selectFornecedor.innerHTML = '<option value="">Erro ao carregar fornecedores</option>';
+    }
+}
+
+// Chamar a função quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    carregarFornecedores();
+    // ... outros códigos de inicialização que você já tem
+})
 
