@@ -992,7 +992,7 @@ async function gerarRelatorioClientes() {
 
 // Relatório de Fornecedores 
 
-async function gerarRelatorioFornecedor() {
+async function gerarRelatorioFornecedores() {
     try {
         // listar os clientes por ordem alfabética
         const fornecedor = await fornecedorModel.find().sort({ razaoFornecedor: 1 })
@@ -1043,7 +1043,7 @@ async function gerarRelatorioFornecedor() {
 
 // Relatório de Fornecedores 
 
-async function gerarRelatorioProduto() {
+async function gerarRelatorioProdutos() {
     try {
         // listar os clientes por ordem alfabética
         const produto = await produtoModel.find().sort({ nomeProduto: 1 })
@@ -1092,15 +1092,15 @@ async function gerarRelatorioProduto() {
 
 //relatorios.html
 // Adicione esses listeners junto com os outros existentes
-ipcMain.on('gerar-relatorio-clientes', () => gerarRelatorioClientes());
-ipcMain.on('gerar-relatorio-fornecedores', () => gerarRelatorioFornecedores());
-ipcMain.on('gerar-relatorio-produtos', () => gerarRelatorioProdutos());
+ipcMain.on('gerar-relatorio-clientes', () => gerarRelatorioClientes())
+ipcMain.on('gerar-relatorio-fornecedores', () => gerarRelatorioFornecedores())
+ipcMain.on('gerar-relatorio-produtos', () => gerarRelatorioProdutos())
 
 // Handler para carregar fornecedores
 ipcMain.handle('carregar-fornecedores', async () => {
     try {
-        const fornecedores = await fornecedorModel.find({}, 'nomeFornecedor').sort({ nomeFornecedor: 1 });
-        return fornecedores.map(f => f.nomeFornecedor);
+        const fornecedores = await fornecedorModel.find({}, 'nomeFornecedor').sort({ razaoFornecedor: 1 });
+        return fornecedores.map(f => f.razaoFornecedor);
     } catch (error) {
         console.error('Erro ao buscar fornecedores:', error);
         return [];
