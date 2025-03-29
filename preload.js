@@ -43,7 +43,7 @@ contextBridge.exposeInMainWorld('api', {
     deletarFornecedor: (idFornecedor) => ipcRenderer.send('delete-supplier', idFornecedor),
     editarFornecedor: (fornecedor) => ipcRenderer.send('update-suplier', fornecedor),
     setarNomeFornecedor: (args) => ipcRenderer.on('set-nameSuplier', args),
-    abrirSite: (urlSite) => ipcRenderer.send('url-site', urlSite),
+    abrirSite: (site) => ipcRenderer.send('url-site', site),
     mostrarErro: (mensagem) => ipcRenderer.send('mostrar-erro', mensagem),
     carregarFornecedores: () => ipcRenderer.invoke('carregar-fornecedores'),
     // Aviso para os preencher o campo de busca
@@ -61,9 +61,9 @@ contextBridge.exposeInMainWorld('api', {
     avisoCliente: () => ipcRenderer.send('notice-box'),
     selecionarArquivo: () => ipcRenderer.invoke('open-file-dialog'),
 
-    cnpjInvalido: (callback) => ipcRenderer.on('cnpj-invalido', callback),
+    // cnpjInvalido: (callback) => ipcRenderer.on('cnpj-invalido', callback),
 
-    barcodeInvalido: (callback) => ipcRenderer.on('barcode-invalido', callback),
+    // barcodeInvalido: (callback) => ipcRenderer.on('barcode-invalido', callback),
 
 
     gerarRelatorioClientes: () => ipcRenderer.send('gerar-relatorio-clientes'),

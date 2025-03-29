@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 // Receber a mensagem CNPJ inválido
-api.cnpjInvalido(() => { 
-    document.getElementById('cnpjFornecedor').classList.add('campo-invalido')
-})
+// api.cnpjInvalido(() => { 
+//     document.getElementById('cnpjFornecedor').classList.add('campo-invalido')
+// })
 
 // Remover a borda vermelha ao digitar
 document.getElementById('cnpjFornecedor').addEventListener('input', () => {
@@ -41,51 +41,26 @@ document.getElementById('frmFornecedor').addEventListener('keydown', teclaEnter)
 
 // Função para acessar site
 
-let usuarioRemoveuHTTPS = false; // Flag para rastrear se o usuário apagou o HTTPS
+
 
 // Função acessar site >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function acessarSite() {
     let urlFornecedor = document.getElementById('inputSiteFornecedor').value.trim();
-
-    // Validação rigorosa
-    if (!urlFornecedor) {
-        api.mostrarErro('URL não pode estar vazia')
-        return
+    
+    // Verifica se a URL começa com "https://", caso contrário, adiciona "https://"
+    if (!urlFornecedor.startsWith('http://') && !urlFornecedor.startsWith('https://')) {
+        urlFornecedor = 'https://' + urlFornecedor;  // Adiciona https:// automaticamente
     }
 
-    try {
-        const urlObj = new URL(urlFornecedor)
-        if (!['http:', 'https:'].includes(urlObj.protocol)) {
-            api.mostrarErro('Protocolo inválido. Use HTTP/HTTPS.')
-            return
-        }
-
-        // Forçar HTTPS mesmo se o usuário digitar HTTP
-        if (urlObj.protocol === 'http:') {
-            urlObj.protocol = 'https:'
-            urlFornecedor = urlObj.href
-        }
-
-        api.abrirSite({ url: urlFornecedor })
-    } catch (error) {
-        api.mostrarErro('URL inválida. Formato correto: https://www.exemplo.com')
+    // Agora, podemos enviar a URL corretamente para o MongoDB sem violar a validação do pattern.
+    const url = {
+        url: urlFornecedor
     }
+
+    // Envia a URL ao servidor ou ao MongoDB através da API
+    api.abrirSite(url);
 }
 
-// Adicionar o https via javascript
-document.getElementById('inputSiteFornecedor').addEventListener('input', function (e) {
-    const input = e.target;
-    const valor = input.value.trim();
-
-    // Verifica se o valor começa com https://
-    if (!valor.startsWith('https://')) {
-        // Se não começar, força o https://
-        input.value = 'https://' + valor.replace(/^https?:\/\//, '');
-    }
-
-    // Mantém o cursor no final
-    input.setSelectionRange(input.value.length, input.value.length);
-});
 
 document.getElementById('inputSiteFornecedor').addEventListener('keydown', function (e) {
     const input = e.target;
